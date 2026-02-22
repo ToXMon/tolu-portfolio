@@ -185,6 +185,84 @@ footer p {
   line-height: 1.7;
 }
 
+.lead-small {
+  color: var(--muted);
+  margin-top: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.projects-header strong {
+  color: #dfe7ff;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  padding: 1.2rem;
+  display: grid;
+  gap: 0.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: -40% auto auto -30%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(103, 232, 249, 0.16), transparent 65%);
+  pointer-events: none;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(103, 232, 249, 0.4);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.45);
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.pill {
+  border: 1px solid var(--line);
+  color: #bed6ff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  background: rgba(10, 16, 28, 0.55);
+}
+
+.project-links {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.project-links a {
+  color: var(--cyan);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.project-links a:hover {
+  text-decoration: underline;
+}
+
+.projects-status {
+  color: var(--muted);
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+}
+
 .stats ul {
   list-style: none;
   margin: 0;
@@ -259,7 +337,8 @@ footer {
 
 @media (max-width: 900px) {
   .grid-two,
-  .cards {
+  .cards,
+  .project-grid {
     grid-template-columns: 1fr;
   }
 
