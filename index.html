@@ -1,139 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tolu Shekoni — Portfolio</title>
-    <meta
-      name="description"
-      content="Portfolio of Tolu Shekoni — Materialist Scientist and Business Excellence Engineer focused on Web3, AI, and Data Science."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <canvas id="nebula"></canvas>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tolu Shekoni — Materialist Scientist and Business Excellence Engineer focused on Web3, AI, and Data Science.">
+  <meta name="color-scheme" content="dark">
+  <title>Tolu Shekoni — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header blur-card">
-      <a class="brand" href="#home">TS</a>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#focus">Focus</a>
-        <a href="#work">Work</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Tolu Shekoni home">TS</a>
+    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#focus">Focus</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <main id="home">
-      <section class="hero section reveal">
-        <p class="eyebrow">Materialist Scientist • Business Excellence Engineer</p>
-        <h1>
-          Tolu Shekoni builds high-leverage systems at the edge of
-          <span>Web3</span>, <span>AI</span>, and <span>Data Science</span>.
-        </h1>
-        <p class="lead">
-          I design measurable products and decision systems that move from concept to
-          production with precision, speed, and economic clarity.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#work">See Selected Work</a>
-          <a class="btn btn-ghost" href="#contact">Start a Conversation</a>
+  <main id="main">
+    <section id="about" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <p class="label eyebrow">Materialist Scientist · Business Excellence Engineer</p>
+          <h1>Tolu Shekoni builds high&#8209;leverage systems at the edge of Web3, AI, and Data&nbsp;Science.</h1>
+          <p class="hero-lead">I design measurable products and decision systems that move from concept to production with precision, speed, and economic clarity.</p>
+          <a href="#work" class="cta">See Selected Work</a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="about" class="section grid-two reveal">
-        <div class="blur-card block">
-          <h2>Operating Thesis</h2>
-          <p>
-            I approach technology as applied science: hypotheses, instrumentation,
-            feedback loops, and iteration. The goal is not novelty for novelty’s sake;
-            the goal is durable business outcomes.
-          </p>
+    <section id="thesis" class="thesis">
+      <div class="container">
+        <div class="thesis-content reveal">
+          <p class="label eyebrow">Operating Thesis</p>
+          <h2>I approach technology as applied science: hypotheses, instrumentation, feedback loops, and iteration.</h2>
+          <p>The goal is not novelty for novelty's sake; the goal is durable business outcomes. Every system I build starts with a measurable hypothesis, gets instrumented for feedback, and ships when the numbers confirm it works.</p>
         </div>
-        <div class="blur-card block stats">
-          <h2>Core Disciplines</h2>
-          <ul>
-            <li><strong>Business Excellence</strong><span>Process intelligence, KPI architecture, execution systems</span></li>
-            <li><strong>Web3 Engineering</strong><span>Protocol-native product design, trust-minimized workflows</span></li>
-            <li><strong>AI Systems</strong><span>Agentic workflows, automation strategy, model operations</span></li>
-            <li><strong>Data Science</strong><span>Signal extraction, forecasting, decision support pipelines</span></li>
-          </ul>
-        </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="focus" class="section reveal">
-        <h2 class="section-title">Current Focus Areas</h2>
-        <div class="cards">
-          <article class="blur-card card">
-            <h3>Web3 x AI Product Design</h3>
-            <p>Building practical onchain products with intelligent automation and clean UX.</p>
+    <section id="focus" class="disciplines">
+      <div class="container">
+        <p class="label eyebrow reveal">Core Disciplines</p>
+        <ol class="disciplines-list">
+          <li class="discipline-item reveal">
+            <span class="discipline-num">01</span>
+            <div class="discipline-body">
+              <h3>Business Excellence</h3>
+              <p>Process intelligence, KPI architecture, execution systems.</p>
+            </div>
+          </li>
+          <li class="discipline-item reveal">
+            <span class="discipline-num">02</span>
+            <div class="discipline-body">
+              <h3>Web3 Engineering</h3>
+              <p>Protocol-native product design, trust-minimized workflows.</p>
+            </div>
+          </li>
+          <li class="discipline-item reveal">
+            <span class="discipline-num">03</span>
+            <div class="discipline-body">
+              <h3>AI Systems</h3>
+              <p>Agentic workflows, automation strategy, model operations.</p>
+            </div>
+          </li>
+          <li class="discipline-item reveal">
+            <span class="discipline-num">04</span>
+            <div class="discipline-body">
+              <h3>Data Science</h3>
+              <p>Signal extraction, forecasting, decision support pipelines.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="work" class="work" data-bleed>
+      <div class="container">
+        <p class="label eyebrow reveal">Selected Work</p>
+        <h2 class="reveal">Projects built end to end.</h2>
+        <div class="work-grid">
+          <article class="work-card reveal">
+            <div class="work-card-header">
+              <span class="work-card-num">01</span>
+              <span class="tag">Live</span>
+            </div>
+            <h3>Crypto Scanner</h3>
+            <p>Autonomous DeFi scanning system for signals, edges, and fast decisions across multiple chains.</p>
           </article>
-          <article class="blur-card card">
-            <h3>Operational Intelligence</h3>
-            <p>Turning business operations into measurable systems with closed-loop optimization.</p>
+          <article class="work-card reveal">
+            <div class="work-card-header">
+              <span class="work-card-num">02</span>
+              <span class="tag">Live</span>
+            </div>
+            <h3>X Monitor</h3>
+            <p>Signal extraction and social monitoring for narrative, trend, and alpha detection.</p>
           </article>
-          <article class="blur-card card">
-            <h3>Data-Driven Execution</h3>
-            <p>Using high-quality metrics and causal thinking to guide product and growth bets.</p>
+          <article class="work-card reveal">
+            <div class="work-card-header">
+              <span class="work-card-num">03</span>
+              <span class="tag">Infrastructure</span>
+            </div>
+            <h3>AgentTrust</h3>
+            <p>Trust infrastructure and wallet-native patterns for agent coordination and verification.</p>
+          </article>
+          <article class="work-card reveal">
+            <div class="work-card-header">
+              <span class="work-card-num">04</span>
+              <span class="tag">Live</span>
+            </div>
+            <h3>Memory Palace</h3>
+            <p>Knowledge systems that preserve context, recall, and durable output for agentic workflows.</p>
+          </article>
+          <article class="work-card reveal">
+            <div class="work-card-header">
+              <span class="work-card-num">05</span>
+              <span class="tag">Tooling</span>
+            </div>
+            <h3>Agent Skills</h3>
+            <p>Twenty-plus skills turned into reusable shipping leverage for real agent workflows.</p>
           </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="work" class="section reveal">
-        <h2 class="section-title">Selected Work Directions</h2>
-        <div class="timeline">
-          <div class="blur-card item">
-            <p class="tag">01</p>
-            <h3>Protocol-Aware Growth Systems</h3>
-            <p>Frameworks for launching and scaling decentralized products with measurable market fit.</p>
-          </div>
-          <div class="blur-card item">
-            <p class="tag">02</p>
-            <h3>AI-Augmented Business Engineering</h3>
-            <p>Decision and workflow engines that reduce entropy and increase execution velocity.</p>
-          </div>
-          <div class="blur-card item">
-            <p class="tag">03</p>
-            <h3>Applied Research to Production</h3>
-            <p>Moving technical insight into shipped interfaces and robust delivery pipelines.</p>
-          </div>
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="contact-content reveal">
+          <h2>Start a Conversation</h2>
+          <p>Have a project or problem that needs engineering clarity? Reach out.</p>
+          <a href="mailto:hello@tolushekoni.com" class="cta" aria-label="Send email to start a conversation">Get in Touch</a>
         </div>
-      </section>
+      </div>
+    </section>
+  </main>
 
-      <section id="projects" class="section reveal">
-        <div class="projects-header">
-          <h2 class="section-title">Featured Repositories</h2>
-          <p class="lead-small">A curated showcase from <strong>wijnaldum-eth</strong>, <strong>tolu-jnj</strong>, and <strong>ToXMon</strong> across hackathons, experiments, and product builds.</p>
-        </div>
-        <div id="project-grid" class="project-grid"></div>
-        <p id="projects-status" class="projects-status">Loading live repository metadata…</p>
-      </section>
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Tolu Shekoni</p>
+    </div>
+  </footer>
 
-      <section id="contact" class="section reveal">
-        <div class="blur-card contact">
-          <h2>Let’s build something unfairly effective.</h2>
-          <p>
-            If you’re building in Web3, AI, or data-intensive products and need rigorous
-            execution with aesthetic quality, let’s talk.
-          </p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="mailto:tolu.a.shekoni@gmail.com">tolu.a.shekoni@gmail.com</a>
-            <a class="btn btn-ghost" href="https://github.com/ToXMon" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <p>© <span id="year"></span> Tolu Shekoni. Crafted for clarity, motion, and impact.</p>
-    </footer>
-
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
