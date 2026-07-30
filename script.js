@@ -1,6 +1,252 @@
 (function () {
   'use strict';
 
+  var portfolioProjects = [
+    {
+      title: 'AdaL Educational Stripe Clone',
+      label: 'Source + README',
+      proof: 'Educational AdaL bootcamp project showing loop-engineered frontend practice through a Stripe-style interface study, with public repository and README evidence.',
+      evidenceType: 'verified-docs',
+      links: [
+        {
+          label: 'GitHub repository',
+          href: 'https://github.com/ToXMon/adal-bootcamp-2',
+          type: 'repo'
+        },
+        {
+          label: 'README evidence',
+          href: 'https://github.com/ToXMon/adal-bootcamp-2/blob/feat/stripe-clone-deploy/README.md',
+          type: 'docs'
+        }
+      ],
+      group: 'featured',
+      publicCopySafe: true
+    },
+    {
+      title: 'Encode Solana / SignalForge',
+      label: 'Devnet + Docs',
+      proof: 'Solana learning-to-shipping body of work across programs, token flows, dApp patterns, tests, and devnet verification evidence.',
+      evidenceType: 'devnet',
+      links: [],
+      group: 'featured',
+      publicCopySafe: true
+    },
+    {
+      title: 'Vouch / Monad',
+      label: 'Live + Source',
+      proof: 'AI-verified commitment and claim protocol work for Monad trust workflows, backed by a public repository, README, live Worker root, and health endpoint evidence.',
+      evidenceType: 'verified-live',
+      links: [
+        {
+          label: 'Live app',
+          href: 'https://vouch.tolu-a-shekoni.workers.dev',
+          type: 'demo'
+        },
+        {
+          label: 'Health endpoint',
+          href: 'https://vouch.tolu-a-shekoni.workers.dev/api/health',
+          type: 'demo'
+        },
+        {
+          label: 'GitHub repository',
+          href: 'https://github.com/ToXMon/vouch',
+          type: 'repo'
+        },
+        {
+          label: 'README',
+          href: 'https://github.com/ToXMon/vouch/blob/main/README.md',
+          type: 'docs'
+        }
+      ],
+      group: 'featured',
+      publicCopySafe: true
+    },
+    {
+      title: 'Crypto Scanner',
+      label: 'Repo + Workflow Gallery',
+      proof: 'Crypto scanner tooling for token, liquidity, and market-risk review, supported by public repository evidence and a related workflow gallery rather than a hosted scanner dashboard claim.',
+      evidenceType: 'verified-repo',
+      links: [
+        {
+          label: 'GitHub repository',
+          href: 'https://github.com/ToXMon/catecoin-scanner',
+          type: 'repo'
+        },
+        {
+          label: 'README',
+          href: 'https://github.com/ToXMon/catecoin-scanner/blob/main/README.md',
+          type: 'docs'
+        },
+        {
+          label: 'Workflow gallery',
+          href: 'https://toxmon.github.io/agent-workflows/',
+          type: 'demo'
+        }
+      ],
+      group: 'secondary',
+      publicCopySafe: true
+    },
+    {
+      title: 'X Monitor',
+      label: 'Local Workflow',
+      proof: 'Local social-signal monitoring workflow for narrative, trend, and research queue detection; no standalone public product URL is claimed.',
+      evidenceType: 'local-only',
+      links: [
+        {
+          label: 'Workflow gallery',
+          href: 'https://toxmon.github.io/agent-workflows/',
+          type: 'demo'
+        }
+      ],
+      group: 'secondary',
+      publicCopySafe: true
+    },
+    {
+      title: 'AgentTrust',
+      label: 'Repo + README',
+      proof: 'Agent trust and verification protocol work with public repository and README evidence; no current live Akash frontend claim is included.',
+      evidenceType: 'verified-repo',
+      links: [
+        {
+          label: 'GitHub repository',
+          href: 'https://github.com/ToXMon/agenttrust',
+          type: 'repo'
+        },
+        {
+          label: 'README',
+          href: 'https://github.com/ToXMon/agenttrust/blob/main/README.md',
+          type: 'docs'
+        }
+      ],
+      group: 'secondary',
+      publicCopySafe: true
+    },
+    {
+      title: 'Memory Palace',
+      label: 'Documented System',
+      proof: 'Knowledge system for preserving context, recall, and durable output across agent workflows.',
+      evidenceType: 'docs',
+      links: [
+        {
+          label: 'GitHub repository',
+          href: 'https://github.com/ToXMon/tolu',
+          type: 'repo'
+        }
+      ],
+      group: 'documented',
+      publicCopySafe: true
+    },
+    {
+      title: 'Agent Skills',
+      label: 'Tooling',
+      proof: 'Reusable Agent Zero skills and workflow tools packaged for repeatable agent workflows.',
+      evidenceType: 'docs',
+      links: [],
+      group: 'documented',
+      publicCopySafe: true
+    }
+  ];
+
+  window.portfolioProjects = portfolioProjects;
+
+  function formatProjectMeta(project) {
+    var meta = [];
+    if (project.group) {
+      meta.push(project.group);
+    }
+    if (project.evidenceType) {
+      meta.push(project.evidenceType);
+    }
+    return meta.join(' · ');
+  }
+
+  function isSafeProjectLink(link) {
+    if (!link || !link.href || !link.label) {
+      return false;
+    }
+    try {
+      var url = new URL(link.href, window.location.href);
+      return url.protocol === 'https:' || url.protocol === 'http:';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function renderPortfolioProjects(projects) {
+    var grid = document.querySelector('.work-grid');
+    if (!grid || !Array.isArray(projects) || !projects.length) {
+      return;
+    }
+
+    var fragment = document.createDocumentFragment();
+
+    projects.forEach(function (project, index) {
+      var card = document.createElement('article');
+      card.className = 'work-card reveal';
+
+      var header = document.createElement('div');
+      header.className = 'work-card-header';
+
+      var number = document.createElement('span');
+      number.className = 'work-card-num';
+      number.textContent = String(index + 1).padStart(2, '0');
+      header.appendChild(number);
+
+      if (project.label) {
+        var label = document.createElement('span');
+        label.className = 'tag';
+        label.textContent = project.label;
+        header.appendChild(label);
+      }
+
+      card.appendChild(header);
+
+      var title = document.createElement('h3');
+      title.textContent = project.title || 'Untitled project';
+      card.appendChild(title);
+
+      if (project.proof) {
+        var proof = document.createElement('p');
+        proof.textContent = project.proof;
+        card.appendChild(proof);
+      }
+
+      var metaText = formatProjectMeta(project);
+      if (metaText) {
+        var meta = document.createElement('p');
+        meta.className = 'work-card-evidence';
+        meta.textContent = metaText;
+        card.appendChild(meta);
+      }
+
+      var links = Array.isArray(project.links) ? project.links.filter(isSafeProjectLink) : [];
+      if (links.length) {
+        var linkList = document.createElement('div');
+        linkList.className = 'work-card-links';
+        links.forEach(function (link) {
+          var anchor = document.createElement('a');
+          anchor.className = 'work-card-link';
+          anchor.href = link.href;
+          anchor.textContent = link.label;
+          anchor.rel = 'noopener noreferrer';
+          anchor.target = '_blank';
+          linkList.appendChild(anchor);
+        });
+        card.appendChild(linkList);
+      }
+
+      fragment.appendChild(card);
+    });
+
+    grid.replaceChildren(fragment);
+  }
+
+  try {
+    renderPortfolioProjects(portfolioProjects);
+  } catch (error) {
+    console.warn('Portfolio project rendering failed; static fallback remains.', error);
+  }
+
   // 1. Staggered IntersectionObserver for .reveal animations
   var reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
