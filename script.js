@@ -4,10 +4,25 @@
   var portfolioProjects = [
     {
       title: 'AdaL Educational Stripe Clone',
-      label: 'Source + README',
-      proof: 'Educational AdaL bootcamp project showing loop-engineered frontend practice through a Stripe-style interface study, with public repository and README evidence.',
-      evidenceType: 'verified-docs',
+      label: 'Live Cloudflare Demo',
+      proof: 'High-fidelity educational Stripe hero clone shipped from AdaL bootcamp as a React static site on Cloudflare Pages, with public demo, X submission proof, repo, and README evidence.',
+      evidenceType: 'verified-live',
       links: [
+        {
+          label: 'Live demo',
+          href: 'https://stripe-clone-bn0.pages.dev/',
+          type: 'demo'
+        },
+        {
+          label: 'Bootcamp submission',
+          href: 'https://67a97296.stripe-clone-bn0.pages.dev/',
+          type: 'demo'
+        },
+        {
+          label: 'X proof post',
+          href: 'https://x.com/tolu_evm/status/2073978784747786320',
+          type: 'proof'
+        },
         {
           label: 'GitHub repository',
           href: 'https://github.com/ToXMon/adal-bootcamp-2',
