@@ -99,11 +99,19 @@ else
   log FAIL T-5 "Fonts incomplete ($font_count refs) or missing display=swap"
 fi
 
-# T-6: No CDN/framework deps
-if grep -riE '<script src="https?://|cdn\.jsdelivr|unpkg\.com/(?!three@0\.149)' index.html script.js >/dev/null 2>&1; then
-  log FAIL T-6 "External CDN script reference found"
+# T-6: No CDN/framework deps (BSD-grep-safe — no lookahead, list forbidden patterns directly)
+cdn_hits=$(grep -iE '<script[^>]+src="https?://|<script[^>]+src="[^"]*//(cdn\.jsdelivr|unpkg|jsdelivr|skypack|esm\.sh)' index.html script.js 2>/dev/null)
+if [ -n "$cdn_hits" ]; then
+  log FAIL T-6 "External CDN <script src=> found:"
+  echo "$cdn_hits" | sed 's/^/      /'
 else
-  log PASS T-6 "Zero CDN runtime dependencies"
+  log PASS T-6 "Zero CDN <script src=> references"
+fi
+# Also check for runtime CSS imports (fonts are allowed; CDN CSS frameworks are not)
+cdn_css=$(grep -iE 'href="https?://[^"]*(cdn|tailwind|bootstrap|fonts\.googleapis\.com)' index.html 2>/dev/null | grep -v 'fonts.googleapis.com')
+if [ -n "$cdn_css" ]; then
+  log FAIL T-6b "External CDN CSS framework reference found:"
+  echo "$cdn_css" | sed 's/^/      /'
 fi
 
 # T-7: Section order
@@ -180,18 +188,36 @@ fi
 # G2 — Full-suite checks (L-1..L-9)
 # ============================================================
 
-# L-1: Local serve reachable
+# L-1: Local serve reachable — extract asset refs from index.html, script.js, styles.css dynamically
+# Build the full list of local files referenced anywhere in the source
+asset_refs=""
+for f in index.html script.js styles.css; do
+  # src=/href= in HTML/JS
+  asset_refs+=$(grep -oE '(src|href)="[^"]+"' "$f" 2>/dev/null | sed -E 's/.*="([^"]+)".*/\1/')
+  asset_refs+=$'\n'
+  # url(...) in CSS — strip quotes too
+  asset_refs+=$(grep -oE 'url\([^)]+\)' "$f" 2>/dev/null | sed -E "s/^url\\(['\"]?//; s/['\"]?\\)$//")
+  asset_refs+=$'\n'
+done
+# Unique, non-http, non-data, non-empty
+asset_refs=$(echo "$asset_refs" | grep -vE '^(https?:|mailto:|#|$|data:|tel:)' | sort -u)
+
 s_ok=true
-for path in / styles.css script.js vendor/three.min.js assets/img/og.png assets/img/favicon.png assets/img/hero-backdrop.png; do
-  code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 "http://localhost:8080/$path")
+checked=0
+for ref in $asset_refs; do
+  # Skip absolute-root paths (would 404 on GitHub-Pages subpath)
+  case "$ref" in
+    /*) continue ;;
+  esac
+  code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 "http://localhost:8080/$ref")
+  checked=$((checked + 1))
   if [ "$code" != "200" ]; then
-    log FAIL L-1 "  /$path -> $code"
+    log FAIL L-1 "  /$ref -> $code (referenced in source)"
     s_ok=false
-    break
   fi
 done
-if [ "$s_ok" = "true" ]; then
-  log PASS L-1 "All core + asset URLs serve HTTP 200"
+if [ "$s_ok" = "true" ] && [ "$checked" -gt 0 ]; then
+  log PASS L-1 "All $checked referenced local files serve HTTP 200"
 fi
 
 # L-2: Referenced files exist (parse src/href/url from index.html + styles.css)
@@ -279,11 +305,15 @@ else
   log FAIL L-6 "HTML+CSS+JS raw total = ${total_kb} KB (exceeds 120 KB)"
 fi
 
-# L-7: Git hygiene
-if git diff --cached 2>/dev/null | grep -iE 'api_key|token=|secret' >/dev/null; then
-  log FAIL L-7 "Secrets detected in staged diff"
+# L-7: Git hygiene — scan BOTH staged diff AND HEAD working-tree for any secret-like strings
+secret_pattern='api[_-]?key|secret[_-]?key|access[_-]?token|token[_-]?=|password[_-]?=|aws[_-]?secret|BEGIN (RSA|OPENSSH|PRIVATE) KEY'
+if git diff --cached 2>/dev/null | grep -iE "$secret_pattern" >/dev/null \
+   || git ls-files | xargs grep -lEi "$secret_pattern" 2>/dev/null | grep -v -E '(\.md|\.sh|docs/adal/EVALUATE\.md|docs/adal/builder-plan\.md|scripts/check\.sh)$' >/dev/null; then
+  log FAIL L-7 "Secrets detected (staged diff OR HEAD tree, excluding docs/scripts)"
+  git diff --cached 2>/dev/null | grep -iE "$secret_pattern" | head -3 | sed 's/^/      staged: /'
+  git ls-files | xargs grep -lEi "$secret_pattern" 2>/dev/null | grep -v -E '(\.md|\.sh|docs/adal/EVALUATE\.md|docs/adal/builder-plan\.md|scripts/check\.sh)$' | head -3 | sed 's/^/      tree:   /'
 else
-  log PASS L-7 "No secrets staged"
+  log PASS L-7 "No secrets in staged diff OR HEAD tree (docs/scripts excluded)"
 fi
 
 # L-8: README accuracy (no stale projectSpecs / hello@tolushekoni.com references)

@@ -1093,6 +1093,16 @@ footer a:hover {
 /* ============================================================
    REVEAL ANIMATION
    ============================================================ */
+
+/* No-JS fallback: when JS is disabled the .no-js class stays on <html>,
+   so the reveal hides below stay visible. JS removes .no-js on load,
+   re-enabling the reveal hides for the animated path. */
+.no-js .reveal,
+.scripting-none .reveal {
+  opacity: 1;
+  transform: none;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(1.25rem);
@@ -1278,5 +1288,18 @@ footer a:hover {
 
   body::before {
     opacity: 0.03;
+  }
+}
+
+/* ============================================================
+   NO-SCRIPTING — modern equivalent of .no-js
+   ============================================================ */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .section-rule {
+    width: 6rem;
   }
 }

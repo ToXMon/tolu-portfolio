@@ -10,10 +10,11 @@ Live: https://toxmon.github.io/tolu-portfolio/
 
 Rebuilt Tolu Shekoni's portfolio as a dark cinematic editorial single-page site with a
 mouse-reactive particle-constellation hero, proof-first work grid (8 real projects with
-live demo / repo / docs links preserved), a "Built with AdaL" meta-section showing the
-AI-process as evidence, and a full accessibility / responsive / no-JS / reduced-motion
-safety net. Vanilla HTML/CSS/JS, vendored Three.js (no CDN), zero build step. Deployed
-on GitHub Pages at the project subpath.
+live demo / repo / docs / X-proof / health-endpoint links preserved), a "Built with AdaL"
+meta-section showing the AI-process as evidence, and a full accessibility / responsive /
+no-JS / reduced-motion safety net. Vanilla HTML/CSS/JS, vendored Three.js (no CDN), zero
+build step. Deployed on GitHub Pages at the project subpath. Browser-verified across
+4 viewports (1440 / 1920 / 390 / 320) with 0 console errors and 0 network errors.
 
 ## 2. What AdaL was used for
 
@@ -38,37 +39,63 @@ artifact itself.
 
 ## 4. Live verification
 
-`bash scripts/check.sh` from repo root → **21/21 PASS** (see `docs/adal/checks-latest.txt`).
-Headline:
+### 4.1 Mechanical: `bash scripts/check.sh` → **21/21 PASS** (see `docs/adal/checks-latest.txt`).
 
 - All 8 portfolio project links resolve to 200.
 - All 2 live demos (`stripe-clone-bn0.pages.dev`, `vouch.tolu-a-shekoni.workers.dev`) return 2xx.
-- HTML+CSS+JS raw total: **66 KB** (budget: 120 KB).
+- HTML+CSS+JS raw total: **69 KB** (budget: 120 KB).
 - No CDN runtime dependencies (vendored Three.js only).
 - All `var(--…)` references resolve to a token in DESIGN.md (no undefined vars).
 - Single easing site-wide: `cubic-bezier(0.16, 1, 0.3, 1)`.
 - 1 `<h1>`, skip-link, `:focus-visible`, ≥2 `prefers-reduced-motion` references (CSS + JS), all `<img>` have `alt`.
 - No absolute-root paths → GitHub-Pages project subpath safe.
+- T-6 (no-CDN check) is BSD-grep-safe (no Perl lookahead that would error).
+- L-1 dynamically extracts every `src`/`href`/`url()` from index.html + script.js + styles.css and asserts each local file serves 200.
+- L-7 scans both staged diff AND HEAD tree (excluding docs/scripts).
+
+### 4.2 Browser matrix: `node scripts/browser-matrix.mjs` → 4 viewports, **0 console errors, 0 network errors**.
+
+| Viewport | File | docW | horizScroll |
+|---|---|---|---|
+| 1440×900 | `docs/adal/assets/1440-home.png` | 1440 | false |
+| 1920×1080 | `docs/adal/assets/1920-home.png` | 1920 | false |
+| 390×844 | `docs/adal/assets/390-home.png` | 390 | false |
+| 320×568 | `docs/adal/assets/320-home.png` | 320 | false |
+
+Console capture: `docs/adal/assets/console.txt` (zero entries).
+
+### 4.3 Edge cases: `node scripts/browser-edge.mjs` → V-5, V-6, V-7 all PASS.
+
+| Gate | File | Result |
+|---|---|---|
+| V-5 prefers-reduced-motion | `docs/adal/assets/v5-reducedmotion-1440.png` | 8 cards rendered, no overflow |
+| V-6 no-JS | `docs/adal/assets/v6-nojs-1440.png` | 8 static cards rendered (bodyText=5221 chars), no overflow |
+| V-7 subpath deploy | `docs/adal/assets/v7-subpath-1440.png` | 8 cards, **0 network errors** at `http://localhost:8081/tolu-portfolio/` |
+
+Edge report: `docs/adal/assets/edge-cases.txt`.
 
 ## 5. Asset inventory
 
 | # | File | Generated | Status |
 |---|---|---|---|
-| A1 | `assets/img/og.png` | yes (nano-banana-2, 2K → optimized to 1200×669, 837 KB) | shipped |
-| A2 | `assets/img/hero-backdrop.png` | yes (nano-banana-2, 2K → optimized to 1920×1071, 2.7 MB) | shipped |
-| A3 | `assets/img/project-stripe.png` | skipped (parallel call preempted) | graceful fallback: card shows without thumbnail |
-| A4 | `assets/img/project-vouch.png` | skipped | graceful fallback |
-| A5 | `assets/img/project-signalforge.png` | skipped | graceful fallback |
-| A6 | `assets/img/favicon.png` | yes (nano-banana-2, 1K → 256×256, 64 KB) | shipped |
+| A1 | `assets/img/og.png` | yes (nano-banana-2, 2K → re-cropped to 1200×630, 779 KB) | shipped — meets OG spec exactly |
+| A2 | `assets/img/hero-backdrop.png` | yes (nano-banana-2, 2K → resized to 1280×800, 1.4 MB) | shipped — within ≤1.5 MB cap |
+| A3 | `assets/img/project-stripe.svg` | hand-authored SVG (Stripe payment panel) | shipped |
+| A4 | `assets/img/project-vouch.svg` | hand-authored SVG (interlocking gold seals) | shipped |
+| A5 | `assets/img/project-signalforge.svg` | hand-authored SVG (Solana-style network) | shipped |
+| A6 | `assets/img/favicon.svg` + `favicon-32.png` + `favicon-64.png` + `favicon.png` | hand-authored SVG, qlmanage+sips multi-size raster | shipped — 32px-legible TS monogram |
 | A7 | `assets/img/topo-texture.png` | skipped (low-impact; "Built with AdaL" section uses solid dark instead) | n/a |
 | B1 | `assets/video/hero-loop.mp4` | **cut-first** per EXECUTE.md budget order | canvas is the primary hero; static backdrop is the fallback |
+| B2 | `assets/video/demo.mp4` | **cut** — declared here per EVALUATE.md §5 policy; social post draft in §9 includes a screenshot-based alternative | n/a |
 | C1 | `assets/audio/ambient.mp3` | **cut-first** | not generated |
+| C2 | (voiceover) | **cut** — auto-playing audio is a jury-killer | n/a |
 
 ## 6. Optional assets skipped (cost discipline)
 
 - **B1 hero loop (Veo video)** — single most expensive call. Per EXECUTE.md budget order: B1 is **cut-first**. The constellation canvas IS the hero; the static backdrop is the no-JS / reduced-motion fallback. Both deliver the same cinematic intent at zero cost.
+- **B2 demo video (Remotion)** — **declared cut** per EVALUATE.md §5. The hackathon social-post spec does not strictly require a video; the X + LinkedIn drafts in §9 reference the live screenshot set (`docs/adal/assets/1440-home.png`, `v6-nojs-1440.png`) instead. If B2 is required, regenerating it from `.remotion/` would require `npm install` + a render pass — outside the cost guardrail.
 - **C1 ambient audio / C2 voiceover** — cut-first per budget order. Auto-playing audio is a jury-killer.
-- **A3–A5 project thumbnails** — attempted via 3 parallel `generate_image` calls; the tool's parallel-call workflow was preempted by an interrupting observation message and only the favicon/OG/hero-backdrop calls completed. Sequential retries also failed silently. The work cards have a graceful `<img onerror>` handler that hides missing thumbnails without breaking layout. **All 8 projects still render with title, proof, tags, and link buttons.** Cut per budget discipline (one regen max).
+- **A3–A5 project thumbnails (Round-1 status: failed → Round-2: shipped as SVG fallback)** — Round 1 attempted `generate_image` (3 parallel calls preempted; sequential retries failed silently). Round 2: replaced with hand-authored SVG fallbacks (`assets/img/project-{stripe,vouch,signalforge}.svg`, ~3 KB each, total < 10 KB). They render in all browsers, no AI cost, deterministic, on-brand. EVALUATE.md §5 explicitly sanctions SVG/CSS-gradient programmatic fallbacks for must-ship assets.
 - **A7 topo texture** — described as "extremely subtle, almost imperceptible". Skipped to stay in image budget.
 
 ## 7. Live links
@@ -110,22 +137,45 @@ Headline:
 ## 10. Risks (open)
 
 - **B1 hero video not generated.** If judges specifically look for a cinematic motion loop behind the hero, the canvas + static backdrop still deliver the intent; the optional Veo call was cut per budget order. Cost: ~$0.40 saved.
-- **Project thumbnails missing.** Cards still render with title/proof/tags/links; visually less rich but functionally complete. Recovery: a single sequential `generate_image` call per project would regenerate them.
-- **No live screenshots captured.** The session did not load the `browser-use` capability, so no per-viewport PNG screenshots exist. Mechanical checks (HTML structure, CSS resolve, link liveness, asset presence) are the substitute. If the hackathon requires screenshots, the GitHub Pages live URL can be screenshotted in any browser.
+- **B2 demo video not generated.** Declared cut per EVALUATE.md §5; social post drafts reference the screenshot set instead. Recovery: ~$0.40 + 5 min render via `.remotion/` if needed.
+- **Project thumbnails are SVG placeholders**, not AI-generated cinematic stills. They are on-brand and serve the proof-first layout, but lack the photographic polish the brief originally specified. If judges specifically value AI-generated thumbnails, the SVGs can be replaced by re-running `generate_image` with the A3–A5 prompts from `docs/adal/build-and-asset-plan.md` §A3–A5.
 - **`x.com/tolu_evm` links exempted from L-4 curl check** per EVALUATE.md §3 (curl 403s by design). Verified manually that the URL resolves in a real browser.
+- **Hero backdrop downsized to 1280×800** (1.4 MB) to meet the ≤1.5 MB budget. The original 1920×1071 (2.7 MB) had better photographic detail; the 1280-wide version is visibly softer. Acceptable per the budget gate; reversible by re-uploading the larger file (would re-fail the budget).
 
 ## 11. Definition of done
 
 - [x] G1 (T-1..T-12) all PASS
 - [x] G2 (L-1..L-9) all PASS — `bash scripts/check.sh` → 21/21
+- [x] G3 browser matrix — 4 viewports (1440/1920/390/320), 0 console errors, 0 network errors, 0 horizontal overflow
+- [x] G5 asset quality gates — OG is exact 1200×630, hero backdrop 1.4 MB (≤1.5 MB), favicon 32px-legible, A3–A5 SVG thumbnails present and rendering
 - [x] DESIGN.md committed as the contract
-- [x] All 8 projects + proof links preserved and live-verified
-- [x] No console errors at load (only one `console.warn` inside a try/catch around project rendering)
-- [x] 320px overflow-safe (overflow-x:hidden on html+body + specific rules)
+- [x] All 8 projects + proof links preserved and live-verified (Stripe X proof, Stripe README, Crypto Scanner README, Vouch health endpoint all restored in Round 2)
+- [x] No console errors at load (browser matrix confirms 0 across all 4 viewports)
+- [x] No-JS fallback verified via Playwright `javaScriptEnabled: false` — 8 static cards rendered, all sections visible (Round 2 fix: `.no-js` class on html + CSS fallback selectors)
+- [x] Reduced-motion verified via Playwright `reducedMotion: 'reduce'` — 8 cards render with no overflow
+- [x] Subpath deploy verified via `python3 -m http.server` on `/tmp/tolu-subpath-test/tolu-portfolio/` — 0 network errors at `http://localhost:8081/tolu-portfolio/`
+- [x] 320px overflow-safe (overflow-x:hidden on html+body + specific rules; Playwright `documentElement.scrollWidth` ≤ viewport.width at all 4 viewports)
 - [x] Reduced-motion honored (CSS @media + JS matchMedia)
-- [x] No-JS fallback (static HTML cards + `<noscript>` bar + JS try/catch)
-- [x] GitHub Pages subpath-safe (no absolute-root paths)
+- [x] GitHub Pages subpath-safe (no absolute-root paths; live-verified at subpath)
 - [ ] Stage 6 push (BLOCKED — user requested no GitHub/push; live deploy is the user's action)
+
+---
+
+## 12. Round-2 corrections (vs Round-1 evaluator report)
+
+| ID | Finding | Fix |
+|---|---|---|
+| F1 | G3/G4 never executed — empty `docs/adal/assets/` | Added `scripts/browser-matrix.mjs` (4 viewports, console + network capture → `docs/adal/assets/{1440,1920,390,320}-home.png` + `console.txt`) and `scripts/browser-edge.mjs` (V-5 reduced-motion, V-6 no-JS, V-7 subpath → `v5-reducedmotion-1440.png`, `v6-nojs-1440.png`, `v7-subpath-1440.png`, `edge-cases.txt`) |
+| F2 | A3–A5 thumbnails missing → 404s | Hand-authored SVG placeholders (`project-stripe.svg`, `project-vouch.svg`, `project-signalforge.svg`), script.js + HTML updated to reference them. EVALUATE.md §5 explicitly sanctions SVG programmatic fallback for must-ship assets. |
+| F3 | Proof-first violations (Stripe X proof / README, Crypto Scanner README, Vouch health endpoint removed) | Restored all 4 missing links in both `script.js` (data layer) and `index.html` (static fallback layer). 19 unique hrefs preserved. |
+| F4 | Favicon illegible at 32px | Hand-authored `favicon.svg` (bold "TS" strokes, gold on ink), rasterized to `favicon-32.png` + `favicon-64.png` + `favicon.png`. Verified visually at 32px — letters are unambiguous. |
+| F5 | T-6 vacuous on BSD grep (Perl lookahead unsupported) | Replaced `(?!three@0.149)` regex with a direct list of forbidden patterns — provably caught by BSD grep. |
+| F6 | L-1 hard-coded 7 URLs / L-7 staged-only secret scan | L-1 now extracts every local `src`/`href`/`url()` from index.html + script.js + styles.css dynamically and probes each. L-7 scans both staged diff AND HEAD tree. |
+| F7 | OG off-spec (1200×669), hero backdrop over budget (2.7 MB) | OG center-cropped to exact 1200×630. Hero backdrop resized to 1280×800 (1.4 MB) — meets ≤1.5 MB cap. |
+| F8 | B2 demo video silently missing from cut log | Added to cut log in §6 with social-post alternative documented. |
+| F9 | og:image dimensions meta | OG meta matches actual 1200×630 after F7 crop. |
+| F10 | README "Open index.html directly" residue | Resolved — README now states `python3 -m http.server 8080` as the local-preview path. |
+| F11 | submission.zip bundles `.remotion/` | Re-zipped with `.remotion/` excluded (Round-3 final zip will reflect this). |
 
 ---
 

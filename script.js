@@ -5,6 +5,11 @@
 (function () {
   'use strict';
 
+  // Flip the .no-js class off as soon as this script executes, so CSS that
+  // depends on JS-driven reveal animations can take over. If JS is disabled,
+  // the class stays and the no-script fallback styles apply.
+  document.documentElement.classList.remove('no-js');
+
   /* ----------------------------------------------------------------
      1. Reduced-motion + capability probes
      ---------------------------------------------------------------- */
@@ -37,19 +42,21 @@
       title: 'AdaL Educational Stripe Clone',
       label: 'Live',
       proof: 'High-fidelity educational Stripe hero clone shipped from AdaL bootcamp as a React static site on Cloudflare Pages, with public demo, X submission proof, repo, and README evidence.',
-      thumbnail: 'assets/img/project-stripe.png',
+      thumbnail: 'assets/img/project-stripe.svg',
       featured: true,
       links: [
-        { label: 'Live demo ↗',    href: 'https://stripe-clone-bn0.pages.dev/',           type: 'demo' },
-        { label: 'Bootcamp submit ↗', href: 'https://67a97296.stripe-clone-bn0.pages.dev/', type: 'proof' },
-        { label: 'GitHub repo',     href: 'https://github.com/ToXMon/adal-bootcamp-2',    type: 'repo' }
+        { label: 'Live demo ↗',       href: 'https://stripe-clone-bn0.pages.dev/',                  type: 'demo' },
+        { label: 'Bootcamp submit ↗', href: 'https://67a97296.stripe-clone-bn0.pages.dev/',        type: 'proof' },
+        { label: 'X proof post',      href: 'https://x.com/tolu_evm/status/2073978784747786320',  type: 'proof' },
+        { label: 'GitHub repo',       href: 'https://github.com/ToXMon/adal-bootcamp-2',           type: 'repo' },
+        { label: 'README evidence',   href: 'https://github.com/ToXMon/adal-bootcamp-2/blob/feat/stripe-clone-deploy/README.md', type: 'docs' }
       ]
     },
     {
       title: 'Encode Solana / SignalForge',
       label: 'Devnet',
       proof: 'Solana learning-to-shipping body of work across programs, token flows, dApp patterns, tests, and devnet verification evidence.',
-      thumbnail: 'assets/img/project-signalforge.png',
+      thumbnail: 'assets/img/project-signalforge.svg',
       featured: true,
       links: []
     },
@@ -57,12 +64,13 @@
       title: 'Vouch / Monad',
       label: 'Live',
       proof: 'AI-verified commitment and claim protocol work for Monad trust workflows, backed by a public repository, live Worker root, and health endpoint evidence.',
-      thumbnail: 'assets/img/project-vouch.png',
+      thumbnail: 'assets/img/project-vouch.svg',
       featured: true,
       links: [
-        { label: 'Live app ↗', href: 'https://vouch.tolu-a-shekoni.workers.dev',          type: 'demo' },
-        { label: 'GitHub repo', href: 'https://github.com/ToXMon/vouch',                  type: 'repo' },
-        { label: 'README',      href: 'https://github.com/ToXMon/vouch/blob/main/README.md', type: 'docs' }
+        { label: 'Live app ↗',       href: 'https://vouch.tolu-a-shekoni.workers.dev',           type: 'demo' },
+        { label: 'Health endpoint',  href: 'https://vouch.tolu-a-shekoni.workers.dev/api/health', type: 'proof' },
+        { label: 'GitHub repo',      href: 'https://github.com/ToXMon/vouch',                   type: 'repo' },
+        { label: 'README',           href: 'https://github.com/ToXMon/vouch/blob/main/README.md', type: 'docs' }
       ]
     },
     {
@@ -71,8 +79,9 @@
       proof: 'Crypto scanner tooling for token, liquidity, and market-risk review, supported by public repository evidence and a related workflow gallery.',
       featured: false,
       links: [
-        { label: 'GitHub repo',        href: 'https://github.com/ToXMon/catecoin-scanner', type: 'repo' },
-        { label: 'Workflow gallery ↗', href: 'https://toxmon.github.io/agent-workflows/',  type: 'demo' }
+        { label: 'GitHub repo',        href: 'https://github.com/ToXMon/catecoin-scanner',                type: 'repo' },
+        { label: 'README',             href: 'https://github.com/ToXMon/catecoin-scanner/blob/main/README.md', type: 'docs' },
+        { label: 'Workflow gallery ↗', href: 'https://toxmon.github.io/agent-workflows/',                 type: 'demo' }
       ]
     },
     {

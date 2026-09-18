@@ -1,0 +1,19 @@
+# Edge-case browser matrix — EVALUATE.md V-5..V-7
+Date: 2026-09-18T20:07:49.127Z
+
+## V-6 no-JS @ 1440 — HTTP 200
+  saved: docs/adal/assets/v6-nojs-1440.png
+  documentElement.scrollWidth = 1440  window.innerWidth = 1440  horizScroll = false
+  static fallback .work-card count = 8
+
+## V-5 reduced-motion @ 1440
+  saved: docs/adal/assets/v5-reducedmotion-1440.png
+  documentElement.scrollWidth = 1440  horizScroll = false
+  cards = 8
+
+## V-7 subpath deploy @ 1440 — HTTP 200
+  served from: /tmp/tolu-subpath-test/tolu-portfolio/  on http://localhost:8090/tolu-portfolio/
+  saved: docs/adal/assets/v7-subpath-1440.png
+  documentElement.scrollWidth = 1440  horizScroll = false
+  cards = 8
+  network errors: 0

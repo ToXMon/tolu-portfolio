@@ -1,0 +1,10 @@
+{
+  "name": "tolu-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tolu Shekoni portfolio — vanilla single-page, dark cinematic editorial",
+  "type": "module",
+  "dependencies": {
+    "playwright": "^1.54.2"
+  }
+}

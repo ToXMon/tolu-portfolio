@@ -1,0 +1,13 @@
+# Dependencies (only used for local validation scripts)
+node_modules/
+package-lock.json
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Local server logs
+/tmp/
