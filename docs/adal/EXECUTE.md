@@ -2,14 +2,18 @@
 
 Date: 2026-09-18 · Deadline: Sep 19, 2026 11:59 PM PT (hackathon submission)
 
-> **How to use:** In a new AdaL session with the repo `ToXMon/tolu-portfolio` open, say:
-> "Read `docs/adal/EXECUTE.md` and `docs/adal/build-and-asset-plan.md` and execute them end-to-end, autonomously. Do not stop to ask questions — make sensible default decisions, log them, and continue. Confirm only before pushing to GitHub."
+> **How to use (new account, step by step):**
+> 1. `git clone https://github.com/ToXMon/tolu-portfolio.git && cd tolu-portfolio`
+> 2. Launch AdaL in engineer mode with an open-weight model: `adal --mode engineer --model <open-weight-slug>` — run `/model` first to see the live catalog and pick a strong open-weight family (Kimi / DeepSeek / Qwen / MiniMax class). Do NOT default to a proprietary frontier model.
+> 3. Inside the session: press `Shift+Tab` to cycle permissions to **YOLO** (auto-approve) so file edits, bash, and generation calls don't pause.
+> 4. Say this one kickoff line:
+>    "Read `docs/adal/EXECUTE.md` and `docs/adal/build-and-asset-plan.md` and execute them end-to-end, autonomously. First load the browser-use and video capabilities (they auto-load on demand, but load them now so they're ready). Do not stop to ask questions — make sensible default decisions, log them, and continue. Confirm only before pushing to GitHub. Stay cost-conscious per the brief."
 
-## Operating mode
-- Run in **engineer mode with auto-approve** (`adal --yolo`) so file edits, bash, and generation calls don't pause.
-- Load capabilities up front: `browser-use` (verification) and `video` (B1/B2 + optional audio). Image generation is built-in (`generate_image`).
-- Work autonomously: build → generate → verify → fix → package. One confirmation gate only: the final `git push`.
-- Models: use a strong open-weight model for the build; use a vision-capable model for the evaluator pass and for reviewing generated assets (per screenshot-matrix discipline). Escalate only on verified capability gaps.
+## Operating mode & cost guardrails
+- **Mode**: engineer mode (`--mode engineer`) coordinates the build/verify/evaluate stages as supervised steps; YOLO permissions make it autonomous. One confirmation gate only: the final `git push`.
+- **Capabilities**: `browser-use` (verification screenshots) and `video` (B1 clip, demo video, optional audio) auto-load when a task needs them — the kickoff line pre-loads them explicitly. Image generation is built-in (`generate_image`), no capability needed.
+- **Model routing (cost)**: strong open-weight for the build (default). For the Stage 4 evaluator pass and asset review, **vision is required** — use a vision-capable open-weight model (MiniMax M3-class is the cheapest per the clone-anywebsite cost table). Escalate to proprietary ONLY if the open-weight model verifiably errors or lacks vision, and log the concrete blocking reason.
+- **Budget rules**: generate each image ONCE, review, regenerate at most once if off-brief. B1 video is the single most expensive call — if usage runs low, CUT B1 first (the canvas constellation is already the hero) and keep site + images + submission package as must-ship. Cut order: C1 audio → C2 voiceover → B1 hero loop → B2 demo video. Never cut Stage 2 (site), Stage 4 (verify), or Stage 5 submission artifacts.
 
 ## Execution graph (in order — each stage gates the next)
 
