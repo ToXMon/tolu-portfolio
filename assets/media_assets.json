@@ -1,0 +1,52 @@
+{
+  "assets": {
+    "8c13ac02": {
+      "id": "8c13ac02",
+      "type": "image",
+      "src": "assets/img/hero-backdrop.png",
+      "duration_s": null,
+      "resolution": null,
+      "provider": "nano-banana-2",
+      "generation": {
+        "prompt": "Abstract cinematic background: a vast dark field of fine golden dust particles drifting through warm black space, extremely shallow depth of field, bokeh highlights in amber and slate blue, shot on ARRI Alexa 65, 100mm macro probe lens, Kodak Vision3 500T 5219, heavy atmospheric haze, single volumetric light shaft from upper left, deep warm-black shadows with amber rim light, subtle film grain, no text, no objects, pure atmospheric texture.",
+        "model": "nano-banana-2",
+        "n": 1,
+        "google_search_grounding": false
+      },
+      "created_at": "2026-09-18T18:59:03Z",
+      "tags": null
+    },
+    "7e9093ef": {
+      "id": "7e9093ef",
+      "type": "image",
+      "src": "assets/img/favicon.png",
+      "duration_s": null,
+      "resolution": null,
+      "provider": "nano-banana-2",
+      "generation": {
+        "prompt": "Minimal monogram mark: the letters \"TS\" constructed from a single continuous thin golden line forming a subtle constellation node pattern, on pure warm-black background, flat vector style, high contrast, centered, generous padding, no other elements.",
+        "model": "nano-banana-2",
+        "n": 1,
+        "google_search_grounding": false
+      },
+      "created_at": "2026-09-18T18:59:15Z",
+      "tags": null
+    },
+    "74b1aaec": {
+      "id": "74b1aaec",
+      "type": "image",
+      "src": "assets/img/og.png",
+      "duration_s": null,
+      "resolution": null,
+      "provider": "nano-banana-2",
+      "generation": {
+        "prompt": "Cinematic wide shot, anamorphic 2.39:1 framing: a lone constellation of golden particle nodes connected by thin light threads floating over a deep warm-black void, shallow depth of field, shot on ARRI Alexa 65 with Panavision C-Series anamorphic lens, Kodak Vision3 500T 5219 film stock, subtle film grain, single warm key light from frame right simulating an ARRI SkyPanel through full CTO, deep shadows, editorial composition with generous negative space on the left third for typography, the words \"TOLU SHEKONI\" in elegant serif type and \"Proof-first builder \u2014 AI systems \u00b7 Web3 \u00b7 Data\" in small monospaced type set into the negative space.",
+        "model": "nano-banana-2",
+        "n": 1,
+        "google_search_grounding": false
+      },
+      "created_at": "2026-09-18T18:59:30Z",
+      "tags": null
+    }
+  }
+}
