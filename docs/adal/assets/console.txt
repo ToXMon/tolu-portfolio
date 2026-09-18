@@ -1,5 +1,5 @@
 # Console messages + network errors — browser-matrix run
-Date: 2026-09-18T20:14:15.096Z
+Date: 2026-09-18T21:07:08.988Z
 URL: http://localhost:8080/
 
 ## 1440-home
@@ -14,6 +14,9 @@ URL: http://localhost:8080/
 ## 320-home
 (no console messages)
 
+## 1440-home-normal-motion
+(no console messages)
+
 
 # Network errors (4xx/5xx + request failures)
 ## 1440-home
@@ -26,4 +29,7 @@ URL: http://localhost:8080/
 (no network errors)
 
 ## 320-home
+(no network errors)
+
+## 1440-home-normal-motion
 (no network errors)

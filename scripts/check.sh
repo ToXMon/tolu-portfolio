@@ -113,6 +113,14 @@ if [ -n "$cdn_css" ]; then
   log FAIL T-6b "External CDN CSS framework reference found:"
   echo "$cdn_css" | sed 's/^/      /'
 fi
+# Bonus: confirm no vendored-but-dead Three.js file (removed in Round 3 — canvas is 2D, no WebGL)
+if [ -f vendor/three.min.js ]; then
+  if grep -qE 'three' index.html script.js styles.css 2>/dev/null; then
+    log PASS T-6c "vendor/three.min.js present AND referenced"
+  else
+    log FAIL T-6c "vendor/three.min.js present but UNREFERENCED (dead vendored dep)"
+  fi
+fi
 
 # T-7: Section order
 order=$(grep -oE 'id="(about|thesis|focus|work|built-with-adal|contact)"' index.html | tr '\n' ' ')
@@ -192,8 +200,17 @@ fi
 # Build the full list of local files referenced anywhere in the source
 asset_refs=""
 for f in index.html script.js styles.css; do
-  # src=/href= in HTML/JS
+  # src=/href= in HTML (double-quoted)
   asset_refs+=$(grep -oE '(src|href)="[^"]+"' "$f" 2>/dev/null | sed -E 's/.*="([^"]+)".*/\1/')
+  asset_refs+=$'\n'
+  # src=/href= in JS (single-quoted)
+  asset_refs+=$(grep -oE "(src|href)='[^']+'" "$f" 2>/dev/null | sed -E "s/.*='([^']+)'.*/\\1/")
+  asset_refs+=$'\n'
+  # thumbnail:'...' style data refs in JS
+  asset_refs+=$(grep -oE "(thumbnail|src|url|href):\s*'[^']+'" "$f" 2>/dev/null | sed -E "s/.*'([^']+)'.*/\\1/")
+  asset_refs+=$'\n'
+  # meta content="..." — only extract values that LOOK like asset paths (start with assets/ or contain a file extension)
+  asset_refs+=$(grep -oE 'content="[^"]+"' "$f" 2>/dev/null | sed -E 's/content="([^"]+)".*/\1/' | grep -E '^(assets/|vendor/|scripts/|docs/|[a-z]+\.[a-z]+$)')
   asset_refs+=$'\n'
   # url(...) in CSS — strip quotes too
   asset_refs+=$(grep -oE 'url\([^)]+\)' "$f" 2>/dev/null | sed -E "s/^url\\(['\"]?//; s/['\"]?\\)$//")
@@ -323,16 +340,17 @@ else
   log PASS L-8 "README.md free of stale references"
 fi
 
-# L-9: Clean-clone boot — verify vendored deps are committed
-for f in vendor/three.min.js index.html styles.css script.js DESIGN.md; do
+# L-9: Clean-clone boot — verify required files exist (Round-3: vendored Three.js removed, canvas is 2D)
+required_files="index.html styles.css script.js DESIGN.md README.md SUBMISSION.md assets/img/og.png assets/img/hero-backdrop.png assets/img/favicon.svg"
+all_present=true
+for f in $required_files; do
   if [ ! -f "$f" ]; then
     log FAIL L-9 "Missing required file: $f"
-    missing=$((missing + 1))
+    all_present=false
   fi
 done
-# All-on-disk check
-if [ -f vendor/three.min.js ] && [ -f index.html ] && [ -f styles.css ] && [ -f script.js ] && [ -f DESIGN.md ]; then
-  log PASS L-9 "Required files all present (vendored deps committed)"
+if [ "$all_present" = "true" ]; then
+  log PASS L-9 "Required files all present (no vendored deps — vanilla site)"
 fi
 
 # ============================================================

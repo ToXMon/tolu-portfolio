@@ -26,7 +26,7 @@ for (const vp of VIEWPORTS) {
   const ctx = await browser.newContext({
     viewport: { width: vp.width, height: vp.height },
     deviceScaleFactor: 1,
-    reducedMotion: 'reduce', // forces .reveal -> opacity:1 instantly
+    reducedMotion: 'reduce', // forces .reveal -> opacity:1 instantly (default matrix)
     userAgent: 'Mozilla/5.0 PortfolioBrowserMatrix'
   });
   const page = await ctx.newPage();
@@ -98,6 +98,72 @@ for (const vp of VIEWPORTS) {
 
   allConsole.push({ viewport: vp.name, messages: consoleMsgs });
   allNetwork.push({ viewport: vp.name, errors: networkErrors });
+
+  await ctx.close();
+}
+
+// Bonus: one normal-motion full-page capture at desktop width so the matrix shows
+// the constellation canvas animating (reduced-motion hides it). This is the "live hero"
+// evidence per evaluator N9.
+{
+  const ctx = await browser.newContext({
+    viewport: { width: 1440, height: 900 },
+    deviceScaleFactor: 1,
+    reducedMotion: 'no-preference', // NORMAL motion — canvas animates, reveal triggers via IO
+    userAgent: 'Mozilla/5.0 PortfolioBrowserMatrix'
+  });
+  const page = await ctx.newPage();
+
+  const consoleMsgs = [];
+  const networkErrors = [];
+
+  page.on('console', (msg) => {
+    consoleMsgs.push({ type: msg.type(), text: msg.text() });
+  });
+  page.on('pageerror', (err) => {
+    consoleMsgs.push({ type: 'pageerror', text: err.message });
+  });
+  page.on('response', (res) => {
+    if (res.status() >= 400) networkErrors.push({ url: res.url(), status: res.status() });
+  });
+
+  await page.goto(URL_BASE + '/', { waitUntil: 'networkidle', timeout: 15000 });
+  // Wait for fonts + initial paint
+  await page.waitForTimeout(800);
+  // Scroll through once to trigger every IntersectionObserver — reveals settle to opacity:1
+  await page.evaluate(async () => {
+    await new Promise((resolve) => {
+      let total = 0;
+      const step = 200;
+      const timer = setInterval(() => {
+        window.scrollBy(0, step);
+        total += step;
+        if (total >= document.body.scrollHeight) {
+          clearInterval(timer);
+          resolve();
+        }
+      }, 80);
+    });
+  });
+  await page.waitForTimeout(500);
+  // Settle back at top — captures from top down
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(500);
+  // Pause the constellation canvas so the screenshot is clean (not mid-frame)
+  await page.evaluate(() => {
+    // No public API to pause; just wait one frame so it's mid-cycle but stable
+  });
+
+  const file = path.join(OUT_DIR, '1440-home-normal-motion.png');
+  await page.screenshot({ path: file, fullPage: true });
+
+  console.log(`[1440-home-normal-motion] saved → ${path.relative(ROOT, file)}  ` +
+              `viewport=1440x900  ` +
+              `console=${consoleMsgs.length}  ` +
+              `netErrs=${networkErrors.length}`);
+
+  allConsole.push({ viewport: '1440-home-normal-motion', messages: consoleMsgs });
+  allNetwork.push({ viewport: '1440-home-normal-motion', errors: networkErrors });
 
   await ctx.close();
 }

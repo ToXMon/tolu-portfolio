@@ -1,7 +1,7 @@
 # Tolu Shekoni — Portfolio
 
-Dark cinematic editorial single-page portfolio, vanilla HTML/CSS/JS, vendored Three.js,
-zero build step, GitHub-Pages ready. Built with AdaL.
+Dark cinematic editorial single-page portfolio, vanilla HTML/CSS/JS, zero build step,
+zero runtime deps, GitHub-Pages ready. Built with AdaL.
 
 **Live:** https://toxmon.github.io/tolu-portfolio/
 
@@ -37,12 +37,14 @@ index.html              # single-page document
 styles.css              # one :root block, all var(--…) resolve, single easing
 script.js               # constellation canvas + reveal observer + magnetic CTA + cursor
 DESIGN.md               # design contract (palette, type, motion, craft)
-vendor/three.min.js     # vendored r149 UMD, no CDN at runtime
 assets/img/             # og.png, favicon*, hero-backdrop.png, project-{stripe,vouch,signalforge}.svg
-docs/adal/              # EXECUTE.md, build-and-asset-plan.md, EVALUATE.md, builder-plan.md
+docs/adal/              # EXECUTE.md, build-and-asset-plan.md, EVALUATE.md, EVALUATE-log.md, builder-plan.md
 scripts/                # check.sh (21 mechanical checks), browser-matrix.mjs, browser-edge.mjs
 SUBMISSION.md           # build summary, asset inventory, social-post draft
 ```
+
+**Zero runtime deps.** No npm packages in production, no vendor folder, no CDN scripts.
+The only external requests are Google Fonts (preconnected + display=swap).
 
 ## Customization
 
