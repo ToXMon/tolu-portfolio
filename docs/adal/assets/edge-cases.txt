@@ -1,5 +1,5 @@
 # Edge-case browser matrix — EVALUATE.md V-5..V-7
-Date: 2026-09-18T20:07:49.127Z
+Date: 2026-09-18T20:14:23.193Z
 
 ## V-6 no-JS @ 1440 — HTTP 200
   saved: docs/adal/assets/v6-nojs-1440.png
