@@ -1,0 +1,26 @@
+PASS   T-1    DESIGN.md defines ink/gold/easing/type
+PASS   T-2    All oklch() literals resolve to palette family (ink/gold/blue + neutral)
+PASS   T-3    Single cubic-bezier easing site-wide (1)
+PASS   T-4    Hero h1 = clamp(3.9rem, 11vw, 9.5rem)
+PASS   T-5    All 3 font families loaded (3 refs) with display=swap
+PASS   T-6    Zero CDN runtime dependencies
+PASS   T-7    Section order matches DESIGN.md
+PASS   T-8    All preserved copy + email + socials present
+PASS   T-9    lang/en, 1 h1, skip-link, 2 reduced-motion refs (CSS+JS), focus-visible, all <img> have alt
+PASS   T-10   Film-grain, cursor-dot, selection, OG, favicon, hamburger all present
+PASS   T-11   script.js syntax OK
+PASS   T-12   No duplicate element ids
+PASS   L-1    All core + asset URLs serve HTTP 200
+PASS   L-2    All HTML/CSS local refs resolve
+PASS   L-3    No absolute-root paths (GitHub-Pages subpath safe)
+PASS   L-4    All in-scope external URLs return 2xx/3xx (x.com exempted per §3)
+PASS   L-5    Stripe Clone + Vouch live demos respond 2xx
+PASS   L-6    HTML+CSS+JS raw total = 66 KB (≤ 120 KB)
+PASS   L-7    No secrets staged
+PASS   L-8    README.md free of stale references
+PASS   L-9    Required files all present (vendored deps committed)
+
+================ SUMMARY ================
+Total: 21   PASS: 21   FAIL: 0
+Report: /Users/tolushekoni/tolu-portfolio/docs/adal/checks-latest.txt
+===========================================

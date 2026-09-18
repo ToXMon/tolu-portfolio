@@ -50,7 +50,18 @@ Then visit `http://localhost:8080`.
 
 ## Quick customization
 
-- Change email: `index.html` search `hello@tolushekoni.com`
-- Change GitHub link: `index.html` search `https://github.com/ToXMon`
-- Update project list: edit `projectSpecs` in `script.js`
-- Color palette: edit CSS variables in `styles.css` under `:root`
+- Change email: search `tolu.a.shekoni@gmail.com` across `index.html`, `script.js`, `footer`
+- Change GitHub link: search `https://github.com/ToXMon` across `index.html`, `script.js`
+- Update project list: edit the `portfolioProjects` array in `script.js`
+- Color palette: edit CSS variables in `styles.css` under `:root` (see `DESIGN.md` for the token contract)
+
+## Design contract
+
+See [`DESIGN.md`](./DESIGN.md) for the full design contract — palette, type ramp, section order, motion primitives, craft details. The validation suite at `scripts/check.sh` enforces it.
+
+## Validation
+
+```bash
+python3 -m http.server 8080      # local preview
+bash scripts/check.sh            # full validation suite (T-1..T-12 + L-1..L-9)
+```
