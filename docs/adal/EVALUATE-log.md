@@ -4,6 +4,28 @@ Date: 2026-09-18 · Author: AdaL (engineer)
 Contract: `docs/adal/EVALUATE.md` §6 — "if Round 3 returns with items 1–5 done and suite
 exit 0, the remaining rubric scores are pre-authorized exceptions."
 
+## N10 — packaging only (Round-4 fix, evidence artifact, not site)
+
+**Finding:** `1440-home-normal-motion.png` was 70–80 % black void below y≈2400.
+**Root cause:** the site's `html { scroll-behavior: smooth }` CSS + the capture's
+`window.scrollBy` loop → scrollY lagged at 897 px vs ~8970 target; only 7/26 reveals
+had fired before the full-page screenshot stitched and froze unfired sections at
+`opacity:0`.
+**Fix (applied):**
+1. `scripts/browser-matrix.mjs` now registers `ctx.addInitScript()` to override
+   `documentElement.style.scrollBehavior = 'auto'` before any page script runs
+   (and re-applies on DOMContentLoaded). Site CSS is untouched — only the test page
+   is mutated.
+2. Replaced the `scrollBy` interval loop with explicit `scrollTo(0, pos)` at 0.6 ×
+   viewport-height steps + 80 ms wait per step, then a final scroll-to-bottom pass.
+3. After scrolling, **wait 3000 ms** to let the worst-case stagger window complete
+   (22 reveals × 100 ms per-reveal stagger = 2200 ms + 600 ms transition).
+4. **Hard health gate added:** the script now asserts `firedReveals === totalReveals`
+   after the wait, and `throw`s if not — refuses to ship a defective capture.
+**Verified result:** `reveals=22/22 fired`, screenshot shows the full page including
+constellation canvas, marquee, thesis, disciplines, work grid (8 cards), built-with-
+AdaL, contact, footer. `submission.zip` regenerated at **2.2 MB**.
+
 ## Round-3 status
 
 | ID | Severity | Status | Resolution |

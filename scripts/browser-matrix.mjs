@@ -105,6 +105,13 @@ for (const vp of VIEWPORTS) {
 // Bonus: one normal-motion full-page capture at desktop width so the matrix shows
 // the constellation canvas animating (reduced-motion hides it). This is the "live hero"
 // evidence per evaluator N9.
+//
+// N10 fix: the site's `html { scroll-behavior: smooth }` CSS causes `window.scrollBy`
+// calls to lag behind target scrollY during the staged scroll loop — IntersectionObservers
+// fire late, the stitched full-page screenshot freezes unfired `.reveal` sections at
+// opacity:0 (giving the captured image a 70-80 % black void below the fold). The fix
+// is to override scroll-behavior to 'auto' (instant) before any scroll runs in this
+// capture context. Site behavior is unchanged — we only mutate the test page.
 {
   const ctx = await browser.newContext({
     viewport: { width: 1440, height: 900 },
@@ -112,6 +119,18 @@ for (const vp of VIEWPORTS) {
     reducedMotion: 'no-preference', // NORMAL motion — canvas animates, reveal triggers via IO
     userAgent: 'Mozilla/5.0 PortfolioBrowserMatrix'
   });
+
+  // Inject before any page script runs: instant scroll + disable smooth interpolation
+  await ctx.addInitScript(() => {
+    const apply = () => {
+      try { document.documentElement.style.scrollBehavior = 'auto'; } catch (_) {}
+      try { document.body && (document.body.style.scrollBehavior = 'auto'); } catch (_) {}
+    };
+    // Apply as soon as documentElement exists, and again on DOMContentLoaded
+    apply();
+    document.addEventListener('DOMContentLoaded', apply);
+  });
+
   const page = await ctx.newPage();
 
   const consoleMsgs = [];
@@ -130,29 +149,49 @@ for (const vp of VIEWPORTS) {
   await page.goto(URL_BASE + '/', { waitUntil: 'networkidle', timeout: 15000 });
   // Wait for fonts + initial paint
   await page.waitForTimeout(800);
-  // Scroll through once to trigger every IntersectionObserver — reveals settle to opacity:1
-  await page.evaluate(async () => {
-    await new Promise((resolve) => {
-      let total = 0;
-      const step = 200;
-      const timer = setInterval(() => {
-        window.scrollBy(0, step);
-        total += step;
-        if (total >= document.body.scrollHeight) {
-          clearInterval(timer);
-          resolve();
-        }
-      }, 80);
-    });
-  });
-  await page.waitForTimeout(500);
-  // Settle back at top — captures from top down
-  await page.evaluate(() => window.scrollTo(0, 0));
-  await page.waitForTimeout(500);
-  // Pause the constellation canvas so the screenshot is clean (not mid-frame)
+
+  // Re-apply override (CSS may have re-set it after addInitScript ran)
   await page.evaluate(() => {
-    // No public API to pause; just wait one frame so it's mid-cycle but stable
+    document.documentElement.style.scrollBehavior = 'auto';
+    document.body.style.scrollBehavior = 'auto';
   });
+
+  // Scroll through once to trigger every IntersectionObserver — reveals settle to opacity:1.
+  //
+  // Why this is tricky: script.js uses a per-sibling stagger — each reveal adds `.visible`
+  // via `setTimeout(..., idx * 100ms)`, so the LAST reveal can lag ~22*100 = 2200ms after
+  // its IO callback fires. We need to (1) trigger every IO by scrolling through every
+  // section, (2) wait long enough for all stagger timeouts to complete, (3) verify via
+  // getComputedStyle that opacity is actually 1 before screenshotting.
+  const scrollReport = await page.evaluate(async () => {
+    const total = document.body.scrollHeight;
+    const step = Math.max(200, Math.floor(window.innerHeight * 0.6));
+    let pos = 0;
+    while (pos < total) {
+      window.scrollTo(0, pos);
+      // IO fires async after scroll; 80ms is enough for the observer to register intersection
+      await new Promise((r) => setTimeout(r, 80));
+      pos += step;
+    }
+    // Final pass — scroll to bottom and to top so every section has been "intersected"
+    window.scrollTo(0, total);
+    await new Promise((r) => setTimeout(r, 200));
+    window.scrollTo(0, 0);
+    await new Promise((r) => setTimeout(r, 100));
+    return { scrolledTo: total, totalReveals: document.querySelectorAll('.reveal').length };
+  });
+
+  // Wait for the worst-case stagger window: 22 reveals × 100 ms = 2200 ms, plus 600 ms
+  // transition time. Total = ~2.8 s. Round up to 3 s for safety.
+  await page.waitForTimeout(3000);
+
+  // Re-check after waiting
+  const finalReport = await page.evaluate(() => {
+    const all = Array.from(document.querySelectorAll('.reveal'));
+    const firedReveals = all.filter((el) => getComputedStyle(el).opacity === '1').length;
+    return { totalReveals: all.length, firedReveals };
+  });
+  const merged = { ...scrollReport, ...finalReport };
 
   const file = path.join(OUT_DIR, '1440-home-normal-motion.png');
   await page.screenshot({ path: file, fullPage: true });
@@ -160,10 +199,22 @@ for (const vp of VIEWPORTS) {
   console.log(`[1440-home-normal-motion] saved → ${path.relative(ROOT, file)}  ` +
               `viewport=1440x900  ` +
               `console=${consoleMsgs.length}  ` +
-              `netErrs=${networkErrors.length}`);
+              `netErrs=${networkErrors.length}  ` +
+              `reveals=${merged.firedReveals}/${merged.totalReveals} fired`);
 
   allConsole.push({ viewport: '1440-home-normal-motion', messages: consoleMsgs });
   allNetwork.push({ viewport: '1440-home-normal-motion', errors: networkErrors });
+
+  // Hard assertion: N10 health gate — if not all reveals fired, the capture is broken
+  // (the normal-motion screenshot would be 70-80 % black void). Fail the script so the
+  // capture never silently ships a defective image.
+  if (merged.firedReveals < merged.totalReveals) {
+    const msg = `N10 health gate FAILED: only ${merged.firedReveals}/${merged.totalReveals} .reveal elements fired in normal-motion capture. ` +
+                `The site has ${merged.totalReveals - merged.firedReveals} hidden sections — the screenshot is defective. ` +
+                `Refusing to ship.`;
+    console.error(msg);
+    throw new Error(msg);
+  }
 
   await ctx.close();
 }

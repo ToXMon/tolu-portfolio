@@ -188,7 +188,7 @@ Edge report: `docs/adal/assets/edge-cases.txt`.
 | N3 | `vendor/three.min.js` (608 KB) dead code | Removed via `git rm`. Zero references in source. `check.sh` L-9 updated to drop the vendored-dep expectation; T-6c now flags unreferenced vendored deps. | -608 KB on disk, -592 KB in zip |
 | N4 | `project-signalforge.svg` incoherent | Rewritten with 6-node hexagonal network + center hub, "SIGNALFORGE" serif wordmark + "SOLANA · DEVNET" mono subtitle panel. No stray lines. | n/a |
 | N6 | L-1 missed single-quoted + meta content refs | L-1 now extracts `(src|href)="'`, `thumbnail|src|url|href: '…'`, `meta content="…"` (path-shaped only). Probes 11 local files. | n/a |
-| N9 | No normal-motion capture in matrix | Added `1440-home-normal-motion.png` under `reducedMotion: 'no-preference'` — shows live constellation canvas. | +3.6 MB to repo (not in zip) |
+| N9 | No normal-motion capture in matrix | Added `1440-home-normal-motion.png` under `reducedMotion: 'no-preference'` — shows live constellation canvas. **Round-4 N10 fix**: capture script now disables `scroll-behavior: smooth` via `addInitScript`, waits 3 s for stagger completion, and asserts all 22 reveals fired before screenshotting — health gate refuses to ship a defective capture. | +3.6 MB to repo (not in zip) |
 
 ### 13.4 Submission package strategy
 
