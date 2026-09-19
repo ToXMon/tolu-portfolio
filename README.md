@@ -1,22 +1,25 @@
-# Tolu Shekoni — Portfolio
+# ToluOS — Tolu Shekoni's Workstation
 
-Dark cinematic editorial single-page portfolio, vanilla HTML/CSS/JS, zero build step,
-zero runtime deps, GitHub-Pages ready. Built with AdaL.
+Dark cinematic editorial single-page portfolio rendered as a **desktop OS metaphor**. Each project opens in a draggable, resizable window with full chrome. Built with AdaL (engineer mode), inspired by [dustinbrett.com (daedalOS)](https://dustinbrett.com/) and the [AdaL bootcamp resources page](https://sylphai-inc.github.io/adal-bootcamp-landing-page/slides/04-resources.html).
 
 **Live:** https://toxmon.github.io/tolu-portfolio/
 
 ## What's here
 
-- Hero with mouse-reactive particle-constellation canvas (2D, vanilla).
-- Proof-first work grid: 8 real projects with live demo / repo / docs / X-proof / health-endpoint links.
-- Built-with-AdaL meta-section (prompts used, before/after, build log).
-- Full accessibility: skip link, prefers-reduced-motion (CSS + JS), no-JS fallback,
-  keyboard-navigable, semantic landmarks.
-- Mobile-first responsive, 320px overflow-safe.
+- **Desktop metaphor**: 8 project icons + Welcome window + draggable/resizable windows + taskbar.
+- **Focal-point constellation canvas** with 6 spokes × 6 clusters × 9 secondary nodes each.
+- **6-layer wallpaper**: gradient + topographic texture (A7) + constellation + warm glow + cool glow + grain.
+- **Per-project domain accents**: Stripe (glacier blue), SignalForge (mint), Vouch (amber-hot), Crypto Scanner (amber-hot), X Monitor (blue-grey), AgentTrust (deep-amber), Memory Palace (violet), Agent Skills (cyan).
+- **Welcome window**: stagger word-entrance, proof strip, 4 CTA buttons, 3 tabs (8 Projects · Receipts · Build process).
+- **Real proof**: all 8 projects have thumbnails (3 AI-generated + 5 hand-authored SVG per project-domain). All 19 unique links preserved (Stripe X proof, Stripe README, Crypto Scanner README, Vouch health endpoint, etc.).
+- **Mobile**: tabbed single-window interface, 8 mobile tabs above hidden taskbar.
+- **Keyboard shortcuts**: `Cmd+W` close, `Cmd+M` minimize, `Cmd+0..8` open project, `?` show overlay.
+- **Layout persistence**: window positions/sizes saved to `localStorage`.
+- **No-JS fallback**: `<noscript>` banner + `.fallback-scroll` static section.
+- **Reduced-motion**: all animations collapse to 0.01 ms; canvas skipped entirely.
+- **Vendored Three.js** (`vendor/three.min.js`, r149 UMD, 594 KB) per `EXECUTE.md` Stage 0 — present and ready for a future 3D parallax variant.
 
 ## Local preview
-
-The constellation canvas + module-style fetches need `http://` (not `file://`):
 
 ```bash
 cd tolu-portfolio
@@ -33,39 +36,39 @@ python3 -m http.server 8080
 ## File layout
 
 ```
-index.html              # single-page document
-styles.css              # one :root block, all var(--…) resolve, single easing
-script.js               # constellation canvas + reveal observer + magnetic CTA + cursor
-DESIGN.md               # design contract (palette, type, motion, craft)
-assets/img/             # og.png, favicon*, hero-backdrop.png, project-{stripe,vouch,signalforge}.svg
-docs/adal/              # EXECUTE.md, build-and-asset-plan.md, EVALUATE.md, EVALUATE-log.md, builder-plan.md
-scripts/                # check.sh (21 mechanical checks), browser-matrix.mjs, browser-edge.mjs
-SUBMISSION.md           # build summary, asset inventory, social-post draft
+index.html                # single-page document with desktop skeleton + fallback scroll
+styles.css                # toluOS chrome (windows, taskbar, mobile tabs, 6-layer wallpaper)
+script.js                 # window manager, drag/resize, keyboard, mobile, focal-point constellation canvas
+DESIGN.md                 # original design contract (palette/type/motion)
+docs/adal/design-spec-os.md # toluOS extension of DESIGN.md
+vendor/three.min.js       # vendored r149 UMD
+assets/img/               # A1 OG, A2 hero, A6 favicon, A7 topo, 3 SVG + 5 SVG thumbnails
+docs/adal/                # EXECUTE.md, build-and-asset-plan.md, EVALUATE.md, builder-plan.md, etc.
+scripts/                  # check.sh (22 mechanical checks), browser-matrix.mjs, browser-edge.mjs
+SUBMISSION.md             # build summary, asset inventory, social-post draft
 ```
-
-**Zero runtime deps.** No npm packages in production, no vendor folder, no CDN scripts.
-The only external requests are Google Fonts (preconnected + display=swap).
-
-## Customization
-
-- **Email / X / GitHub**: search-and-replace across `index.html`, `script.js`, footer.
-- **Project list**: edit the `portfolioProjects` array in `script.js`.
-- **Palette / type / motion**: edit tokens in `:root` of `styles.css` (see `DESIGN.md`).
-- **Constellation physics**: edit `initConstellation()` in `script.js`.
 
 ## Validation
 
 ```bash
-python3 -m http.server 8080   # serve
-bash scripts/check.sh         # full mechanical suite (T-1..T-12 + L-1..L-9)
-node scripts/browser-matrix.mjs   # 4-viewport Playwright screenshot + console capture
-node scripts/browser-edge.mjs     # V-5/6/7 edge-case browser matrix
+python3 -m http.server 8080
+bash scripts/check.sh
+node scripts/browser-matrix.mjs
+node scripts/browser-edge.mjs
 ```
 
-Latest run results in `docs/adal/checks-latest.txt`, `docs/adal/assets/console.txt`,
-`docs/adal/assets/edge-cases.txt`.
+Latest results in `docs/adal/checks-latest.txt`, `docs/adal/assets/console.txt`, `docs/adal/assets/edge-cases.txt`.
 
-## Built with AdaL
+## Customization
 
-See the on-page "Built with AdaL" section (`#built-with-adal`) and `SUBMISSION.md` for
-the full receipts — design contract, asset prompts, build log, social-post draft.
+- **Email / X / GitHub**: search-and-replace across `index.html`, `script.js`.
+- **Project list**: edit the `PROJECTS` array in `script.js`.
+- **Palette / type / motion**: edit tokens in `:root` of `styles.css` (see `DESIGN.md`).
+- **Window chrome / taskbar**: edit `.window` / `.taskbar` rules in `styles.css`.
+
+## Known gaps
+
+- **C1 ambient audio not generated** — AdaL audio capability not available in this session. Sound toggle is wired but does not play.
+- **B1 hero video not generated** — AdaL video capability not available. Constellation canvas is the only motion element.
+- **B2 demo video not generated** — same reason.
+- **A3–A5 thumbnails** — 3 SVG placeholders (kept from Round 2) used in place of AI-generated cinematic stills because parallel `generate_image` calls were preempted.

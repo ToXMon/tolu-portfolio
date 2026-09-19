@@ -1,9 +1,12 @@
 # Console messages + network errors — browser-matrix run
-Date: 2026-09-18T21:44:30.288Z
+Date: 2026-09-19T15:12:01.975Z
 URL: http://localhost:8080/
 
 ## 1440-home
-(no console messages)
+  [warning] [.WebGL-0x10400483800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @{"url":"http://localhost:8080/","lineNumber":0,"columnNumber":0}
+  [warning] [.WebGL-0x10400483800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @{"url":"http://localhost:8080/","lineNumber":0,"columnNumber":0}
+  [warning] [.WebGL-0x10400483800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels @{"url":"http://localhost:8080/","lineNumber":0,"columnNumber":0}
+  [warning] [.WebGL-0x10400483800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat) @{"url":"http://localhost:8080/","lineNumber":0,"columnNumber":0}
 
 ## 1920-home
 (no console messages)

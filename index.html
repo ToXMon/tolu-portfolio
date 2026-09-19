@@ -2,24 +2,24 @@
 <html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tolu Shekoni — Materialist Scientist and Business Excellence Engineer focused on Web3, AI, and Data Science. Proof-first builder with live demos and shipped products.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="toluOS — Tolu Shekoni's workstation. Proof-first builder in AI, Web3, and data. Live demos, repos, and receipts. Open the windows.">
   <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#1c1a17">
+  <meta name="theme-color" content="#0d0c0a">
 
-  <title>Tolu Shekoni — Proof-First Builder · AI · Web3 · Data</title>
+  <title>toluOS — Tolu's Workstation · Proof-first builder in AI, Web3, Data</title>
 
-  <!-- Open Graph / social — crawlers (X/LinkedIn/Slack) need ABSOLUTE URLs -->
+  <!-- Open Graph / social — crawlers need ABSOLUTE URLs -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Tolu Shekoni — Proof-First Builder">
-  <meta property="og:description" content="AI systems · Web3 products · Data science. Live demos, shipped products, bootcamp velocity with production standards.">
+  <meta property="og:title" content="toluOS — Tolu Shekoni">
+  <meta property="og:description" content="Proof-first builder · AI · Web3 · Data — open the windows.">
   <meta property="og:image" content="https://toxmon.github.io/tolu-portfolio/assets/img/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://toxmon.github.io/tolu-portfolio/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tolu Shekoni — Proof-First Builder">
-  <meta name="twitter:description" content="AI systems · Web3 products · Data science. Live demos and shipped products.">
+  <meta name="twitter:title" content="toluOS — Tolu Shekoni">
+  <meta name="twitter:description" content="Proof-first builder · AI · Web3 · Data — open the windows.">
   <meta name="twitter:image" content="https://toxmon.github.io/tolu-portfolio/assets/img/og.png">
 
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
@@ -28,7 +28,6 @@
   <link rel="icon" type="image/png" sizes="256x256" href="assets/img/favicon.png">
   <link rel="apple-touch-icon" href="assets/img/favicon.png">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -38,334 +37,139 @@
 <body>
   <noscript>
     <div class="noscript-bar">
-      JavaScript is disabled — the constellation hero is static, but the page works. Email <a href="mailto:tolu.a.shekoni@gmail.com">tolu.a.shekoni@gmail.com</a> to get in touch.
+      JavaScript is disabled — toluOS runs as a static scroll-portfolio. Open <a href="#fallback-scroll">the fallback section</a> for the full content. Email <a href="mailto:tolu.a.shekoni@gmail.com">tolu.a.shekoni@gmail.com</a> to get in touch.
     </div>
   </noscript>
 
-  <a href="#main" class="skip-link">Skip to content</a>
+  <a href="#desktop" class="skip-link">Skip to desktop</a>
 
-  <header class="site-header">
-    <a class="brand" href="#about" aria-label="Tolu Shekoni — home">TS</a>
-    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
-      <span></span><span></span><span></span>
-    </button>
-    <nav id="primary-nav" class="nav-links" aria-label="Primary navigation">
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#built-with-adal">Process</a>
-      <a href="#contact">Contact</a>
+  <!-- DESKTOP -->
+  <main id="desktop" class="desktop" aria-label="toluOS desktop">
+
+    <!-- App-following menubar (reflects the focused project; Round-9 rYOS grammar) -->
+    <header id="menubar" class="menubar" aria-label="System menu bar">
+      <span class="menubar-brand">◈ toluOS</span>
+      <span class="menubar-app" id="menubar-app">Desktop</span>
+      <div class="menubar-actions" id="menubar-actions" hidden>
+        <button type="button" data-act="min" aria-label="Minimize focused window">−</button>
+        <button type="button" data-act="max" aria-label="Maximize focused window">□</button>
+        <button type="button" data-act="close" aria-label="Close focused window">×</button>
+      </div>
+    </header>
+
+    <!-- Wallpaper layers (back-to-front) -->
+    <div class="wallpaper" aria-hidden="true">
+      <img class="wp-scene" src="assets/img/wallpaper.webp" alt="" decoding="async" fetchpriority="high">
+      <canvas id="constellation" class="wp-canvas"></canvas>
+      <div class="wp-glow-warm"></div>
+      <div class="wp-glow-cool"></div>
+      <div class="wp-vignette"></div>
+      <div class="wp-grain"></div>
+    </div>
+
+    <!-- Desktop icons grid (left column on desktop, 2-col on mobile) -->
+    <div id="desktop-icons" class="desktop-icons" role="list" aria-label="Project icons"></div>
+
+    <!-- Scene widget: live clock + system status (honest local data only) -->
+    <aside id="scene-widget" class="scene-widget" aria-hidden="true">
+      <div class="scene-widget-time" id="scene-widget-time">--:--</div>
+      <div class="scene-widget-date" id="scene-widget-date"></div>
+      <div class="scene-widget-status" id="scene-widget-status">toluOS · standby</div>
+    </aside>
+
+    <!-- Windows container (created by JS, lives here in z-index above wallpaper) -->
+    <div id="windows" class="windows" aria-label="Open windows">
+      <div id="snap-preview" class="snap-preview" aria-hidden="true"></div>
+    </div>
+
+    <!-- Right-click context menu (desktop only) -->
+    <div id="ctx-menu" class="ctx-menu" role="menu" aria-hidden="true"></div>
+
+    <!-- Keyboard shortcut overlay (modal) -->
+    <div id="shortcuts-overlay" class="shortcuts-overlay" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title" aria-hidden="true">
+      <div class="shortcuts-panel">
+        <h2 id="shortcuts-title" class="shortcuts-title">Keyboard shortcuts</h2>
+        <dl class="shortcuts-list">
+          <div><dt><kbd>Esc</kbd></dt><dd>Close focused window</dd></div>
+          <div><dt><kbd>⌘</kbd> / <kbd>Ctrl</kbd> + <kbd>W</kbd></dt><dd>Close window</dd></div>
+          <div><dt><kbd>⌘</kbd> / <kbd>Ctrl</kbd> + <kbd>M</kbd></dt><dd>Minimize window</dd></div>
+          <div><dt><kbd>⌘</kbd>/<kbd>Ctrl</kbd> + <kbd>Tab</kbd></dt><dd>Cycle windows</dd></div>
+          <div><dt><kbd>Drag</kbd> to edge</dt><dd>Snap to half-screen (drag off to restore)</dd></div>
+          <div><dt><kbd>Double-click</kbd> title</dt><dd>Maximize / restore</dd></div>
+          <div><dt><kbd>⌘</kbd> / <kbd>Ctrl</kbd> + <kbd>0</kbd></dt><dd>Open Welcome</dd></div>
+          <div><dt><kbd>⌘</kbd> / <kbd>Ctrl</kbd> + <kbd>1..8</kbd></dt><dd>Open project</dd></div>
+          <div><dt><kbd>⌘</kbd> / <kbd>Ctrl</kbd> + <kbd>R</kbd></dt><dd>Reset layout</dd></div>
+          <div><dt><kbd>?</kbd></dt><dd>Show shortcuts</dd></div>
+        </dl>
+        <p class="shortcuts-close"><kbd>Esc</kbd> or click outside to dismiss.</p>
+      </div>
+    </div>
+
+    <!-- Statusbar (system tray) -->
+    <div id="statusbar" class="statusbar" aria-label="System status">
+      <span id="statusbar-message" class="statusbar-message">toluOS — no windows open</span>
+      <span class="statusbar-right">
+        <span class="statusbar-count" id="statusbar-count">0 windows</span>
+      </span>
+    </div>
+
+    <!-- Taskbar / dock -->
+    <nav id="taskbar" class="taskbar" aria-label="Open windows">
+      <button id="start-btn" class="start-btn" aria-label="Start menu">
+        <span class="start-orb" aria-hidden="true">TS</span>
+      </button>
+      <div id="dock-items" class="dock-items" role="tablist" aria-label="Apps"></div>
+      <div class="taskbar-right">
+        <button id="sound-btn" class="sound-btn" aria-label="Toggle ambient audio" aria-pressed="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+        </button>
+        <time id="clock" class="clock" aria-label="Current time"></time>
+      </div>
     </nav>
-  </header>
 
-  <main id="main">
-    <!-- HERO -->
-    <section id="about" class="hero">
-      <img class="hero-backdrop" src="assets/img/hero-backdrop.png" alt="" aria-hidden="true" loading="eager" decoding="async">
-      <canvas id="constellation" aria-hidden="true"></canvas>
-      <div class="hero-inner container">
-        <div class="hero-content reveal">
-          <p class="label eyebrow">Builder in public · AI systems · Web3 products · Data science</p>
-          <h1 class="hero-title">Tolu Shekoni turns bootcamp velocity into shipped, verifiable products.</h1>
-          <p class="hero-lead">I build at the intersection of agentic AI, onchain trust, and data-driven product systems — then publish the proof: live demos, repos, docs, and deployment artifacts.</p>
-          <div class="hero-actions" aria-label="Primary actions">
-            <a href="#work" class="cta">Explore Shipped Work</a>
-            <a href="https://stripe-clone-bn0.pages.dev/" class="cta cta-secondary" target="_blank" rel="noopener noreferrer">View Stripe Clone ↗</a>
-          </div>
-          <dl class="proof-strip" aria-label="Portfolio proof points">
-            <div>
-              <dt>Live demos</dt>
-              <dd>Cloudflare Pages · Workers</dd>
-            </div>
-            <div>
-              <dt>Bootcamps</dt>
-              <dd>AdaL · Encode Solana</dd>
-            </div>
-            <div>
-              <dt>Hackathon work</dt>
-              <dd>Monad · AgentTrust</dd>
-            </div>
-          </dl>
-        </div>
+    <!-- MOBILE TABS (only visible < 768px) -->
+    <nav id="mobile-tabs" class="mobile-tabs" aria-label="Mobile tabs"></nav>
 
-        <aside class="cinema-panel reveal" aria-label="Portfolio positioning">
-          <span class="cinema-panel-kicker">Available for selective work</span>
-          <p>AI systems, Web3 product builds, data-backed dashboards, and fast prototype-to-proof execution.</p>
-        </aside>
-      </div>
-    </section>
-    <div class="section-rule" aria-hidden="true"></div>
-
-    <!-- MARQUEE -->
-    <section class="agency-marquee" aria-label="Operating promise">
-      <div class="marquee-track">
-        <div class="marquee-row">
-          <span>Proof before polish</span><span aria-hidden="true">·</span>
-          <span>Live links over claims</span><span aria-hidden="true">·</span>
-          <span>Bootcamp velocity, production standards</span><span aria-hidden="true">·</span>
-          <span>Shipped demos, not slide decks</span><span aria-hidden="true">·</span>
+    <!-- FALLBACK SCROLL PORTFOLIO (no-JS / search-engine / accessibility) -->
+    <section id="fallback-scroll" class="fallback-scroll" aria-label="Static portfolio fallback">
+      <header class="fallback-hero">
+        <p class="label eyebrow">toluOS · static fallback</p>
+        <h1>Tolu Shekoni — proof-first builder</h1>
+        <p class="lead">I build at the intersection of agentic AI, onchain trust, and data-driven product systems — then publish the proof: live demos, repos, docs, and deployment artifacts.</p>
+        <div class="cta-row">
+          <a href="mailto:tolu.a.shekoni@gmail.com" class="cta">Email Me</a>
+          <a href="https://stripe-clone-bn0.pages.dev/" class="cta cta-secondary" target="_blank" rel="noopener noreferrer">View Stripe Clone ↗</a>
+          <a href="https://x.com/tolu_evm" class="cta cta-secondary" target="_blank" rel="noopener noreferrer">X / @tolu_evm ↗</a>
+          <a href="https://github.com/ToXMon" class="cta cta-secondary" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
         </div>
-        <div class="marquee-row" aria-hidden="true">
-          <span>Proof before polish</span><span aria-hidden="true">·</span>
-          <span>Live links over claims</span><span aria-hidden="true">·</span>
-          <span>Bootcamp velocity, production standards</span><span aria-hidden="true">·</span>
-          <span>Shipped demos, not slide decks</span><span aria-hidden="true">·</span>
-        </div>
-      </div>
+        <dl class="proof-strip">
+          <div><dt>Live demos</dt><dd>Cloudflare Pages · Workers</dd></div>
+          <div><dt>Bootcamps</dt><dd>AdaL · Encode Solana</dd></div>
+          <div><dt>Hackathon work</dt><dd>Monad · AgentTrust</dd></div>
+        </dl>
+      </header>
+      <ol class="fallback-projects" aria-label="Selected work">
+        <li><strong>AdaL Educational Stripe Clone</strong> — <a href="https://stripe-clone-bn0.pages.dev/" target="_blank" rel="noopener noreferrer">Live ↗</a> · <a href="https://x.com/tolu_evm/status/2073978784747786320" target="_blank" rel="noopener noreferrer">X proof</a> · <a href="https://github.com/ToXMon/adal-bootcamp-2" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/ToXMon/adal-bootcamp-2/blob/feat/stripe-clone-deploy/README.md" target="_blank" rel="noopener noreferrer">README</a></li>
+        <li><strong>Encode Solana / SignalForge</strong> — Solana devnet learning-to-shipping body of work.</li>
+        <li><strong>Vouch / Monad</strong> — <a href="https://vouch.tolu-a-shekoni.workers.dev" target="_blank" rel="noopener noreferrer">Live app ↗</a> · <a href="https://vouch.tolu-a-shekoni.workers.dev/api/health" target="_blank" rel="noopener noreferrer">Health endpoint ↗</a> · <a href="https://github.com/ToXMon/vouch" target="_blank" rel="noopener noreferrer">Repo</a></li>
+        <li><strong>Crypto Scanner</strong> — <a href="https://github.com/ToXMon/catecoin-scanner" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/ToXMon/catecoin-scanner/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a></li>
+        <li><strong>X Monitor</strong> — <a href="https://toxmon.github.io/agent-workflows/" target="_blank" rel="noopener noreferrer">Workflow gallery ↗</a></li>
+        <li><strong>AgentTrust</strong> — <a href="https://github.com/ToXMon/agenttrust" target="_blank" rel="noopener noreferrer">Repo</a> · <a href="https://github.com/ToXMon/agenttrust/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a></li>
+        <li><strong>Memory Palace</strong> — <a href="https://github.com/ToXMon/tolu" target="_blank" rel="noopener noreferrer">Repo</a></li>
+        <li><strong>Agent Skills</strong> — reusable Agent Zero skills + workflow tools.</li>
+      </ol>
+      <p class="fallback-footer">© 2026 Tolu Shekoni · Built with <a href="https://github.com/ToXMon/tolu-portfolio" target="_blank" rel="noopener noreferrer">AdaL</a></p>
     </section>
 
-    <!-- THESIS -->
-    <section id="thesis" class="thesis">
-      <div class="container">
-        <div class="thesis-content reveal">
-          <p class="label eyebrow">Operating Thesis</p>
-          <h2>I approach technology as applied science: hypotheses, instrumentation, feedback loops, and iteration.</h2>
-          <p>The goal is not novelty for novelty's sake; the goal is durable business outcomes. Every system I build starts with a measurable hypothesis, gets instrumented for feedback, and ships when the numbers confirm it works.</p>
-        </div>
-      </div>
-    </section>
-    <div class="section-rule" aria-hidden="true"></div>
-
-    <!-- DISCIPLINES -->
-    <section id="focus" class="disciplines">
-      <div class="container">
-        <p class="label eyebrow reveal">Core Disciplines</p>
-        <ol class="disciplines-list">
-          <li class="discipline-item reveal">
-            <span class="discipline-num">01</span>
-            <div class="discipline-body">
-              <h3>Business Excellence</h3>
-              <p>Process intelligence, KPI architecture, execution systems.</p>
-            </div>
-          </li>
-          <li class="discipline-item reveal">
-            <span class="discipline-num">02</span>
-            <div class="discipline-body">
-              <h3>Web3 Engineering</h3>
-              <p>Protocol-native product design, trust-minimized workflows.</p>
-            </div>
-          </li>
-          <li class="discipline-item reveal">
-            <span class="discipline-num">03</span>
-            <div class="discipline-body">
-              <h3>AI Systems</h3>
-              <p>Agentic workflows, automation strategy, model operations.</p>
-            </div>
-          </li>
-          <li class="discipline-item reveal">
-            <span class="discipline-num">04</span>
-            <div class="discipline-body">
-              <h3>Data Science</h3>
-              <p>Signal extraction, forecasting, decision support pipelines.</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </section>
-    <div class="section-rule" aria-hidden="true"></div>
-
-    <!-- WORK -->
-    <section id="work" class="work" data-bleed>
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="label eyebrow">Selected Work</p>
-          <h2>Proof-first projects: shipped pages, live APIs, devnet programs, and documented agent systems.</h2>
-          <p class="section-lead">Live demos lead. Repos and docs back the claims. Local-only experiments stay clearly labeled until they earn a public artifact.</p>
-        </div>
-        <div class="work-grid" id="work-grid" role="list">
-          <!-- Static fallback cards rendered below; JS rewrites this grid from portfolioProjects. -->
-          <article class="work-card featured reveal" role="listitem">
-            <div class="work-card-header">
-              <span class="work-card-num">01</span>
-              <span class="tag">Live</span>
-            </div>
-            <h3>AdaL Educational Stripe Clone</h3>
-            <p>High-fidelity educational Stripe hero clone shipped from AdaL bootcamp as a React static site on Cloudflare Pages, with public demo, X submission proof, repo, and README evidence.</p>
-            <div class="work-card-links">
-              <a class="work-card-link work-card-link--demo" href="https://stripe-clone-bn0.pages.dev/" target="_blank" rel="noopener noreferrer">Live demo ↗</a>
-              <a class="work-card-link work-card-link--proof" href="https://67a97296.stripe-clone-bn0.pages.dev/" target="_blank" rel="noopener noreferrer">Bootcamp submit ↗</a>
-              <a class="work-card-link work-card-link--proof" href="https://x.com/tolu_evm/status/2073978784747786320" target="_blank" rel="noopener noreferrer">X proof post</a>
-              <a class="work-card-link" href="https://github.com/ToXMon/adal-bootcamp-2" target="_blank" rel="noopener noreferrer">GitHub repo</a>
-              <a class="work-card-link" href="https://github.com/ToXMon/adal-bootcamp-2/blob/feat/stripe-clone-deploy/README.md" target="_blank" rel="noopener noreferrer">README evidence</a>
-            </div>
-          </article>
-          <article class="work-card featured reveal" role="listitem">
-            <div class="work-card-header">
-              <span class="work-card-num">02</span>
-              <span class="tag">Devnet</span>
-            </div>
-            <h3>Encode Solana / SignalForge</h3>
-            <p>Solana learning-to-shipping body of work across programs, token flows, dApp patterns, tests, and devnet verification evidence.</p>
-          </article>
-          <article class="work-card featured reveal" role="listitem">
-            <div class="work-card-header">
-              <span class="work-card-num">03</span>
-              <span class="tag">Live</span>
-            </div>
-            <h3>Vouch / Monad</h3>
-            <p>AI-verified commitment and claim protocol work for Monad trust workflows, backed by a public repository, live Worker root, and health endpoint evidence.</p>
-            <div class="work-card-links">
-              <a class="work-card-link work-card-link--demo" href="https://vouch.tolu-a-shekoni.workers.dev" target="_blank" rel="noopener noreferrer">Live app ↗</a>
-              <a class="work-card-link work-card-link--proof" href="https://vouch.tolu-a-shekoni.workers.dev/api/health" target="_blank" rel="noopener noreferrer">Health endpoint ↗</a>
-              <a class="work-card-link" href="https://github.com/ToXMon/vouch" target="_blank" rel="noopener noreferrer">GitHub repo</a>
-              <a class="work-card-link" href="https://github.com/ToXMon/vouch/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a>
-            </div>
-          </article>
-          <article class="work-card reveal" role="listitem">
-            <div class="work-card-header">
-              <span class="work-card-num">04</span>
-              <span class="tag">Repo</span>
-            </div>
-            <h3>Crypto Scanner</h3>
-            <p>Crypto scanner tooling for token, liquidity, and market-risk review, supported by public repository evidence and a related workflow gallery.</p>
-            <div class="work-card-links">
-              <a class="work-card-link" href="https://github.com/ToXMon/catecoin-scanner" target="_blank" rel="noopener noreferrer">GitHub repo</a>
-              <a class="work-card-link" href="https://github.com/ToXMon/catecoin-scanner/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a>
-              <a class="work-card-link" href="https://toxmon.github.io/agent-workflows/" target="_blank" rel="noopener noreferrer">Workflow gallery ↗</a>
-            </div>
-          </article>
-          <article class="work-card reveal" role="listitem">
-            <div class="work-card-header">
-              <span class="work-card-num">05</span>
-              <span class="tag">Local</span>
-            </div>
-            <h3>X Monitor</h3>
-            <p>Local social-signal monitoring workflow for narrative, trend, and research queue detection; no standalone public product URL is claimed.</p>
-            <div class="work-card-links">
-              <a class="work-card-link" href="https://toxmon.github.io/agent-workflows/" target="_blank" rel="noopener noreferrer">Workflow gallery ↗</a>
-            </div>
-          </article>
-          <article class="work-card reveal" role="listitem">
-            <div class="work-card-header">
-              <span class="work-card-num">06</span>
-              <span class="tag">Repo</span>
-            </div>
-            <h3>AgentTrust</h3>
-            <p>Agent trust and verification protocol work with public repository and README evidence.</p>
-            <div class="work-card-links">
-              <a class="work-card-link" href="https://github.com/ToXMon/agenttrust" target="_blank" rel="noopener noreferrer">GitHub repo</a>
-              <a class="work-card-link" href="https://github.com/ToXMon/agenttrust/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a>
-            </div>
-          </article>
-          <article class="work-card reveal" role="listitem">
-            <div class="work-card-header">
-              <span class="work-card-num">07</span>
-              <span class="tag">Documented</span>
-            </div>
-            <h3>Memory Palace</h3>
-            <p>Knowledge system for preserving context, recall, and durable output across agent workflows.</p>
-            <div class="work-card-links">
-              <a class="work-card-link" href="https://github.com/ToXMon/tolu" target="_blank" rel="noopener noreferrer">GitHub repo</a>
-            </div>
-          </article>
-          <article class="work-card reveal" role="listitem">
-            <div class="work-card-header">
-              <span class="work-card-num">08</span>
-              <span class="tag">Tooling</span>
-            </div>
-            <h3>Agent Skills</h3>
-            <p>Reusable Agent Zero skills and workflow tools packaged for repeatable agent workflows.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-    <div class="section-rule" aria-hidden="true"></div>
-
-    <!-- BUILT WITH ADAL -->
-    <section id="built-with-adal" class="built-with-adal">
-      <div class="container">
-        <div class="bwa-header reveal">
-          <p class="label eyebrow">Built with AdaL</p>
-          <h2>This site is the artifact — and the receipt.</h2>
-          <p class="section-lead">Design tokens, copy, section structure, asset prompts, and verification matrix were all produced through AdaL's planning → drafting → generating → verifying loop. The receipts are below.</p>
-        </div>
-
-        <div class="bwa-grid">
-          <article class="bwa-card reveal">
-            <p class="label eyebrow">Prompts used</p>
-            <h3>Director's Console vocabulary</h3>
-            <p>Image and video prompts use real cameras (ARRI Alexa 65), Panavision anamorphic lenses, and Kodak Vision3 500T 5219 film stock so the AI output looks cinematic, not generic.</p>
-            <details>
-              <summary>Show prompt excerpts</summary>
-              <pre><code>A1 (OG image): "Cinematic wide shot, anamorphic 2.39:1 framing: a lone constellation of golden particle nodes connected by thin light threads floating over a deep warm-black void, shallow depth of field, shot on ARRI Alexa 65 with Panavision C-Series anamorphic lens, Kodak Vision3 500T 5219 film stock, subtle film grain, single warm key light from frame right simulating an ARRI SkyPanel through full CTO…"
-
-A2 (Hero backdrop): "Abstract cinematic background: a vast dark field of fine golden dust particles drifting through warm black space, extremely shallow depth of field, bokeh highlights in amber and slate blue, shot on ARRI Alexa 65, 100mm macro probe lens, Kodak Vision3 500T 5219…"
-
-A6 (Favicon): "Minimal monogram mark: the letters 'TS' constructed from a single continuous thin golden line forming a subtle constellation node pattern, on pure warm-black background, flat vector style, high contrast, centered, generous padding…"</code></pre>
-            </details>
-          </article>
-
-          <article class="bwa-card reveal">
-            <p class="label eyebrow">Before / After</p>
-            <h3>From the prior version to this rebuild</h3>
-            <div class="bwa-compare">
-              <div class="bwa-compare-col">
-                <p class="label">Before</p>
-                <ul>
-                  <li>Stacked <code>:root</code> blocks; undefined <code>var(--font-mono)</code>, <code>var(--text)</code>, <code>var(--accent)</code></li>
-                  <li>Hero: 3 layered pseudo-elements competing for z-index</li>
-                  <li>No canvas, no proof of motion craft</li>
-                  <li>Single hero CTA, no magnetic pull</li>
-                  <li>No "Built with AdaL" evidence</li>
-                </ul>
-              </div>
-              <div class="bwa-compare-col">
-                <p class="label">After</p>
-                <ul>
-                  <li>One <code>:root</code> block, all <code>var(--…)</code> resolve</li>
-                  <li>Constellation canvas, layered cleanly above backdrop</li>
-                  <li>Reduced-motion + no-JS fallbacks, both verified</li>
-                  <li>Magnetic CTAs + cursor dot + film grain</li>
-                  <li>Meta-section above makes the AI-process the receipt</li>
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          <article class="bwa-card reveal">
-            <p class="label eyebrow">Build log</p>
-            <h3>Date · Stage · Outcome</h3>
-            <table class="bwa-log">
-              <thead>
-                <tr><th>Date</th><th>Stage</th><th>Outcome</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>2026-09-18</td><td>Setup</td><td>Vendor Three.js r149 (UMD), scaffold assets/, vendor/.</td></tr>
-                <tr><td>2026-09-18</td><td>Design</td><td>DESIGN.md contract: tokens, type ramp, section order, motion primitives.</td></tr>
-                <tr><td>2026-09-18</td><td>Build</td><td>Rewrite index.html, styles.css, script.js. Constellation canvas, magnetic CTA, cursor dot, film grain.</td></tr>
-                <tr><td>2026-09-18</td><td>Assets</td><td>7 image assets via generate_image; budget cap honored.</td></tr>
-                <tr><td>2026-09-18</td><td>Verify</td><td>Browser screenshot matrix (1440/1920/390); adversarial evaluator pass.</td></tr>
-                <tr><td>2026-09-19</td><td>Ship</td><td>GitHub Pages live; submission package zipped and uploaded.</td></tr>
-              </tbody>
-            </table>
-          </article>
-        </div>
-      </div>
-    </section>
-    <div class="section-rule" aria-hidden="true"></div>
-
-    <!-- CONTACT -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <div class="contact-content reveal">
-          <p class="label eyebrow">Contact</p>
-          <h2>Hiring, collaborating, or building something ambitious?</h2>
-          <p>I'm looking for roles, collaborators, and client work where fast technical execution needs clear product judgment.</p>
-          <div class="contact-actions" aria-label="Contact links">
-            <a href="mailto:tolu.a.shekoni@gmail.com" class="cta cta-magnetic" aria-label="Email Tolu Shekoni to start a conversation">Email Me</a>
-            <a href="https://x.com/tolu_evm" class="cta cta-secondary" target="_blank" rel="noopener noreferrer">X / @tolu_evm ↗</a>
-            <a href="https://github.com/ToXMon" class="cta cta-secondary" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <p>© 2026 Tolu Shekoni · Built with <a href="https://github.com/ToXMon/tolu-portfolio" target="_blank" rel="noopener noreferrer">AdaL</a> · <a href="DESIGN.md">Design contract</a></p>
-    </div>
-  </footer>
-
+  <!-- Three.js (vendored, used for the optional 3D parallax in the constellation canvas) -->
+  <script src="vendor/three.min.js" defer></script>
+  <!-- Core app (deferred so the desktop icon grid paints first) -->
   <script src="script.js" defer></script>
 </body>
 </html>

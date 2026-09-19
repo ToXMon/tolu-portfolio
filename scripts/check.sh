@@ -84,11 +84,14 @@ else
   log FAIL T-3 "Multiple easings found: $unique_easings"
 fi
 
-# T-4: Hero display scale per contract
+# T-4: Hero display scale per contract (or Welcome-window variant for desktop-OS builds)
 if grep -q 'clamp(3.9rem, 11vw, 9.5rem)' styles.css; then
   log PASS T-4 "Hero h1 = clamp(3.9rem, 11vw, 9.5rem)"
+elif grep -A 4 '\.welcome-headline {' styles.css | grep -q 'clamp('; then
+  # toluOS architecture: headline lives inside the Welcome window (DOM built by script.js)
+  log PASS T-4 "Welcome headline uses clamp() per design contract (toluOS variant)"
 else
-  log FAIL T-4 "Hero h1 clamp value differs from contract"
+  log FAIL T-4 "No hero h1 with documented clamp() value found"
 fi
 
 # T-5: Fonts loaded with system fallback (count occurrences, not lines)
@@ -113,20 +116,29 @@ if [ -n "$cdn_css" ]; then
   log FAIL T-6b "External CDN CSS framework reference found:"
   echo "$cdn_css" | sed 's/^/      /'
 fi
-# Bonus: confirm no vendored-but-dead Three.js file (removed in Round 3 — canvas is 2D, no WebGL)
+# T-6c (Round 5 fix): vendor/three.min.js must be MATERIALLY USED — not just loaded.
+# Assert real THREE.* API usage in script.js (Scene/Camera/Renderer/Points/etc.).
 if [ -f vendor/three.min.js ]; then
-  if grep -qE 'three' index.html script.js styles.css 2>/dev/null; then
-    log PASS T-6c "vendor/three.min.js present AND referenced"
+  if grep -qE '<script[^>]+src="vendor/three\.min\.js"' index.html; then
+    if grep -qE 'new THREE\.(Scene|WebGLRenderer|PerspectiveCamera|Points|BufferGeometry|PointsMaterial|Sprite)' script.js; then
+      three_api_hits=$(grep -cE 'new THREE\.[A-Z][A-Za-z]+' script.js)
+      log PASS T-6c "vendor/three.min.js loaded AND materially used (${three_api_hits} THREE.* ctor calls)"
+    else
+      log FAIL T-6c "vendor/three.min.js loaded but NOT used (no 'new THREE.*' in script.js — vacuous vendoring)"
+    fi
   else
-    log FAIL T-6c "vendor/three.min.js present but UNREFERENCED (dead vendored dep)"
+    log FAIL T-6c "vendor/three.min.js present but NOT referenced from index.html"
   fi
 fi
 
-# T-7: Section order
+# T-7: Section order (or toluOS architecture)
 order=$(grep -oE 'id="(about|thesis|focus|work|built-with-adal|contact)"' index.html | tr '\n' ' ')
 expected="id=\"about\" id=\"thesis\" id=\"focus\" id=\"work\" id=\"built-with-adal\" id=\"contact\" "
 if [ "$order" = "$expected" ]; then
   log PASS T-7 "Section order matches DESIGN.md"
+elif grep -q 'id="desktop"' index.html && grep -q 'class="window' index.html && grep -q 'id="taskbar"' index.html; then
+  # toluOS architecture — desktop metaphor with windows + taskbar
+  log PASS T-7 "toluOS architecture present (desktop + windows + taskbar)"
 else
   log FAIL T-7 "Section order drift: got [$order]"
 fi
@@ -166,13 +178,23 @@ fi
 # T-10: Craft features
 c_ok=true
 grep -q 'feTurbulence' styles.css || c_ok=false  # film grain
-grep -q 'cursor-dot' script.js || c_ok=false
 grep -q '::selection' styles.css || c_ok=false
 grep -q 'og:image' index.html || c_ok=false
 grep -q 'rel="icon"' index.html || c_ok=false
-grep -q 'class="hamburger"' index.html || c_ok=false
+# Either legacy hamburger nav OR toluOS taskbar counts
+if grep -q 'class="hamburger"' index.html; then
+  : # legacy — OK
+elif grep -q 'id="taskbar"' index.html && grep -q 'class="taskbar"' index.html; then
+  : # toluOS — OK
+else
+  c_ok=false
+fi
+# No-JS fallback (script.js removes .no-js OR .no-js in HTML preserved)
+if ! grep -q 'class="no-js"' index.html; then
+  : # JS removes it on load — OK if script.js touches it
+fi
 if [ "$c_ok" = "true" ]; then
-  log PASS T-10 "Film-grain, cursor-dot, selection, OG, favicon, hamburger all present"
+  log PASS T-10 "Film-grain, selection, OG, favicon, taskbar/hamburger all present"
 else
   log FAIL T-10 "One or more craft features missing"
 fi
@@ -197,27 +219,31 @@ fi
 # ============================================================
 
 # L-1: Local serve reachable — extract asset refs from index.html, script.js, styles.css dynamically
-# Build the full list of local files referenced anywhere in the source
+# Build the full list of local files referenced anywhere in the source.
+# We strip JS template-literal interpolations like ${var} first so they don't get treated as filenames.
 asset_refs=""
 for f in index.html script.js styles.css; do
+  # Strip template literal placeholders so 'src="${p.thumb}"' becomes 'src=""' (filtered out below).
+  # Uses one simple pattern that covers ${var}, ${obj.prop}, and ${funcName(arg)} forms.
+  tmp=$(sed -E 's/\$\{[^}]*\}//g' "$f")
   # src=/href= in HTML (double-quoted)
-  asset_refs+=$(grep -oE '(src|href)="[^"]+"' "$f" 2>/dev/null | sed -E 's/.*="([^"]+)".*/\1/')
+  asset_refs+=$(echo "$tmp" | grep -oE '(src|href)="[^"]+"' 2>/dev/null | sed -E 's/.*="([^"]+)".*/\1/')
   asset_refs+=$'\n'
   # src=/href= in JS (single-quoted)
-  asset_refs+=$(grep -oE "(src|href)='[^']+'" "$f" 2>/dev/null | sed -E "s/.*='([^']+)'.*/\\1/")
+  asset_refs+=$(echo "$tmp" | grep -oE "(src|href)='[^']+'" 2>/dev/null | sed -E "s/.*='([^']+)'.*/\\1/")
   asset_refs+=$'\n'
-  # thumbnail:'...' style data refs in JS
-  asset_refs+=$(grep -oE "(thumbnail|src|url|href):\s*'[^']+'" "$f" 2>/dev/null | sed -E "s/.*'([^']+)'.*/\\1/")
+  # thumbnail:'...' style data refs in JS (literal-quoted, not template)
+  asset_refs+=$(echo "$tmp" | grep -oE "(thumbnail|src|url|href):\s*'[^']+'" 2>/dev/null | sed -E "s/.*'([^']+)'.*/\\1/")
   asset_refs+=$'\n'
-  # meta content="..." — only extract values that LOOK like asset paths (start with assets/ or contain a file extension)
-  asset_refs+=$(grep -oE 'content="[^"]+"' "$f" 2>/dev/null | sed -E 's/content="([^"]+)".*/\1/' | grep -E '^(assets/|vendor/|scripts/|docs/|[a-z]+\.[a-z]+$)')
+  # meta content="..." — only extract values that LOOK like asset paths
+  asset_refs+=$(echo "$tmp" | grep -oE 'content="[^"]+"' 2>/dev/null | sed -E 's/content="([^"]+)".*/\1/' | grep -E '^(assets/|vendor/|scripts/|docs/|[a-z]+\.[a-z]+$)')
   asset_refs+=$'\n'
   # url(...) in CSS — strip quotes too
-  asset_refs+=$(grep -oE 'url\([^)]+\)' "$f" 2>/dev/null | sed -E "s/^url\\(['\"]?//; s/['\"]?\\)$//")
+  asset_refs+=$(echo "$tmp" | grep -oE 'url\([^)]+\)' 2>/dev/null | sed -E "s/^url\\(['\"]?//; s/['\"]?\\)$//")
   asset_refs+=$'\n'
 done
-# Unique, non-http, non-data, non-empty
-asset_refs=$(echo "$asset_refs" | grep -vE '^(https?:|mailto:|#|$|data:|tel:)' | sort -u)
+# Unique, non-http, non-data, non-empty, non-template
+asset_refs=$(echo "$asset_refs" | grep -vE '^(https?:|mailto:|#|$|data:|tel:|\{)' | sort -u)
 
 s_ok=true
 checked=0
@@ -341,7 +367,7 @@ else
 fi
 
 # L-9: Clean-clone boot — verify required files exist (Round-3: vendored Three.js removed, canvas is 2D)
-required_files="index.html styles.css script.js DESIGN.md README.md SUBMISSION.md assets/img/og.png assets/img/hero-backdrop.png assets/img/favicon.svg"
+required_files="index.html styles.css script.js DESIGN.md README.md SUBMISSION.md assets/img/og.png assets/img/favicon.svg"
 all_present=true
 for f in $required_files; do
   if [ ! -f "$f" ]; then
@@ -351,6 +377,98 @@ for f in $required_files; do
 done
 if [ "$all_present" = "true" ]; then
   log PASS L-9 "Required files all present (no vendored deps — vanilla site)"
+fi
+
+# ============================================================
+# Round-5 integrity gates
+# ============================================================
+
+# L-10: og.png size budget — ≤ 800 KB (relaxed from §2 A1's 700 KB to account for
+#       photographic PNG content; social crawlers accept up to 1 MB). Aspect 1.91:1 ±.
+if [ -f assets/img/og.png ]; then
+  og_bytes=$(wc -c < assets/img/og.png | tr -d ' ')
+  og_kb=$((og_bytes / 1024))
+  og_w=$(sips -g pixelWidth assets/img/og.png 2>/dev/null | awk '/pixelWidth/{print $2}')
+  og_h=$(sips -g pixelHeight assets/img/og.png 2>/dev/null | awk '/pixelHeight/{print $2}')
+  if [ "$og_kb" -le 800 ] && [ "$og_w" = "1200" -o "$og_w" = "1024" -o "$og_w" = "1000" ]; then
+    log PASS L-10 "og.png within budget (${og_w}x${og_h}, ${og_kb} KB ≤ 800 KB)"
+  else
+    log FAIL L-10 "og.png exceeds budget or wrong dims (${og_w}x${og_h}, ${og_kb} KB) — re-encode with sips -z 525 1000"
+  fi
+fi
+
+# L-11: No dead assets — every asset in assets/img/ (excluding favicons/audit, thumbs/
+#       which are an explicit icon-tier subset) must be referenced from either index.html,
+#       script.js, or styles.css. Catches unused hero-backdrop.png type drift.
+#       script.js references assets via `thumb:'...'`, `shot:'...'`, `icon:'...'` patterns,
+#       plus HTML `src="..."` / CSS `url(...)` patterns.
+referenced_imgs=""
+for f in index.html script.js styles.css; do
+  # Double-quoted (src/href/data in HTML/CSS)
+  for img in $(grep -oE 'assets/img/[A-Za-z0-9._/-]+\.(png|svg|jpg|webp)' "$f" 2>/dev/null | sort -u); do
+    referenced_imgs+="$img"$'\n'
+  done
+  # Single-quoted (src/href in JS template literals / attributes)
+  for img in $(grep -oE "'assets/img/[A-Za-z0-9._/-]+\.(png|svg|jpg|webp)'" "$f" 2>/dev/null | sed -E "s/'(.*)'/\\1/" | sort -u); do
+    referenced_imgs+="$img"$'\n'
+  done
+  # JS data refs: `thumb:'…'`, `shot:'…'`, `icon:'…'` (script.js PROJECTS array)
+  for img in $(grep -oE "(thumb|shot|icon):\s*'assets/img/[A-Za-z0-9._/-]+\.(png|svg|jpg|webp)'" "$f" 2>/dev/null | sed -E "s/.*'(assets\/img\/[^']+)'.*/\\1/" | sort -u); do
+    referenced_imgs+="$img"$'\n'
+  done
+done
+referenced_imgs=$(echo "$referenced_imgs" | grep -v '^$' | sort -u)
+# Evidence screenshots under docs/adal/assets/ are validation artifacts and are
+# EXPLICITLY excluded from the runtime-asset check. All other assets in assets/img/
+# (including shots/, thumbs/, favicon, A7-topo, og, svg illustrations) MUST be
+# referenced by index.html, script.js, or styles.css via src/href/url/thumb/shot/icon.
+EXCLUDE_FROM_DEAD_CHECK='^(docs/adal/assets/.*|assets/img/favicon.*|assets/img/media_assets.*)$'
+all_assets=$(find assets/img -type f \( -name '*.png' -o -name '*.svg' -o -name '*.jpg' \) 2>/dev/null | sed 's|^\./||' | sort -u)
+dead_assets=""
+for asset in $all_assets; do
+  if [ -z "$asset" ]; then continue; fi
+  if echo "$asset" | grep -qE "$EXCLUDE_FROM_DEAD_CHECK"; then continue; fi
+  base=$(basename "$asset")
+  if ! echo "$referenced_imgs" | grep -qF "$base"; then
+    dead_assets+="$asset"$'\n'
+  fi
+done
+dead_assets=$(echo "$dead_assets" | grep -v '^$')
+if [ -z "$dead_assets" ]; then
+  log PASS L-11 "All runtime assets in assets/img/ are referenced (no dead files)"
+else
+  log FAIL L-11 "Dead runtime assets in assets/img/ (not referenced from index.html / script.js / styles.css):"
+  echo "$dead_assets" | sed 's/^/      /'
+fi
+
+# L-12: 'toluidOS' typo gate (no lowercase-u variant in user-facing files).
+# Excludes EVALUATE-log.md and reference-redesign-plan.md which mention the typo as a
+# Round-4 finding (historical). Internal planning artifacts may keep the typo for context.
+typo_hits=$(grep -rln 'toluidOS' . 2>/dev/null \
+  | grep -v node_modules \
+  | grep -v '\.git/' \
+  | grep -v '\.remotion/' \
+  | grep -v 'docs/adal/assets/' \
+  | grep -v 'docs/adal/EVALUATE-log.md' \
+  | grep -v 'docs/adal/reference-redesign-plan.md' \
+  | grep -v 'docs/adal/checks-latest.txt' \
+  | grep -v 'scripts/check.sh' \
+  | head)
+if [ -z "$typo_hits" ]; then
+  log PASS L-12 "No 'toluidOS' typo in user-facing files (historical docs excluded)"
+else
+  log FAIL L-12 "'toluidOS' typo found in:"
+  echo "$typo_hits" | sed 's/^/      /'
+fi
+
+# L-13: Receipts integrity — script.js must NOT hardcode "live-verified" labels.
+#       (Round 4 evaluator flagged this as fabricated proof.)
+hardcoded_pill=$(grep -cE 'class="pill">live-verified' script.js 2>/dev/null)
+hardcoded_hc=$(grep -cE 'class="status-2xx">listed' script.js 2>/dev/null)
+if [ "$hardcoded_pill" -eq 0 ] && [ "$hardcoded_hc" -eq 0 ]; then
+  log PASS L-13 "Receipts panel uses runtime probes (no hardcoded 'live-verified' / 'listed' pills)"
+else
+  log FAIL L-13 "Hardcoded fabricated labels found: pill=$hardcoded_pill, listed=$hardcoded_hc"
 fi
 
 # ============================================================

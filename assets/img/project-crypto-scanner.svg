@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Crypto Scanner project thumbnail">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d0c0a"/>
+      <stop offset="100%" stop-color="#1a0e05"/>
+    </linearGradient>
+    <radialGradient id="amber" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E89A30" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#E89A30" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.18 0"/>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <circle cx="800" cy="500" r="450" fill="url(#amber)"/>
+
+  <!-- Concentric radar rings -->
+  <g stroke="#E89A30" fill="none" stroke-width="1.4" opacity="0.85">
+    <circle cx="800" cy="500" r="80"/>
+    <circle cx="800" cy="500" r="160"/>
+    <circle cx="800" cy="500" r="240"/>
+    <circle cx="800" cy="500" r="320"/>
+    <circle cx="800" cy="500" r="400"/>
+  </g>
+
+  <!-- Radial spokes -->
+  <g stroke="#E89A30" stroke-width="1" opacity="0.55">
+    <line x1="800" y1="500" x2="800" y2="100"/>
+    <line x1="800" y1="500" x2="800" y2="900"/>
+    <line x1="800" y1="500" x2="400" y2="500"/>
+    <line x1="800" y1="500" x2="1200" y2="500"/>
+    <line x1="800" y1="500" x2="510" y2="220" stroke-dasharray="3,6"/>
+    <line x1="800" y1="500" x2="1090" y2="780" stroke-dasharray="3,6"/>
+  </g>
+
+  <!-- Data points on rings -->
+  <g fill="#5DDB7B">
+    <circle cx="800" cy="180" r="4"/>
+    <circle cx="950" cy="380" r="3.5"/>
+    <circle cx="1010" cy="540" r="4"/>
+    <circle cx="660" cy="640" r="3.5"/>
+    <circle cx="560" cy="450" r="4"/>
+  </g>
+
+  <!-- Center sweep line -->
+  <g opacity="0.65">
+    <line x1="800" y1="500" x2="1100" y2="200" stroke="#E89A30" stroke-width="2"/>
+    <circle cx="1100" cy="200" r="6" fill="#E89A30"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(800 880)">
+    <text x="0" y="0" text-anchor="middle" font-family="Georgia, serif" font-size="42" font-weight="700" letter-spacing="6" fill="#f3eee5">CRYPTO SCANNER</text>
+    <text x="0" y="32" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" letter-spacing="8" fill="#E89A30" fill-opacity="0.75">DEFI · SIGNAL · TOKEN</text>
+  </g>
+
+  <rect width="100%" height="100%" filter="url(#grain)" opacity="0.4"/>
+</svg>
