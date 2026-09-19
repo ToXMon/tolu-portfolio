@@ -1,7 +1,7 @@
 # Edge-case browser matrix — EVALUATE.md V-5..V-7 + V-9 mobile
-Date: 2026-09-19T15:13:31.039Z
+Date: 2026-09-19T18:54:07.881Z
 
-## V-9 mobile @ 390 (fresh context) — 9 tabs (Welcome + 8 projects)
+## V-9 mobile @ 390 (fresh context) — 10 tabs (Welcome + 9 projects)
   tab "Stripe Clone": passed=true  title="Stripe Clone"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
   tab "SignalForge": passed=true  title="SignalForge"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
   tab "Vouch / Monad": passed=true  title="Vouch / Monad"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
@@ -10,28 +10,29 @@ Date: 2026-09-19T15:13:31.039Z
   tab "AgentTrust": passed=true  title="AgentTrust"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
   tab "Memory Palace": passed=true  title="Memory Palace"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
   tab "Agent Skills": passed=true  title="Agent Skills"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
+  tab "Résumé": passed=true  title="Résumé"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
   pageerrors: 0
   saved: docs/adal/assets/v9-mobile-390.png
   PASS: all project tabs open contained, titled, visible windows
 
 ## V-9b receipts terminal-state @ 1440
-  rows: 15  reachable: 14  nonTerminal: 0
+  rows: 16  reachable: 15  nonTerminal: 0
   pageerrors: 0
   PASS: every receipts row reached a terminal measured state
 
 ## V-6 no-JS @ 1440 — HTTP 200
   saved: docs/adal/assets/v6-nojs-1440.png
   documentElement.scrollWidth = 1440  window.innerWidth = 1440  horizScroll = false
-  fallback-scroll: {"exists":true,"w":1440,"h":900,"projectLinks":13}
+  fallback-scroll: {"exists":true,"w":1440,"h":900,"projectLinks":14}
 
 ## V-5 reduced-motion @ 1440
   saved: docs/adal/assets/v5-reducedmotion-1440.png
   documentElement.scrollWidth = 1440  horizScroll = false
-  icons = 8  windows = 1  renderer = true (2d-fallback expected under RM)
+  icons = 9  windows = 1  renderer = true (2d-fallback expected under RM)
 
 ## V-7 subpath deploy @ 1440 — HTTP 200
   served from: /tmp/tolu-subpath-test/tolu-portfolio/  on http://localhost:8090/tolu-portfolio/
   saved: docs/adal/assets/v7-subpath-1440.png
   documentElement.scrollWidth = 1440  horizScroll = false
-  icons = 8  windows = 1  dock = 9
+  icons = 9  windows = 1  dock = 10
   network errors: 0

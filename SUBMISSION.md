@@ -73,14 +73,16 @@ Console capture: `docs/adal/assets/console.txt` (zero entries).
 | A3 | `assets/img/project-stripe.svg` | Hand-authored SVG (Round 2 fallback) | shipped |
 | A4 | `assets/img/project-vouch.svg` | Hand-authored SVG (Round 2 fallback) | shipped |
 | A5 | `assets/img/project-signalforge.svg` | Hand-authored SVG (Round 3 fallback) | shipped |
-| A8 | `assets/img/project-crypto-scanner.svg` | Hand-authored SVG (Round 4 new) | shipped |
+| A8 | `assets/img/shots/crypto-scanner.png` | nano-banana-2 cinematic still (Round 10, replaced hand-authored SVG) | shipped, 1600×1000 + 128×80 icon |
 | A9 | `assets/img/project-x-monitor.svg` | Hand-authored SVG (Round 4 new) | shipped |
 | A10 | `assets/img/project-agenttrust.svg` | Hand-authored SVG (Round 4 new) | shipped |
 | A11 | `assets/img/project-memory-palace.svg` | Hand-authored SVG (Round 4 new) | shipped |
-| A12 | `assets/img/project-agent-skills.svg` | Hand-authored SVG (Round 4 new) | shipped |
+| A12 | `assets/img/shots/agent-skills.png` | nano-banana-2 cinematic still (Round 10, replaced hand-authored SVG) | shipped, 1600×1000 + 128×80 icon |
+| A13 | `assets/img/shots/resume.png` | nano-banana-2 brand still (Round 10, Résumé app) | shipped, 1600×1000 + 128×80 icon |
+| A14 | `assets/docs/Tolu_Shekoni_Resume.docx` | Generalized résumé (full-stack / data / AI roles), authored via AdaL | shipped |
 | B1 | `assets/video/hero-loop.mp4` | **CUT** — AdaL video capability not available | n/a |
 | B2 | `assets/video/demo.mp4` | **CUT** — same reason | n/a |
-| C1 | `assets/audio/ambient.mp3` | **CUT** — AdaL audio capability not available | n/a |
+| C1 | `assets/audio/ambient-loop.mp3` | ffmpeg-synthesized ambient drone (Round 10, 28 s seamless loop, 48 kbps mono) — wired to the opt-in sound toggle | shipped, 165 KB, lazy-loaded on click |
 | C2 | (voiceover) | **CUT** | n/a |
 | Vendored | `vendor/three.min.js` | r149 UMD, 594 KB | shipped (per EXECUTE.md Stage 0) |
 

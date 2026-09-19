@@ -55,7 +55,7 @@
     },
     {
       id: 'vouch',
-      label: 'Vouch / Monad',
+      label: 'Vouch',
       title: 'Vouch / Monad',
       accent: 'var(--color-amber-hot)',
       accentBg: 'oklch(0.20 0.04 70)',
@@ -78,10 +78,10 @@
       title: 'Crypto Scanner',
       accent: 'var(--color-amber-hot)',
       accentBg: 'oklch(0.20 0.04 70)',
-      thumb: 'assets/img/project-crypto-scanner.svg',
-      icon:  'assets/img/project-crypto-scanner.svg', // SVG — already small
+      thumb: 'assets/img/shots/crypto-scanner.png', // AI cinematic still (Round 10)
+      icon:  'assets/img/shots/thumbs/crypto-scanner.png',
       shot: null,
-      shotNote: 'No authentic capture — repo not screenshotted in this session.',
+      shotNote: 'No authentic browser capture — cinematic AI illustration used as the project visual identity.',
       proof: 'Crypto scanner tooling for token, liquidity, and market-risk review, supported by public repository evidence and a related workflow gallery.',
       links: [
         { label: 'GitHub repo',         href: 'https://github.com/ToXMon/catecoin-scanner',                 type: 'repo' },
@@ -141,12 +141,40 @@
       title: 'Agent Skills',
       accent: 'var(--color-cyan)',
       accentBg: 'oklch(0.18 0.02 200)',
-      thumb: 'assets/img/project-agent-skills.svg',
-      icon:  'assets/img/project-agent-skills.svg', // SVG — already small
+      thumb: 'assets/img/shots/agent-skills.png', // AI cinematic still (Round 10)
+      icon:  'assets/img/shots/thumbs/agent-skills.png',
       shot: null,
-      shotNote: 'No authentic capture — Agent Skills catalog is not currently published as a standalone public page.',
+      shotNote: 'No authentic browser capture — cinematic AI illustration used as the project visual identity.',
       proof: 'Reusable Agent Zero skills and workflow tools packaged for repeatable agent workflows.',
       links: []
+    },
+    {
+      id: 'resume',
+      label: 'Résumé',
+      title: 'Résumé — Tolu Shekoni',
+      accent: 'var(--color-accent)',
+      accentBg: 'var(--color-accent-bg)',
+      thumb: 'assets/img/shots/resume.png', // AI brand still (Round 10)
+      icon:  'assets/img/shots/thumbs/resume.png',
+      shot: null,
+      shotNote: 'Brand still — AI-generated illustration (not a browser capture). Download the full résumé below.',
+      proof: 'Full-stack developer · data scientist · AI engineer. Nine years shipping data and AI products in regulated enterprise environments, backed by a public portfolio of full-stack, blockchain, and agent systems.',
+      links: [
+        { label: 'Download résumé (.docx)', href: 'assets/docs/Tolu_Shekoni_Resume.docx', type: 'demo' },
+        { label: 'GitHub profile ↗',        href: 'https://github.com/ToXMon',              type: 'repo' },
+        { label: 'Email Me',                href: 'mailto:tolu.a.shekoni@gmail.com',         type: 'docs' }
+      ],
+      resumeDetails: `
+        <h3>Focus</h3>
+        <p>Full-stack development · data science · AI engineering</p>
+        <h3>Stack highlights</h3>
+        <p>Python · SQL · TypeScript/React · Next.js · RAG &amp; LLM agents · PostgreSQL · Cloudflare</p>
+        <h3>Recent experience</h3>
+        <p><strong>Johnson &amp; Johnson</strong> — Staff Engineer, CAR T Business Excellence (2024–present) · AI/ML Data Scientist, GROW rotation (2023–24)</p>
+        <p><strong>Catalent Pharma Solutions</strong> — Manager, Continuous Improvement (2019–2023)</p>
+        <h3>Education</h3>
+        <p>B.S. Engineering Science — University of Virginia</p>
+      `
     }
   ];
 
@@ -339,6 +367,14 @@
       p.textContent = project.proof;
       body.appendChild(p);
 
+ // résumé summary (Résumé app only — trusted static HTML from the registry)
+      if (project.resumeDetails) {
+        const details = document.createElement('div');
+        details.className = 'resume-details';
+        details.innerHTML = project.resumeDetails;
+        body.appendChild(details);
+      }
+
  // links
       if (project.links && project.links.length) {
         const ul = document.createElement('ul');
@@ -447,7 +483,7 @@
     const tabs = document.createElement('div');
     tabs.className = 'welcome-tabs';
     const tabData = [
-      { id: 'projects', label: '8 Projects' },
+      { id: 'projects', label: PROJECTS.length + ' Projects' },
       { id: 'receipts', label: 'Receipts' },
       { id: 'process',  label: 'Build process' }
     ];
@@ -636,8 +672,8 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
     const instanceId = (!isWelcome && instanceNum > 1) ? `${id}#${instanceNum}` : id;
     const stored = loadLayout().windows[instanceId] || {};
     const el = buildWindowEl(projectRef, { welcome: isWelcome, instanceNum, titleText: (!isWelcome && instanceNum > 1) ? project.label : undefined });
-    const defaultW = isWelcome ? 640 : 560;
-    const defaultH = isWelcome ? 520 : 460;
+    const defaultW = isWelcome ? 640 : (id === 'resume' ? 600 : 560);
+    const defaultH = isWelcome ? 520 : (id === 'resume' ? 620 : 460);
     const w = stored.w || defaultW;
     const h = stored.h || defaultH;
     // Default position: right-of-center so the aurora horizon stays visible
@@ -1656,18 +1692,29 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
 
   function setupSoundToggle() {
     if (!soundBtnEl) return;
- // Honest disabled indicator — no audio asset was generated in this build.
- // AdaL audio capability was not available in this session, so the brief's
- // C1 ambient audio remains un-delivered. The button is visible but inert
- // so the UI shape matches the design contract while the affordance is honest.
-    soundBtnEl.setAttribute('aria-disabled', 'true');
-    soundBtnEl.setAttribute('aria-pressed', 'false');
-    soundBtnEl.title = 'Ambient audio: not generated (AdaL audio capability unavailable)';
-    soundBtnEl.style.opacity = '0.35';
-    soundBtnEl.style.cursor = 'not-allowed';
-    soundBtnEl.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+ // C1 ambient loop — assets/audio/ambient-loop.mp3 (28 s seamless, ffmpeg-synthesized).
+ // Opt-in only: browsers block autoplay and the brief mandates default OFF. The
+ // asset loads lazily on first click so it never counts against initial transfer.
+    let audio = null;
+    let loaded = false;
+    function setState(on) {
+      soundBtnEl.setAttribute('aria-pressed', on ? 'true' : 'false');
+      soundBtnEl.title = on ? 'Ambient audio: on' : 'Ambient audio: off';
+    }
+    setState(false);
+    soundBtnEl.addEventListener('click', () => {
+      if (!loaded) {
+        audio = new Audio('assets/audio/ambient-loop.mp3');
+        audio.loop = true;
+        audio.volume = 0.5;
+        loaded = true;
+      }
+      if (audio.paused) {
+        audio.play().then(() => setState(true)).catch(() => setState(false));
+      } else {
+        audio.pause();
+        setState(false);
+      }
     });
   }
 
@@ -1782,7 +1829,7 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
         }
         if (e.key === 'r' || e.key === 'R') { resetLayout(); e.preventDefault(); return; }
         if (e.key === '0') { openProjectWindow('welcome'); e.preventDefault(); return; }
-        if (/^[1-8]$/.test(e.key)) {
+        if (/^[1-9]$/.test(e.key)) {
           const idx = parseInt(e.key, 10) - 1;
           if (PROJECTS[idx]) { openProjectWindow(PROJECTS[idx].id); e.preventDefault(); }
         }
@@ -1802,6 +1849,27 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
     });
   }
 
+ // Wallpaper parallax (Round 10): the scene image drifts gently opposite the
+ // pointer, sized oversized so edges never show. Independent of Three.js;
+ // reducedMotion or coarse pointers → static image.
+  function setupWallpaperParallax() {
+    const wpScene = document.querySelector('.wp-scene');
+    if (!wpScene || reducedMotion || !finePointer) return;
+    let px = 0, py = 0, tx = 0, ty = 0;
+    const onMove = (e) => {
+      tx = (e.clientX / window.innerWidth - 0.5) * -22;
+      ty = (e.clientY / window.innerHeight - 0.5) * -14;
+    };
+    const ease = () => {
+      px += (tx - px) * 0.06;
+      py += (ty - py) * 0.06;
+      wpScene.style.transform = 'translate(' + px.toFixed(1) + 'px, ' + py.toFixed(1) + 'px) scale(1.03)';
+      requestAnimationFrame(ease);
+    };
+    window.addEventListener('mousemove', onMove, { passive: true });
+    requestAnimationFrame(ease);
+  }
+
   function init() {
     renderDesktopIcons();
     buildDock();
@@ -1812,6 +1880,7 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
     setupKeyboard();
     setupMobileSwipe();
     setupMenubarActions();
+    setupWallpaperParallax();
     initConstellation();
     syncMenubar();
 

@@ -48,6 +48,70 @@
       },
       "created_at": "2026-09-19T14:17:47Z",
       "tags": null
+    },
+    "d6854b40": {
+      "id": "d6854b40",
+      "type": "image",
+      "src": "../.adal/sessions/259c619d-0401-469b-b3bc-6db98af47212/scratch/thumb-crypto-raw.png",
+      "duration_s": null,
+      "resolution": null,
+      "provider": "nano-banana-2",
+      "generation": {
+        "prompt": "Cinematic macro still: a holographic scanner interface of warm amber light sweeping across a dark liquid data plane, concentric golden signal rings expanding over a black reflective surface, thin amber data threads rising like a heat map, a few cool slate-blue outlier markers glowing at the edges, volumetric haze, extreme macro shot on ARRI Alexa 65 with probe lens, Kodak Vision3 500T 5219 film stock, dramatic single-source tungsten lighting through haze, deep shadow falloff, subtle film grain, no text, no logos, editorial negative space.",
+        "model": "nano-banana-2",
+        "n": 1,
+        "google_search_grounding": false
+      },
+      "created_at": "2026-09-19T18:28:11Z",
+      "tags": null
+    },
+    "5af835e4": {
+      "id": "5af835e4",
+      "type": "image",
+      "src": "../.adal/sessions/259c619d-0401-469b-b3bc-6db98af47212/scratch/thumb-skills-raw.png",
+      "duration_s": null,
+      "resolution": null,
+      "provider": "nano-banana-2",
+      "generation": {
+        "prompt": "Cinematic still: an elegant modular toolkit of glowing golden geometric tiles floating in ordered rows above a dark workbench, each small tile holding a warm point of light like precision instruments laid out in a case, thin amber filaments connecting related tiles into a subtle constellation, a soft slate-blue accent light from frame left, volumetric haze, shallow depth of field, shot on ARRI Alexa 65 with 65mm Panavision Primo lens at f/1.8, Kodak Vision3 500T 5219 film stock, deep warm-black shadows, subtle film grain, no text, no logos, editorial composition.",
+        "model": "nano-banana-2",
+        "n": 1,
+        "google_search_grounding": false
+      },
+      "created_at": "2026-09-19T18:28:25Z",
+      "tags": null
+    },
+    "ac3277b9": {
+      "id": "ac3277b9",
+      "type": "image",
+      "src": "../.adal/sessions/259c619d-0401-469b-b3bc-6db98af47212/scratch/thumb-resume-raw.png",
+      "duration_s": null,
+      "resolution": null,
+      "provider": "nano-banana-2",
+      "generation": {
+        "prompt": "Cinematic still: a single elegant document sheet of warm ivory paper floating at a slight angle above a dark desk, illuminated by a single warm gold key light from frame right like a spotlight on a resume, thin golden rule lines and a small constellation seal glowing faintly on the paper, deep warm-black background with a soft slate-blue rim light from frame left, volumetric haze, shallow depth of field, shot on ARRI Alexa 65 with 75mm Panavision Primo lens at f/2, Kodak Vision3 500T 5219 film stock, subtle film grain, no readable text, no logos, premium editorial composition with negative space.",
+        "model": "nano-banana-2",
+        "n": 1,
+        "google_search_grounding": false
+      },
+      "created_at": "2026-09-19T18:45:15Z",
+      "tags": null
+    },
+    "330dafb7": {
+      "id": "330dafb7",
+      "type": "image",
+      "src": "../.adal/sessions/259c619d-0401-469b-b3bc-6db98af47212/scratch/thumb-skills-raw2.png",
+      "duration_s": null,
+      "resolution": null,
+      "provider": "nano-banana-2",
+      "generation": {
+        "prompt": "Cinematic still, viewed at a low three-quarter angle: a precision dark workbench receding in perspective, on which an orderly grid of glowing golden square chips lies flat on the surface in perfectly aligned rows and columns, each chip carrying a crisp minimal circuit-line glyph, the grid receding with the table's perspective toward a vanishing point, warm gold light from the chips reflecting softly off the dark brushed-steel surface beneath them, thin amber light threads connecting a few neighboring chips, single warm key light from upper right, deep warm-black background, subtle volumetric haze, shot on ARRI Alexa 65 with 50mm Panavision Primo lens at f/2.8, Kodak Vision3 500T 5219 film stock, shallow depth of field on the near row, subtle film grain, no text, no logos, premium editorial composition.",
+        "model": "nano-banana-2",
+        "n": 1,
+        "google_search_grounding": false
+      },
+      "created_at": "2026-09-19T18:58:04Z",
+      "tags": null
     }
   }
 }

@@ -625,6 +625,8 @@ img, svg, canvas { display: block; max-width: 100%; }
   padding-top: 0.5rem;
   margin-top: auto;
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
   justify-content: space-between;
   align-items: center;
 }
@@ -646,6 +648,24 @@ img, svg, canvas { display: block; max-width: 100%; }
   border-radius: 50%;
   background: oklch(0.78 0.18 145);
 }
+
+/* Résumé app summary panel (Round 10) */
+.resume-details {
+  border: 1px solid oklch(1 0 0 / 0.1);
+  border-radius: 8px;
+  padding: 0.75rem 0.9rem;
+  background: oklch(1 0 0 / 0.03);
+  font-size: 0.83rem;
+}
+.resume-details h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  margin: 0.7rem 0 0.25rem 0;
+}
+.resume-details h3:first-child { margin-top: 0; }
+.resume-details p { margin: 0 0 0.25rem 0; }
 
 .window-shot-note {
   font-family: var(--font-mono);
