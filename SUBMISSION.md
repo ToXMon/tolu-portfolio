@@ -73,17 +73,21 @@ Console capture: `docs/adal/assets/console.txt` (zero entries).
 | A3 | `assets/img/project-stripe.svg` | Hand-authored SVG (Round 2 fallback) | shipped |
 | A4 | `assets/img/project-vouch.svg` | Hand-authored SVG (Round 2 fallback) | shipped |
 | A5 | `assets/img/project-signalforge.svg` | Hand-authored SVG (Round 3 fallback) | shipped |
-| A8 | `assets/img/shots/crypto-scanner.png` | nano-banana-2 cinematic still (Round 10, replaced hand-authored SVG) | shipped, 1600×1000 + 128×80 icon |
+| A8 | `assets/img/projects/crypto-scanner.png` (desktop icon) + inline CSS/SVG banner card (window body) | nano-banana-2 cinematic still (icon, Round 10) + CSS/SVG banner card themed `--color-amber-hot` (Round 11) | shipped |
 | A9 | `assets/img/project-x-monitor.svg` | Hand-authored SVG (Round 4 new) | shipped |
 | A10 | `assets/img/project-agenttrust.svg` | Hand-authored SVG (Round 4 new) | shipped |
 | A11 | `assets/img/project-memory-palace.svg` | Hand-authored SVG (Round 4 new) | shipped |
-| A12 | `assets/img/shots/agent-skills.png` | nano-banana-2 cinematic still (Round 10, replaced hand-authored SVG) | shipped, 1600×1000 + 128×80 icon |
-| A13 | `assets/img/shots/resume.png` | nano-banana-2 brand still (Round 10, Résumé app) | shipped, 1600×1000 + 128×80 icon |
+| A12 | `assets/img/projects/agent-skills.png` (desktop icon) + inline CSS/SVG banner card (window body) | nano-banana-2 cinematic still (icon, Round 10) + CSS/SVG banner card themed `--color-cyan` with 4×4 skill tile grid (Round 11) | shipped |
+| A13 | `assets/img/projects/resume.png` (desktop icon) + inline document renderer (window body) | nano-banana-2 brand still (icon, Round 10) + full résumé doc rendered inline from `assets/docs/resume.json` (Round 11) | shipped |
 | A14 | `assets/docs/Tolu_Shekoni_Resume.docx` | Generalized résumé (full-stack / data / AI roles), authored via AdaL | shipped |
+| A15 | `assets/docs/resume.json` | Build-time extraction of A14 via `node scripts/resume-extract.mjs` (vanilla node, no deps) | shipped, ~6 KB |
+| A16 | `assets/img/projects/thumbs/projects-folder.svg` | Hand-authored SVG folder glyph, gold on dark ink, 8-dot grid representing the 8 portfolio projects | shipped |
+| A17 | `assets/img/projects/thumbs/music.svg` | Hand-authored SVG music glyph, gold note + sound waves | shipped |
 | B1 | `assets/video/hero-loop.mp4` | **CUT** — AdaL video capability not available | n/a |
 | B2 | `assets/video/demo.mp4` | **CUT** — same reason | n/a |
 | C1 | `assets/audio/ambient-loop.mp3` | ffmpeg-synthesized ambient drone (Round 10, 28 s seamless loop, 48 kbps mono) — wired to the opt-in sound toggle | shipped, 165 KB, lazy-loaded on click |
 | C2 | (voiceover) | **CUT** | n/a |
+| C3 | **Music player (Audius REST)** | Round 11 — public REST at `discoveryprovider.audius.co/v1`, no auth (free tier: 10 req/s, 500 K req/mo). Drop a bearer token at the top of the MusicApp module in script.js to lift the rate limit. Trending + 9 genre chips + free-text search + prev/next + AudioContext beat pulse. | shipped, 0 KB (live stream) |
 | Vendored | `vendor/three.min.js` | r149 UMD, 594 KB | shipped (per EXECUTE.md Stage 0) |
 
 ## 6. Cut log

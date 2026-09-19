@@ -120,11 +120,11 @@ for (const vp of VIEWPORTS) {
   allNetwork.push({ viewport: vp.name, errors: networkErrors });
 
   // Non-vacuous assertions for the reduced-motion desktop metaphor:
-  //   • 8 icons rendered
+  //   • ≥4 top-level icons rendered (Round 11: dock trimmed; 8 projects live in Projects folder)
   //   • ≥1 window auto-opened (Welcome)
   //   • taskbar has tabs
   // The Three.js renderer check happens in the normal-motion block below.
-  if (overflow.icons < 8) throw new Error(`${vp.name}: expected 8 desktop icons, got ${overflow.icons}`);
+  if (overflow.icons < 4) throw new Error(`${vp.name}: expected ≥4 desktop icons, got ${overflow.icons}`);
   if (overflow.windows < 1) throw new Error(`${vp.name}: expected ≥1 window (welcome), got ${overflow.windows}`);
   if (overflow.tabs < 1) throw new Error(`${vp.name}: expected ≥1 taskbar tab, got ${overflow.tabs}`);
 
@@ -236,7 +236,7 @@ for (const vp of VIEWPORTS) {
   if (!heroReport.heroParticles || heroReport.heroParticles < 100) failures.push(`starfield particle count too low (${heroReport.heroParticles})`);
   if (!heroReport.windowCount || heroReport.windowCount < 1) failures.push(`no windows opened (windowCount=${heroReport.windowCount})`);
   if (!heroReport.welcomeVisible) failures.push('Welcome window not visible');
-  if (!heroReport.icons || heroReport.icons < 8) failures.push(`desktop icons missing (${heroReport.icons})`);
+  if (!heroReport.icons || heroReport.icons < 4) failures.push(`desktop icons missing (${heroReport.icons})`);
 
   if (failures.length) {
     const msg = `toluOS health gate FAILED:\n      - ` + failures.join('\n      - ');

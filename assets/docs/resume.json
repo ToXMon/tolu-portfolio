@@ -1,0 +1,158 @@
+{
+  "name": "TOLULOPE A. SHEKONI",
+  "contact": [
+    "Manalapan, NJ",
+    "(601) 213-7781",
+    "tolu.a.shekoni@gmail.com",
+    "github.com/ToXMon",
+    "x.com/tolu_evm"
+  ],
+  "role": "FULL-STACK DEVELOPER · DATA SCIENTIST · AI ENGINEER",
+  "summary": "Engineer with nine years of experience shipping data and AI products in regulated enterprise environments, backed by a public portfolio of full-stack, blockchain, and agent systems. Builds end to end: Python/SQL data pipelines, ML and NLP solutions (RAG, embeddings, evaluation), TypeScript/React web applications, and workflow automation. Known for converting ambiguous requirements into measurable, adopted, and well-documented solutions.",
+  "sections": [
+    {
+      "title": "TECHNICAL SKILLS",
+      "type": "skills",
+      "rows": [
+        {
+          "label": "Languages",
+          "items": [
+            "Python",
+            "SQL",
+            "TypeScript/JavaScript",
+            "R",
+            "HTML/CSS"
+          ]
+        },
+        {
+          "label": "AI/ML",
+          "items": [
+            "LLM applications & agents (ElizaOS, Agent Zero)",
+            "RAG",
+            "embeddings",
+            "vector search",
+            "prompt engineering",
+            "NLP",
+            "model evaluation",
+            "MLOps",
+            "Responsible AI"
+          ]
+        },
+        {
+          "label": "Data",
+          "items": [
+            "PostgreSQL",
+            "ETL",
+            "statistical analysis",
+            "KPI dashboards (R Shiny, Power Platform)",
+            "data governance",
+            "operational reporting"
+          ]
+        },
+        {
+          "label": "Web & Cloud",
+          "items": [
+            "React",
+            "Next.js",
+            "Vite",
+            "Tailwind",
+            "Cloudflare Pages/Workers",
+            "REST APIs",
+            "Git/GitHub"
+          ]
+        },
+        {
+          "label": "Enterprise tools",
+          "items": [
+            "Azure OpenAI",
+            "Domino",
+            "Microsoft Power Platform",
+            "SharePoint automation",
+            "Lean Six Sigma"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "EXPERIENCE",
+      "type": "experience",
+      "entries": [
+        {
+          "title": "Johnson & Johnson — Staff Engineer, CAR T Business Excellence",
+          "meta": "· Raritan, NJ · 2024–Present",
+          "bullets": [
+            "Lead site-wide continuous improvement for CAR T manufacturing: KPI dashboards, baseline measurement, process mapping, and daily management systems that surface bottlenecks and drive timely action.",
+            "Partner with QA/QC, MSAT, Supply Chain, and Facilities to deliver AI and automation opportunities within compliance, throughput, and adoption constraints.",
+            "Lead RCA/CAPA programs, translating process failures into clear causes, controls, ownership, and follow-through."
+          ]
+        },
+        {
+          "title": "Johnson & Johnson — AI/ML Data Scientist (GROW Rotation)",
+          "meta": "· Raritan, NJ · 2023–2024",
+          "bullets": [
+            "Built NLP/ML workflows on the Domino platform under regulated-pharma constraints: data preparation, feature engineering, model prototyping, and deployment planning.",
+            "Delivered NLP solutions extracting insight from unstructured text to improve search, decision support, and knowledge retrieval.",
+            "Applied MLOps and Responsible AI practices: model versioning, reproducibility, evaluation documentation, audit readiness."
+          ]
+        },
+        {
+          "title": "Catalent Pharma Solutions — Manager, Continuous Improvement",
+          "meta": "· 2019–2023",
+          "bullets": [
+            "Led Lean and Six Sigma programs across manufacturing and supply chain, strengthening GMP, ISO, and FDA compliance while reducing waste.",
+            "Built rules-based Power Platform automation tools reported to save 50+ labor hours annually; embedded standard work and data-driven performance systems."
+          ]
+        },
+        {
+          "title": "Oxford Global Resources — Project Manager",
+          "meta": "· New Brunswick, NJ · 2023–2024",
+          "bullets": [
+            "Led cross-functional technology and process-improvement projects; automated SharePoint document-sorting workflows, reducing manual review effort."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "SELECTED PROJECTS",
+      "type": "projects",
+      "items": [
+        {
+          "name": "SignalForge (Encode Solana capstone)",
+          "description": "Anchor programs, proposal state machines, CPI/escrow logic, SPL/Token-2022 flows, devnet-verified deployments, tests, PRD, and runbook."
+        },
+        {
+          "name": "Vouch (Monad hackathon)",
+          "description": "AI-verified commitment and claim protocol: live Cloudflare Worker with health endpoint, public repo, README evidence."
+        },
+        {
+          "name": "Crypto scanners (Catecoin, Memecoin)",
+          "description": "Python pipelines for token discovery, whale and liquidity signals, contract safety checks, alerting, and HTML reports."
+        },
+        {
+          "name": "Stripe Clone",
+          "description": "high-fidelity React static site on Cloudflare Pages: typography, gradients, motion, responsive layout."
+        },
+        {
+          "name": "IntentJournal+",
+          "description": "Next.js prototype turning natural-language financial intent into recommendations using embeddings and DeFi integrations."
+        }
+      ]
+    },
+    {
+      "title": "EDUCATION",
+      "type": "list",
+      "items": [
+        "B.S. Engineering Science — Materials Science & Engineering, Chemistry · University of Virginia"
+      ]
+    },
+    {
+      "title": "CERTIFICATIONS & AWARDS",
+      "type": "list",
+      "items": [
+        "Six Sigma Lean Professional (ID 2776832) · 2025 Competitiveness Award — Advanced Therapies Supply Chain"
+      ]
+    }
+  ],
+  "generatedAt": "2026-09-19",
+  "paragraphCount": 34
+}

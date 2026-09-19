@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e0d0b"/>
+      <stop offset="100%" stop-color="#16140f"/>
+    </linearGradient>
+    <linearGradient id="g-flap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#caa868" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#a4833e" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="g-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1814"/>
+      <stop offset="100%" stop-color="#0a0908"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="10" fill="url(#g)" stroke="rgba(255,255,255,0.08)"/>
+  <!-- folder tab -->
+  <path d="M10 20 Q10 16 14 16 L24 16 L27 20 L50 20 Q54 20 54 24 L54 26 L10 26 Z" fill="url(#g-flap)"/>
+  <!-- folder body -->
+  <rect x="10" y="24" width="44" height="32" rx="4" fill="url(#g-body)" stroke="rgba(255,255,255,0.1)"/>
+  <!-- inset rim highlight -->
+  <rect x="11" y="25" width="42" height="30" rx="3" fill="none" stroke="rgba(202,168,104,0.18)"/>
+  <!-- grid of project dots (representing the 8 projects inside) -->
+  <g fill="#caa868" opacity="0.75">
+    <circle cx="18" cy="35" r="1.6"/>
+    <circle cx="26" cy="35" r="1.6"/>
+    <circle cx="34" cy="35" r="1.6"/>
+    <circle cx="42" cy="35" r="1.6"/>
+    <circle cx="18" cy="42" r="1.6"/>
+    <circle cx="26" cy="42" r="1.6"/>
+    <circle cx="34" cy="42" r="1.6"/>
+    <circle cx="42" cy="42" r="1.6"/>
+  </g>
+  <!-- gold accent dot bottom-right -->
+  <circle cx="48" cy="50" r="2" fill="#e4b870"/>
+</svg>

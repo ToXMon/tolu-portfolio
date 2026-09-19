@@ -77,6 +77,27 @@
       <div class="scene-widget-status" id="scene-widget-status">toluOS · standby</div>
     </aside>
 
+    <!-- Now Playing desktop widget (top-right; appears when a track is loaded) -->
+    <aside id="now-playing-widget" aria-label="Now playing">
+      <div class="npw-row">
+        <div class="npw-art"><span class="npw-glyph">♪</span></div>
+        <div class="npw-meta">
+          <div class="npw-title">Pick a track</div>
+          <div class="npw-artist">Music — open the player</div>
+        </div>
+        <div class="npw-controls">
+          <button class="npw-btn" data-act="prev" aria-label="Previous">⏮</button>
+          <button class="npw-btn primary" data-act="play" aria-label="Play / pause">▶</button>
+          <button class="npw-btn" data-act="next" aria-label="Next">⏭</button>
+          <button class="npw-btn" data-act="open" aria-label="Open Music window">↗</button>
+        </div>
+      </div>
+      <div class="npw-progress"><div class="npw-fill"></div></div>
+    </aside>
+
+    <!-- Quick Links (bottom-left; always visible on desktop) -->
+    <aside id="quick-links" aria-label="Quick links"></aside>
+
     <!-- Windows container (created by JS, lives here in z-index above wallpaper) -->
     <div id="windows" class="windows" aria-label="Open windows">
       <div id="snap-preview" class="snap-preview" aria-hidden="true"></div>
@@ -97,8 +118,11 @@
           <div><dt><kbd>Drag</kbd> to edge</dt><dd>Snap to half-screen (drag off to restore)</dd></div>
           <div><dt><kbd>Double-click</kbd> title</dt><dd>Maximize / restore</dd></div>
           <div><dt><kbd>⌘</kbd> / <kbd>Ctrl</kbd> + <kbd>0</kbd></dt><dd>Open Welcome</dd></div>
+          <div><dt><kbd>⌘</kbd> / <kbd>Ctrl</kbd> + <kbd>P</kbd></dt><dd>Open Projects folder</dd></div>
           <div><dt><kbd>⌘</kbd> / <kbd>Ctrl</kbd> + <kbd>1..9</kbd></dt><dd>Open project</dd></div>
           <div><dt><kbd>⌘</kbd> / <kbd>Ctrl</kbd> + <kbd>R</kbd></dt><dd>Reset layout</dd></div>
+          <div><dt><kbd>F4</kbd></dt><dd>Toggle Launchpad</dd></div>
+          <div><dt><kbd>Space</kbd></dt><dd>Play / pause Music (when no input focused)</dd></div>
           <div><dt><kbd>?</kbd></dt><dd>Show shortcuts</dd></div>
         </dl>
         <p class="shortcuts-close"><kbd>Esc</kbd> or click outside to dismiss.</p>
@@ -167,6 +191,9 @@
     </section>
 
   </main>
+
+  <!-- Launchpad overlay (F4) -->
+  <div id="launchpad" role="dialog" aria-modal="true" aria-label="Launchpad" aria-hidden="true"></div>
 
   <!-- Three.js (vendored, used for the optional 3D parallax in the constellation canvas) -->
   <script src="vendor/three.min.js" defer></script>

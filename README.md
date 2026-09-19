@@ -6,14 +6,17 @@ Dark cinematic editorial single-page portfolio rendered as a **desktop OS metaph
 
 ## What's here
 
-- **Desktop metaphor**: 8 project icons + Welcome window + draggable/resizable windows + taskbar.
+- **Desktop metaphor**: 4 top-level tiles (Welcome, Projects folder, Résumé, Music) + draggable/resizable windows + taskbar + Now Playing widget + Quick Links + Launchpad (F4).
+- **8 portfolio projects** open from a Finder-style Projects folder (Cmd+P). Power users still reach each directly via Cmd+1..9.
+- **Résumé app** renders the full `.docx` inline — extracted to `assets/docs/resume.json` at build time via `node scripts/resume-extract.mjs` (vanilla node, no deps). Download link in the footer.
+- **Music player** (Cmd+M or click the large Music tile) — Audius public REST, no auth. Trending + search + 9 genre chips + prev/next + AudioContext beat pulse.
 - **Focal-point constellation canvas** with 6 spokes × 6 clusters × 9 secondary nodes each.
 - **6-layer wallpaper**: gradient + topographic texture (A7) + constellation + warm glow + cool glow + grain.
 - **Per-project domain accents**: Stripe (glacier blue), SignalForge (mint), Vouch (amber-hot), Crypto Scanner (amber-hot), X Monitor (blue-grey), AgentTrust (deep-amber), Memory Palace (violet), Agent Skills (cyan).
 - **Welcome window**: stagger word-entrance, proof strip, 4 CTA buttons, 3 tabs (8 Projects · Receipts · Build process).
-- **Real proof**: all 8 projects have thumbnails (3 AI-generated + 5 hand-authored SVG per project-domain). All 19 unique links preserved (Stripe X proof, Stripe README, Crypto Scanner README, Vouch health endpoint, etc.).
+- **CSS/SVG banner cards** replace the AI-cinematic stills for Crypto Scanner, Agent Skills, and SignalForge (404 honesty card).
 - **Mobile**: tabbed single-window interface, 8 mobile tabs above hidden taskbar.
-- **Keyboard shortcuts**: `Cmd+W` close, `Cmd+M` minimize, `Cmd+0..8` open project, `?` show overlay.
+- **Keyboard shortcuts**: `Cmd+W` close, `Cmd+M` minimize, `Cmd+0` Welcome, `Cmd+P` Projects folder, `Cmd+1..9` projects, `F4` Launchpad, `Space` play/pause Music, `?` show overlay.
 - **Layout persistence**: window positions/sizes saved to `localStorage`.
 - **No-JS fallback**: `<noscript>` banner + `.fallback-scroll` static section.
 - **Reduced-motion**: all animations collapse to 0.01 ms; canvas skipped entirely.
@@ -36,15 +39,16 @@ python3 -m http.server 8080
 ## File layout
 
 ```
-index.html                # single-page document with desktop skeleton + fallback scroll
-styles.css                # toluOS chrome (windows, taskbar, mobile tabs, 6-layer wallpaper)
-script.js                 # window manager, drag/resize, keyboard, mobile, focal-point constellation canvas
+index.html                # single-page document with desktop skeleton + fallback scroll + Now Playing widget + Quick Links + Launchpad
+styles.css                # toluOS chrome (windows, taskbar, mobile tabs, 6-layer wallpaper) + banner cards + folder grid + résumé doc + music body + widgets + launchpad
+script.js                 # window manager + drag/resize + keyboard + mobile + focal-point constellation + Projects folder + Résumé renderer + MusicApp + banner cards + Now Playing widget + Quick Links + Launchpad
 DESIGN.md                 # original design contract (palette/type/motion)
 docs/adal/design-spec-os.md # toluOS extension of DESIGN.md
 vendor/three.min.js       # vendored r149 UMD
-assets/img/               # A1 OG, A2 hero, A6 favicon, A7 topo, 3 SVG + 5 SVG thumbnails
+assets/img/projects/      # portfolio banners + thumbs (8 projects, moved from shots/ in Round 11)
+assets/docs/              # Tolu_Shekoni_Resume.docx + generated resume.json
 docs/adal/                # EXECUTE.md, build-and-asset-plan.md, EVALUATE.md, builder-plan.md, etc.
-scripts/                  # check.sh (22 mechanical checks), browser-matrix.mjs, browser-edge.mjs
+scripts/                  # check.sh (28 mechanical checks), browser-matrix.mjs, browser-edge.mjs, browser-probes.mjs, resume-extract.mjs
 SUBMISSION.md             # build summary, asset inventory, social-post draft
 ```
 

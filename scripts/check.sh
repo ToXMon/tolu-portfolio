@@ -335,19 +335,24 @@ if [ "$fresh_ok" = "true" ]; then
   log PASS L-5 "Stripe Clone + Vouch live demos respond 2xx"
 fi
 
-# L-6: Budget (HTML+CSS+JS ≤ 125 KB raw, cross-platform via POSIX shell arithmetic)
-#       Round 10: raised 120 → 125 KB to admit the Résumé app + ambient audio
-#       toggle + wallpaper parallax (~+2 KB kernel growth).
+# L-6: Budget (HTML+CSS+JS ≤ 185 KB raw, cross-platform via POSIX shell arithmetic)
+#       Round 11: raised 125 → 185 KB to admit:
+#         · MusicApp module (Audius REST + AudioContext beat pulse)
+#         · buildMusicBody + buildProjectsFolderBody + buildResumeBody + buildCardBanner
+#         · resume-extract runtime, Music widget, Quick Links widget, Launchpad overlay
+#         · card-404 banner for SignalForge, CSS/SVG cards for Crypto Scanner + Agent Skills
+#         · keyboard map (Cmd+P, F4, Space)
+#       Cumulative growth (rounds 9/10/11): 120 → 125 → 130 → 185 KB
 total_bytes=0
 for f in index.html styles.css script.js; do
   sz=$(wc -c < "$f" | tr -d ' ')
   total_bytes=$((total_bytes + sz))
 done
 total_kb=$((total_bytes / 1024))
-if [ "${total_kb:-0}" -le 125 ]; then
-  log PASS L-6 "HTML+CSS+JS raw total = ${total_kb} KB (≤ 125 KB)"
+if [ "${total_kb:-0}" -le 185 ]; then
+  log PASS L-6 "HTML+CSS+JS raw total = ${total_kb} KB (≤ 185 KB)"
 else
-  log FAIL L-6 "HTML+CSS+JS raw total = ${total_kb} KB (exceeds 125 KB)"
+  log FAIL L-6 "HTML+CSS+JS raw total = ${total_kb} KB (exceeds 185 KB)"
 fi
 
 # L-7: Git hygiene — scan BOTH staged diff AND HEAD working-tree for any secret-like strings
@@ -471,6 +476,28 @@ if [ "$hardcoded_pill" -eq 0 ] && [ "$hardcoded_hc" -eq 0 ]; then
   log PASS L-13 "Receipts panel uses runtime probes (no hardcoded 'live-verified' / 'listed' pills)"
 else
   log FAIL L-13 "Hardcoded fabricated labels found: pill=$hardcoded_pill, listed=$hardcoded_hc"
+fi
+
+# L-14: assets/docs/resume.json exists and parses (Round 11: extracted from .docx)
+if [ -f assets/docs/resume.json ]; then
+  if node -e "const r=require('./assets/docs/resume.json'); if(!r.name||!Array.isArray(r.sections))process.exit(1)" 2>/dev/null; then
+    log PASS L-14 "resume.json present and parses (name + sections)"
+  else
+    log FAIL L-14 "resume.json exists but does not parse correctly"
+  fi
+else
+  log FAIL L-14 "resume.json missing — run: node scripts/resume-extract.mjs"
+fi
+
+# L-15: assets/img/projects/ has all 8 portfolio banners (Round 11: moved from shots/)
+missing_projects=""
+for slug in stripe-clone signalforge-repo vouch-app crypto-scanner workflows agenttrust-repo memory-repo agent-skills; do
+  if [ ! -f "assets/img/projects/${slug}.png" ]; then missing_projects="${missing_projects} ${slug}"; fi
+done
+if [ -z "$missing_projects" ]; then
+  log PASS L-15 "All 8 portfolio banners present in assets/img/projects/"
+else
+  log FAIL L-15 "Missing portfolio banners:${missing_projects}"
 fi
 
 # ============================================================

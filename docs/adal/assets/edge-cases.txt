@@ -1,10 +1,10 @@
 # Edge-case browser matrix — EVALUATE.md V-5..V-7 + V-9 mobile
-Date: 2026-09-19T18:54:07.881Z
+Date: 2026-09-19T21:16:28.733Z
 
 ## V-9 mobile @ 390 (fresh context) — 10 tabs (Welcome + 9 projects)
   tab "Stripe Clone": passed=true  title="Stripe Clone"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
   tab "SignalForge": passed=true  title="SignalForge"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
-  tab "Vouch / Monad": passed=true  title="Vouch / Monad"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
+  tab "Vouch": passed=true  title="Vouch"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
   tab "Crypto Scanner": passed=true  title="Crypto Scanner"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
   tab "X Monitor": passed=true  title="X Monitor"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
   tab "AgentTrust": passed=true  title="AgentTrust"  x=12..378 (vp=390)  insideX=true  insideY=true  horizOverflow=false  hasTitle=true
@@ -28,11 +28,11 @@ Date: 2026-09-19T18:54:07.881Z
 ## V-5 reduced-motion @ 1440
   saved: docs/adal/assets/v5-reducedmotion-1440.png
   documentElement.scrollWidth = 1440  horizScroll = false
-  icons = 9  windows = 1  renderer = true (2d-fallback expected under RM)
+  icons = 4  windows = 1  renderer = true (2d-fallback expected under RM)
 
 ## V-7 subpath deploy @ 1440 — HTTP 200
   served from: /tmp/tolu-subpath-test/tolu-portfolio/  on http://localhost:8090/tolu-portfolio/
   saved: docs/adal/assets/v7-subpath-1440.png
   documentElement.scrollWidth = 1440  horizScroll = false
-  icons = 9  windows = 1  dock = 10
+  icons = 4  windows = 1  dock = 4
   network errors: 0

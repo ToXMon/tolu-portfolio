@@ -1,16 +1,16 @@
 # Round-9 interaction probes — rYOS grammar (independently implemented)
-Date: 2026-09-19T19:01:20.726Z
+Date: 2026-09-19T21:15:20.799Z
 
 PASS  P1 launch-origin  — origin {x:24,y:52} within icon rect 24,52 80×99
 PASS  P1 pageerrors  — 0
-PASS  P2 multi-instance  — instances: stripe, stripe#2; dock running=true badge="2"
+PASS  P2 multi-instance  — instances: stripe, stripe#2; projects-folder running=true badge=""
 PASS  P2 icon-refocus  — third icon click focused existing, no new instance
 PASS  P3 z-order/focus  — focus vouch→stripe; stack top=stripe; menubar="Stripe Clone"
 PASS  P4 edge-snap  — preview shown; snapped=left x=0 w=720 (half=720)
 PASS  P4 snap-restore  — un-snapped; w restored to 560px
 PASS  P5 dock-magnification  — hover transform: "translateY(-2.27998px) scale(1.38)"
-PASS  P5 running-indicator  — vouch dock dot visible (running=true)
-PASS  P6a layout-v2-roundtrip  — v2 saved {x:245,y:234} → restored {x:245,y:234}
+PASS  P5 running-indicator  — projects folder dock dot visible (running=true)
+PASS  P6a layout-v2-roundtrip  — v2 saved {x:221,y:210} → restored {x:221,y:210}
 PASS  P6b v1-migration  — v1 stripe{x:111} → v2 stripe{x:111} (canonical key); v1 key removed
 PASS  P7 swipe-cycle  — swipe-left: focus vouch → stripe (next down z-stack)
 PASS  P7 touch-44px  — 10 tabs, min height 44px ≥ 44px
@@ -18,6 +18,6 @@ PASS  P7 window-controls-44px  — control 44×44
 PASS  P8 drag+resize  — drag ok; resize 560×460 → 660×530
 PASS  P8 minimize+restore  — opacity 0 → 1, focus restored
 PASS  P8 esc-close  — Esc closed the focused window
-PASS  P9 perf-budget  — transfer 852 KB (≤ 1.1 MB), DCL 230 ms (local, ≤ 1200 ms)
+PASS  P9 perf-budget  — transfer 849 KB (≤ 1.1 MB), DCL 374 ms (local, ≤ 1200 ms)
 
 Total: 18  PASS: 18  FAIL: 0

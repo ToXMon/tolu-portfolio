@@ -227,7 +227,9 @@ log.push('');
   log.push(`  saved: ${f}`);
   log.push(`  documentElement.scrollWidth = ${m.docW}  horizScroll = ${m.horizScroll}`);
   log.push(`  icons = ${desktop.icons}  windows = ${desktop.windows}  renderer = ${desktop.heroRenderer} (2d-fallback expected under RM)`);
-  if (desktop.icons < 8 || desktop.windows < 1) {
+  // Round 11: desktop has 4 top-level tiles (Welcome, Projects folder, Résumé, Music).
+  // The 8 portfolio projects live inside the Projects folder — verified separately.
+  if (desktop.icons < 4 || desktop.windows < 1) {
     log.push(`  WARN: reduced-motion broke desktop metaphor`);
   }
   log.push('');

@@ -26,9 +26,9 @@
       title: 'AdaL Educational Stripe Clone',
       accent: 'var(--color-blue)',
       accentBg: 'oklch(0.20 0.04 245)',
-      thumb: 'assets/img/shots/stripe-clone.png', // REAL captured screenshot
-      icon:  'assets/img/shots/thumbs/stripe-clone.png',
-      shot: 'assets/img/shots/stripe-clone.png',
+      thumb: 'assets/img/projects/stripe-clone.png', // REAL captured screenshot
+      icon:  'assets/img/projects/thumbs/stripe-clone.png',
+      shot: 'assets/img/projects/stripe-clone.png',
       shotNote: 'Live URL captured 2026-09-18 — currently serves stripe.com (clone no longer deployed at this URL); other proof links intact.',
       proof: 'High-fidelity educational Stripe hero clone shipped from AdaL bootcamp as a React static site on Cloudflare Pages, with X submission proof, repo, and README evidence. Note: as of 2026-09-18 the live demo URL no longer serves Tolu\'s clone (it now redirects to stripe.com); the project links below remain the authoritative source of the work.',
       links: [
@@ -45,10 +45,11 @@
       title: 'Encode Solana / SignalForge',
       accent: 'var(--color-mint-green)',
       accentBg: 'oklch(0.20 0.04 160)',
-      thumb: 'assets/img/shots/signalforge-repo.png', // 404 page — the honest artifact
-      icon:  'assets/img/shots/thumbs/signalforge-repo.png',
-      shots: ['assets/img/shots/signalforge-repo.png'],
-      shot: 'assets/img/shots/signalforge-repo.png',
+      thumb: 'assets/img/projects/signalforge-repo.png', // 404 page — the honest artifact
+      icon:  'assets/img/projects/thumbs/signalforge-repo.png',
+      bannerStyle: 'card-404',
+      shots: ['assets/img/projects/signalforge-repo.png'],
+      shot: 'assets/img/projects/signalforge-repo.png',
       shotNote: 'Repository URL `ToXMon/signalforge` returns 404 — captured the GitHub "Not Found" page as the artifact.',
       proof: 'Solana learning-to-shipping body of work across programs, token flows, dApp patterns, tests, and devnet verification evidence. Note: the public repo URL was not locatable on 2026-09-18.',
       links: []
@@ -59,10 +60,10 @@
       title: 'Vouch / Monad',
       accent: 'var(--color-amber-hot)',
       accentBg: 'oklch(0.20 0.04 70)',
-      thumb: 'assets/img/shots/vouch-app.png',
-      icon:  'assets/img/shots/thumbs/vouch-app.png',
-      shots: ['assets/img/shots/vouch-app.png', 'assets/img/shots/vouch-repo.png', 'assets/img/shots/vouch-health.png'],
-      shot: 'assets/img/shots/vouch-app.png',
+      thumb: 'assets/img/projects/vouch-app.png',
+      icon:  'assets/img/projects/thumbs/vouch-app.png',
+      shots: ['assets/img/projects/vouch-app.png', 'assets/img/projects/vouch-repo.png', 'assets/img/projects/vouch-health.png'],
+      shot: 'assets/img/projects/vouch-app.png',
       shotNote: 'Three captures: live Vouch app (UI + Vouch/MONAD branding), GitHub repo page, and /api/health JSON response. All captured 2026-09-18.',
       proof: 'AI-verified commitment and claim protocol work for Monad trust workflows, backed by a public repository, live Worker root, and health endpoint evidence. Live and accessible as of 2026-09-18.',
       links: [
@@ -78,10 +79,11 @@
       title: 'Crypto Scanner',
       accent: 'var(--color-amber-hot)',
       accentBg: 'oklch(0.20 0.04 70)',
-      thumb: 'assets/img/shots/crypto-scanner.png', // AI cinematic still (Round 10)
-      icon:  'assets/img/shots/thumbs/crypto-scanner.png',
+      thumb: 'assets/img/projects/crypto-scanner.png', // desktop icon still (Round 10)
+      icon:  'assets/img/projects/thumbs/crypto-scanner.png',
+      bannerStyle: 'card', // window body uses CSS/SVG card banner
       shot: null,
-      shotNote: 'No authentic browser capture — cinematic AI illustration used as the project visual identity.',
+      shotNote: 'Window uses a CSS/SVG banner card themed to the project (no authentic browser capture).',
       proof: 'Crypto scanner tooling for token, liquidity, and market-risk review, supported by public repository evidence and a related workflow gallery.',
       links: [
         { label: 'GitHub repo',         href: 'https://github.com/ToXMon/catecoin-scanner',                 type: 'repo' },
@@ -95,9 +97,9 @@
       title: 'X Monitor',
       accent: 'var(--color-blue-grey)',
       accentBg: 'oklch(0.18 0.02 230)',
-      thumb: 'assets/img/shots/workflows.png',
-      icon:  'assets/img/shots/thumbs/workflows.png',
-      shot: 'assets/img/shots/workflows.png',
+      thumb: 'assets/img/projects/workflows.png',
+      icon:  'assets/img/projects/thumbs/workflows.png',
+      shot: 'assets/img/projects/workflows.png',
       shotNote: 'Agent workflows gallery captured 2026-09-18 — "Cracked full-stack systems for agentic workflows" landing page.',
       proof: 'Local social-signal monitoring workflow for narrative, trend, and research queue detection; no standalone public product URL is claimed. The workflows gallery is the public-facing artifact for this work.',
       links: [
@@ -110,9 +112,9 @@
       title: 'AgentTrust',
       accent: 'var(--color-deep-amber)',
       accentBg: 'oklch(0.18 0.02 60)',
-      thumb: 'assets/img/shots/agenttrust-repo.png',
-      icon:  'assets/img/shots/thumbs/agenttrust-repo.png',
-      shot: 'assets/img/shots/agenttrust-repo.png',
+      thumb: 'assets/img/projects/agenttrust-repo.png',
+      icon:  'assets/img/projects/thumbs/agenttrust-repo.png',
+      shot: 'assets/img/projects/agenttrust-repo.png',
       shotNote: 'GitHub repo page captured 2026-09-18 — accessible.',
       proof: 'Agent trust and verification protocol work with public repository and README evidence.',
       links: [
@@ -126,9 +128,9 @@
       title: 'Memory Palace',
       accent: 'var(--color-deep-violet)',
       accentBg: 'oklch(0.18 0.04 290)',
-      thumb: 'assets/img/shots/memory-repo.png',
-      icon:  'assets/img/shots/thumbs/memory-repo.png',
-      shot: 'assets/img/shots/memory-repo.png',
+      thumb: 'assets/img/projects/memory-repo.png',
+      icon:  'assets/img/projects/thumbs/memory-repo.png',
+      shot: 'assets/img/projects/memory-repo.png',
       shotNote: 'GitHub repo page (ToXMon/tolu) captured 2026-09-18 — accessible.',
       proof: 'Knowledge system for preserving context, recall, and durable output across agent workflows.',
       links: [
@@ -141,44 +143,56 @@
       title: 'Agent Skills',
       accent: 'var(--color-cyan)',
       accentBg: 'oklch(0.18 0.02 200)',
-      thumb: 'assets/img/shots/agent-skills.png', // AI cinematic still (Round 10)
-      icon:  'assets/img/shots/thumbs/agent-skills.png',
+      thumb: 'assets/img/projects/agent-skills.png', // desktop icon still (Round 10)
+      icon:  'assets/img/projects/thumbs/agent-skills.png',
+      bannerStyle: 'card',
       shot: null,
-      shotNote: 'No authentic browser capture — cinematic AI illustration used as the project visual identity.',
+      shotNote: 'Window uses a CSS/SVG banner card themed to the project (no authentic browser capture).',
       proof: 'Reusable Agent Zero skills and workflow tools packaged for repeatable agent workflows.',
       links: []
     },
     {
       id: 'resume',
+      kind: 'resume',
       label: 'Résumé',
       title: 'Résumé — Tolu Shekoni',
       accent: 'var(--color-accent)',
       accentBg: 'var(--color-accent-bg)',
-      thumb: 'assets/img/shots/resume.png', // AI brand still (Round 10)
-      icon:  'assets/img/shots/thumbs/resume.png',
+      thumb: 'assets/img/projects/resume.png', // AI brand still (Round 10)
+      icon:  'assets/img/projects/thumbs/resume.png',
       shot: null,
-      shotNote: 'Brand still — AI-generated illustration (not a browser capture). Download the full résumé below.',
+      shotNote: 'Inline rendering of the full résumé document (generated from assets/docs/Tolu_Shekoni_Resume.docx at build time via scripts/resume-extract.mjs).',
       proof: 'Full-stack developer · data scientist · AI engineer. Nine years shipping data and AI products in regulated enterprise environments, backed by a public portfolio of full-stack, blockchain, and agent systems.',
       links: [
         { label: 'Download résumé (.docx)', href: 'assets/docs/Tolu_Shekoni_Resume.docx', type: 'demo' },
         { label: 'GitHub profile ↗',        href: 'https://github.com/ToXMon',              type: 'repo' },
         { label: 'Email Me',                href: 'mailto:tolu.a.shekoni@gmail.com',         type: 'docs' }
       ],
-      resumeDetails: `
-        <h3>Focus</h3>
-        <p>Full-stack development · data science · AI engineering</p>
-        <h3>Stack highlights</h3>
-        <p>Python · SQL · TypeScript/React · Next.js · RAG &amp; LLM agents · PostgreSQL · Cloudflare</p>
-        <h3>Recent experience</h3>
-        <p><strong>Johnson &amp; Johnson</strong> — Staff Engineer, CAR T Business Excellence (2024–present) · AI/ML Data Scientist, GROW rotation (2023–24)</p>
-        <p><strong>Catalent Pharma Solutions</strong> — Manager, Continuous Improvement (2019–2023)</p>
-        <h3>Education</h3>
-        <p>B.S. Engineering Science — University of Virginia</p>
-      `
+      resumeDocUrl: 'assets/docs/resume.json'
     }
   ];
 
   window.PORTFOLIO_PROJECTS = PROJECTS;
+
+// Top-level apps: desktop icons + dock items. Welcome stays for power users.
+// Order matters — matches the keyboard map: Cmd+0 Welcome, Cmd+P Projects, Cmd+M Music.
+// (Resume is also reachable from the Welcome projects list / desktop icon.)
+  const TOP_LEVEL_APPS = [
+    { id: 'welcome', label: 'Welcome', title: 'Welcome', accent: 'var(--color-accent)', accentBg: 'var(--color-accent-bg)', icon: null, glyph: '◈', kind: 'welcome', tileSize: 'standard' },
+    { id: 'projects', label: 'Projects', title: 'Projects — 8 portfolio builds', accent: 'var(--color-accent)', accentBg: 'var(--color-accent-bg)', icon: 'assets/img/projects/thumbs/projects-folder.svg', glyph: '▤', kind: 'projects-folder', tileSize: 'standard', count: PROJECTS.length },
+    { id: 'resume', label: 'Résumé', title: 'Résumé — Tolu Shekoni', accent: 'var(--color-accent)', accentBg: 'var(--color-accent-bg)', icon: 'assets/img/projects/thumbs/resume.png', glyph: '§', kind: 'resume', tileSize: 'standard' },
+    { id: 'music', label: 'Music', title: 'Music — Audius', accent: 'var(--color-accent)', accentBg: 'var(--color-accent-bg)', icon: 'assets/img/projects/thumbs/music.svg', glyph: '♪', kind: 'music', tileSize: 'large' }
+  ];
+  window.TOP_LEVEL_APPS = TOP_LEVEL_APPS;
+
+// Per-app default sizes for openProjectWindow
+  function defaultSizeFor(id) {
+    if (id === 'welcome') return { w: 640, h: 520 };
+    if (id === 'projects') return { w: 720, h: 540 };
+    if (id === 'music') return { w: 540, h: 520 };
+    if (id === 'resume') return { w: 600, h: 620 };
+    return { w: 560, h: 460 };
+  }
 
   const iconsEl      = document.getElementById('desktop-icons');
   const windowsEl    = document.getElementById('windows');
@@ -261,9 +275,9 @@
       w.closing = false;
       w.maximized = false;
       w.snapped = null;
-      const isWelcome = w.id === 'welcome';
-      const defaultW = isWelcome ? 640 : 560;
-      const defaultH = isWelcome ? 520 : 460;
+      const sz = defaultSizeFor(w.id);
+      const defaultW = sz.w;
+      const defaultH = sz.h;
       w.w = defaultW;
       w.h = defaultH;
       w.x = Math.max(20, (window.innerWidth - defaultW) / 2 + (i * 24 - 60));
@@ -279,9 +293,10 @@
     saveLayout();
   }
 
-  function buildWindowEl(project, opts = {}) {
+function buildWindowEl(project, opts = {}) {
     const win = document.createElement('article');
-    win.className = 'window' + (opts.welcome ? ' welcome-window' : '');
+    const kindClass = project.kind ? ` window-${project.kind}` : '';
+    win.className = 'window' + (opts.welcome ? ' welcome-window' : '') + kindClass;
     win.dataset.project = project.id;
     win.style.setProperty('--window-accent', project.accent);
     win.style.setProperty('--window-accent-bg', project.accentBg);
@@ -289,7 +304,7 @@
     win.setAttribute('aria-labelledby', `win-title-${project.id}`);
     win.tabIndex = -1;
 
- // Title bar
+// Title bar
     const title = document.createElement('header');
     title.className = 'window-title';
     title.innerHTML = `
@@ -301,55 +316,66 @@
       </div>
     `;
 
- // Body
+// Body
     const body = document.createElement('div');
     body.className = 'window-body';
 
     if (opts.welcome) {
       body.appendChild(buildWelcomeBody(project));
+    } else if (project.kind === 'projects-folder') {
+      body.appendChild(buildProjectsFolderBody(project));
+    } else if (project.kind === 'resume') {
+      body.appendChild(buildResumeBody(project));
+    } else if (project.kind === 'music') {
+      body.appendChild(buildMusicBody(project));
     } else {
- // All captures (real + illustration). The FIRST is the primary thumbnail;
- // additional captures are rendered as a horizontal strip below it.
-      const shots = Array.isArray(project.shots) && project.shots.length
-        ? project.shots
-        : [project.shot || project.thumb].filter(Boolean);
+// Default: shots + proof + links (existing pattern). Banner-card projects skip the
+      // primary thumbnail and render an inline CSS/SVG banner instead.
+      const useCard = project.bannerStyle === 'card' || project.bannerStyle === 'card-404';
 
-      if (shots.length) {
-        const primary = document.createElement('div');
-        primary.className = 'window-thumb';
-        const primaryImg = document.createElement('img');
-        primaryImg.src = shots[0];
-        primaryImg.alt = project.title + (project.shot ? ' (real browser capture)' : ' (illustration)');
-        primaryImg.loading = 'lazy';
-        primaryImg.decoding = 'async';
-        primaryImg.addEventListener('error', () => { primary.style.display = 'none'; });
-        primary.appendChild(primaryImg);
-        body.appendChild(primary);
+      if (useCard) {
+        const card = buildCardBanner(project);
+        if (card) body.appendChild(card);
+      } else {
+        const shots = Array.isArray(project.shots) && project.shots.length
+          ? project.shots
+          : [project.shot || project.thumb].filter(Boolean);
+        if (shots.length) {
+          const primary = document.createElement('div');
+          primary.className = 'window-thumb';
+          const primaryImg = document.createElement('img');
+          primaryImg.src = shots[0];
+          primaryImg.alt = project.title + (project.shot ? ' (real browser capture)' : ' (illustration)');
+          primaryImg.loading = 'lazy';
+          primaryImg.decoding = 'async';
+          primaryImg.addEventListener('error', () => { primary.style.display = 'none'; });
+          primary.appendChild(primaryImg);
+          body.appendChild(primary);
 
- // Additional captures — only shown when there is more than one shot
-        if (shots.length > 1) {
-          const strip = document.createElement('div');
-          strip.className = 'window-shots-strip';
-          shots.slice(1).forEach((src, i) => {
-            const wrap = document.createElement('a');
-            wrap.href = src;
-            wrap.target = '_blank';
-            wrap.rel = 'noopener noreferrer';
-            wrap.className = 'window-shot-thumb';
-            const im = document.createElement('img');
-            im.src = src;
-            im.alt = project.title + ' capture ' + (i + 2);
-            im.loading = 'lazy';
-            im.decoding = 'async';
-            im.addEventListener('error', () => { wrap.style.display = 'none'; });
-            wrap.appendChild(im);
-            strip.appendChild(wrap);
-          });
-          body.appendChild(strip);
+          if (shots.length > 1) {
+            const strip = document.createElement('div');
+            strip.className = 'window-shots-strip';
+            shots.slice(1).forEach((src, i) => {
+              const wrap = document.createElement('a');
+              wrap.href = src;
+              wrap.target = '_blank';
+              wrap.rel = 'noopener noreferrer';
+              wrap.className = 'window-shot-thumb';
+              const im = document.createElement('img');
+              im.src = src;
+              im.alt = project.title + ' capture ' + (i + 2);
+              im.loading = 'lazy';
+              im.decoding = 'async';
+              im.addEventListener('error', () => { wrap.style.display = 'none'; });
+              wrap.appendChild(im);
+              strip.appendChild(wrap);
+            });
+            body.appendChild(strip);
+          }
         }
       }
 
- // capture-source note (honest about provenance)
+// capture-source note (honest about provenance)
       if (project.shotNote) {
         const note = document.createElement('p');
         note.className = 'window-shot-note';
@@ -357,25 +383,17 @@
         body.appendChild(note);
       }
 
- // title h2
+// title h2
       const h2 = document.createElement('h2');
       h2.textContent = project.title;
       body.appendChild(h2);
 
- // proof
+// proof
       const p = document.createElement('p');
       p.textContent = project.proof;
       body.appendChild(p);
 
- // résumé summary (Résumé app only — trusted static HTML from the registry)
-      if (project.resumeDetails) {
-        const details = document.createElement('div');
-        details.className = 'resume-details';
-        details.innerHTML = project.resumeDetails;
-        body.appendChild(details);
-      }
-
- // links
+// links
       if (project.links && project.links.length) {
         const ul = document.createElement('ul');
         project.links.forEach((link) => {
@@ -392,13 +410,13 @@
         body.appendChild(ul);
       }
 
- // status footer — honest, no fabricated verification claims.
- // The date shown is when the source PROJECTS data was last reviewed, not
- // a runtime verification claim.
+// status footer — honest, no fabricated verification claims.
+// The date shown is when the source PROJECTS data was last reviewed, not
+// a runtime verification claim.
       const status = document.createElement('div');
       status.className = 'window-status';
       const lastCheck = '2026-09-18'; // data-reviewed date (see SUBMISSION.md), NOT a live check
-      const hasShot = !!project.shot; // set in PROJECTS — only projects with a real captured sc
+      const hasShot = !!project.shot;
 
       status.innerHTML = `
         <span>toluOS · v1 · ${lastCheck}</span>
@@ -534,6 +552,7 @@
       <pre class="receipt-prompt">A1 OG: "Cinematic wide shot, anamorphic 2.39:1 framing: a lone constellation of golden particle nodes connected by thin light threads floating over a deep warm-black void…"
 A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lines on deep warm-black, almost imperceptible, like an archival engineering blueprint…"
 (full set: build-and-asset-plan.md §2)</pre>
+      <p class="wp-note-sm">Music: Audius public REST, no auth (free tier: 10 req/s, 500 K req/mo). Drop a bearer token at the top of the MusicApp module in script.js to lift the rate limit. Resume doc rendered inline from <code>assets/docs/resume.json</code> (extracted from <code>Tolu_Shekoni_Resume.docx</code> via <code>node scripts/resume-extract.mjs</code>).</p>
     `;
     tabPanels.receipts = recPanel;
     wrap.appendChild(recPanel);
@@ -636,7 +655,9 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
 
   function openProjectWindow(id, opts = {}) {
     const isWelcome = id === 'welcome';
-    const project = PROJECTS.find((p) => p.id === id);
+ // Round 11: id may be a portfolio project OR a top-level app (Welcome, Projects,
+ // Resume, Music). Search both arrays.
+    const project = PROJECTS.find((p) => p.id === id) || TOP_LEVEL_APPS.find((p) => p.id === id);
     if (!isWelcome && !project) return null;
     const projectRef = isWelcome
       ? { id: 'welcome', label: 'Welcome — Tolu Shekoni', title: 'Welcome', accent: 'var(--color-accent)', accentBg: 'var(--color-accent-bg)' }
@@ -672,8 +693,9 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
     const instanceId = (!isWelcome && instanceNum > 1) ? `${id}#${instanceNum}` : id;
     const stored = loadLayout().windows[instanceId] || {};
     const el = buildWindowEl(projectRef, { welcome: isWelcome, instanceNum, titleText: (!isWelcome && instanceNum > 1) ? project.label : undefined });
-    const defaultW = isWelcome ? 640 : (id === 'resume' ? 600 : 560);
-    const defaultH = isWelcome ? 520 : (id === 'resume' ? 620 : 460);
+    const sz = defaultSizeFor(id);
+    const defaultW = sz.w;
+    const defaultH = sz.h;
     const w = stored.w || defaultW;
     const h = stored.h || defaultH;
     // Default position: right-of-center so the aurora horizon stays visible
@@ -1009,18 +1031,20 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
 
   function renderDesktopIcons() {
     iconsEl.innerHTML = '';
-    PROJECTS.forEach((p) => {
+    TOP_LEVEL_APPS.forEach((p) => {
       const btn = document.createElement('button');
-      btn.className = 'desktop-icon';
+      btn.className = 'desktop-icon' + (p.tileSize === 'large' ? ' desktop-icon-large' : '');
       btn.dataset.openProject = p.id;
       btn.setAttribute('role', 'listitem');
       btn.setAttribute('aria-label', `Open ${p.title}`);
- // Use the small icon thumb (≤10 KB) for the desktop icon; full-res shot is
- // reserved for the window body and lazy-loaded only when the window opens.
-      const iconSrc = p.icon || p.thumb;
+ // Use the icon (or thumb) as the desktop icon; SVG / PNG both fine.
+      const iconSrc = p.icon || null;
+      const thumbInner = iconSrc
+        ? `<img src="${escapeHtml(iconSrc)}" alt="" loading="lazy" decoding="async">`
+        : `<span class="desktop-icon-glyph" aria-hidden="true">${escapeHtml(p.glyph || '◈')}</span>`;
       btn.innerHTML = `
-        <div class="desktop-icon-thumb"><img src="${escapeHtml(iconSrc)}" alt="" loading="lazy" decoding="async"></div>
-        <span class="desktop-icon-label">${escapeHtml(p.label)}</span>
+        <div class="desktop-icon-thumb${iconSrc ? '' : ' desktop-icon-thumb-glyph'}">${thumbInner}</div>
+        <span class="desktop-icon-label">${escapeHtml(p.label)}${p.count ? ` <span class="desktop-icon-count">${p.count}</span>` : ''}</span>
       `;
       btn.addEventListener('click', (e) => {
  // Launch-origin: open from this icon's rect (or focus existing instance)
@@ -1050,16 +1074,21 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
   function buildDock() {
     if (dockBuilt || !dockItemsEl) return;
     dockBuilt = true;
-    const entries = [{ id: 'welcome', label: 'Welcome', icon: null }, ...PROJECTS];
+ // Trimmed dock: 4 entries — Welcome, Projects folder, Résumé, Music.
+ // Power users reach individual projects via Cmd+1..9 + the Projects folder window.
+    const entries = TOP_LEVEL_APPS.slice();
     entries.forEach((entry) => {
       const btn = document.createElement('button');
       btn.className = 'dock-item';
       btn.dataset.dockId = entry.id;
       btn.setAttribute('aria-label', entry.label);
       btn.title = entry.label;
-      const iconSrc = entry.id === 'welcome' ? null : (entry.icon || entry.thumb);
+      const iconSrc = entry.id === 'welcome' ? null : entry.icon;
+      const dockInner = iconSrc
+        ? `<img src="${escapeHtml(iconSrc)}" alt="" loading="lazy" decoding="async">`
+        : escapeHtml(entry.glyph || '◈');
       btn.innerHTML = `
-        <span class="dock-thumb" aria-hidden="true">${iconSrc ? `<img src="${escapeHtml(iconSrc)}" alt="" loading="lazy" decoding="async">` : '◈'}</span>
+        <span class="dock-thumb" aria-hidden="true">${dockInner}</span>
         <span class="dock-label">${escapeHtml(entry.label)}</span>
         <span class="dock-dot" aria-hidden="true"></span>
         <span class="dock-badge" aria-hidden="true"></span>
@@ -1118,13 +1147,17 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
  // Count live instances per project
     const running = new Map(); // projectId -> count
     let focusedProject = null;
+    let projectsCount = 0; // for the Projects folder dock entry — counts any portfolio project
     windows.forEach((state) => {
       if (state.closing) return;
       running.set(state.id, (running.get(state.id) || 0) + 1);
+      if (state.id !== 'welcome' && state.id !== 'projects' && state.id !== 'music' && state.id !== 'resume') projectsCount++;
       if (state.instanceId === focusedId && !state.minimized) focusedProject = state.id;
     });
     dockItemEls.forEach((parts, projectId) => {
-      const n = running.get(projectId) || 0;
+      let n = running.get(projectId) || 0;
+ // Projects folder dock entry lights up whenever any portfolio project is running
+      if (projectId === 'projects') n = projectsCount > 0 ? 1 : 0;
       parts.btn.classList.toggle('running', n > 0);
       parts.btn.classList.toggle('focused', projectId === focusedProject);
       parts.dot.style.opacity = n > 0 ? '1' : '0';
@@ -1829,9 +1862,25 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
         }
         if (e.key === 'r' || e.key === 'R') { resetLayout(); e.preventDefault(); return; }
         if (e.key === '0') { openProjectWindow('welcome'); e.preventDefault(); return; }
+        if (e.key === 'p' || e.key === 'P') { openProjectWindow('projects'); e.preventDefault(); return; }
         if (/^[1-9]$/.test(e.key)) {
           const idx = parseInt(e.key, 10) - 1;
           if (PROJECTS[idx]) { openProjectWindow(PROJECTS[idx].id); e.preventDefault(); }
+        }
+      }
+ // F4 = launchpad (no modifier required — matches macOS grammar)
+      if (e.key === 'F4' && !mod) {
+        e.preventDefault();
+        if (window.toluOS && window.toluOS.launchpad) window.toluOS.launchpad.toggle();
+        return;
+      }
+ // Space = play/pause music when no input is focused
+      if (e.key === ' ' && !mod) {
+        const t = e.target;
+        const isInput = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+        if (!isInput) {
+          e.preventDefault();
+          MusicApp.toggle();
         }
       }
     });
@@ -1870,6 +1919,818 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
     requestAnimationFrame(ease);
   }
 
+// ============================================================
+// Round 11 — Card banners / Projects folder / Résumé body / Music body
+// ============================================================
+
+// buildCardBanner — inline CSS/SVG hero banner for projects without real captures
+  function buildCardBanner(project) {
+    const wrap = document.createElement('div');
+    wrap.className = `banner-card banner-card-${project.bannerStyle || 'card'}`;
+    wrap.style.setProperty('--window-accent', project.accent || 'var(--color-accent)');
+
+    if (project.bannerStyle === 'card-404') {
+      wrap.innerHTML = `
+        <div class="banner-card-grid"></div>
+        <div class="banner-card-404">
+          <div class="banner-card-404-code">404</div>
+          <div class="banner-card-404-title">repo link rot</div>
+          <div class="banner-card-404-sub">Public repo URL not locatable on 2026-09-18. Receipt captured from the GitHub "Not Found" page — shown in the strip below.</div>
+          <a class="banner-card-404-link" href="https://github.com/ToXMon/signalforge" target="_blank" rel="noopener noreferrer">Verify on GitHub ↗</a>
+        </div>`;
+      return wrap;
+    }
+
+    // bannerStyle === 'card' — themed by project id
+    if (project.id === 'crypto') {
+      wrap.innerHTML = `
+        <svg class="banner-card-svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <radialGradient id="bg-c" cx="0.5" cy="0.6" r="0.7">
+              <stop offset="0%" stop-color="oklch(0.20 0.04 70)" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="oklch(0.10 0.02 70)" stop-opacity="0.95"/>
+            </radialGradient>
+          </defs>
+          <rect width="800" height="500" fill="url(#bg-c)"/>
+          <g fill="none" stroke="var(--window-accent)" stroke-width="0.8" opacity="0.55">
+            <circle cx="400" cy="280" r="40"/>
+            <circle cx="400" cy="280" r="80"/>
+            <circle cx="400" cy="280" r="130"/>
+            <circle cx="400" cy="280" r="190"/>
+            <circle cx="400" cy="280" r="260"/>
+          </g>
+          <g stroke="var(--window-accent)" stroke-width="1.4" fill="none" opacity="0.85">
+            <path d="M120 280 Q200 240 280 260 T440 240 T600 250 T720 230"/>
+            <path d="M120 320 Q220 300 320 310 T520 290 T720 305"/>
+          </g>
+          <g fill="var(--window-accent)" opacity="0.7">
+            <circle cx="180" cy="180" r="3"/><circle cx="660" cy="200" r="3"/>
+            <circle cx="700" cy="350" r="3"/><circle cx="160" cy="400" r="3"/>
+          </g>
+          <text x="40" y="450" font-family="Fraunces, serif" font-size="34" font-weight="700" fill="var(--window-accent)">Crypto Scanner</text>
+          <text x="40" y="475" font-family="Source Sans 3, sans-serif" font-size="14" fill="oklch(0.78 0.02 60)">Token · liquidity · market-risk review</text>
+        </svg>`;
+    } else if (project.id === 'skills') {
+      // 4×4 grid of skill tiles, one highlighted (the active skill)
+      const tiles = [];
+      const active = 7;
+      for (let i = 0; i < 16; i++) {
+        const x = 80 + (i % 4) * 160;
+        const y = 90 + Math.floor(i / 4) * 90;
+        const isActive = i === active;
+        tiles.push(`<rect x="${x}" y="${y}" width="120" height="64" rx="6"
+          fill="${isActive ? 'var(--window-accent)' : 'oklch(0.16 0.02 200 / 0.85)'}"
+          stroke="var(--window-accent)" stroke-width="${isActive ? 1.6 : 0.6}" opacity="${isActive ? 1 : 0.7}"/>`);
+        if (isActive) {
+          tiles.push(`<text x="${x + 60}" y="${y + 38}" text-anchor="middle" font-family="DM Mono, monospace" font-size="13" font-weight="600" fill="oklch(0.13 0.01 60)">Active</text>`);
+        }
+      }
+      wrap.innerHTML = `
+        <svg class="banner-card-svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <radialGradient id="bg-s" cx="0.5" cy="0.4" r="0.7">
+              <stop offset="0%" stop-color="oklch(0.20 0.04 200)" stop-opacity="0.85"/>
+              <stop offset="100%" stop-color="oklch(0.10 0.02 200)" stop-opacity="0.95"/>
+            </radialGradient>
+          </defs>
+          <rect width="800" height="500" fill="url(#bg-s)"/>
+          ${tiles.join('')}
+          <text x="40" y="460" font-family="Fraunces, serif" font-size="32" font-weight="700" fill="var(--window-accent)">Agent Skills</text>
+          <text x="40" y="482" font-family="Source Sans 3, sans-serif" font-size="14" fill="oklch(0.78 0.02 60)">20+ reusable Agent Zero skills</text>
+        </svg>`;
+    } else {
+      // generic fallback
+      wrap.innerHTML = `
+        <div class="banner-card-grid"></div>
+        <div class="banner-card-label">${escapeHtml(project.title)}</div>`;
+    }
+    return wrap;
+  }
+
+// buildProjectsFolderBody — Finder-style grid of all 8 portfolio projects
+  function buildProjectsFolderBody(project) {
+    const wrap = document.createElement('div');
+    wrap.className = 'folder-body';
+
+    const intro = document.createElement('p');
+    intro.className = 'folder-intro';
+    intro.textContent = `${PROJECTS.length} portfolio builds — click any card to open the project window.`;
+    wrap.appendChild(intro);
+
+    const grid = document.createElement('div');
+    grid.className = 'folder-grid';
+    PROJECTS.forEach((p) => {
+      const card = document.createElement('button');
+      card.className = 'folder-card';
+      card.setAttribute('role', 'listitem');
+      card.setAttribute('aria-label', `Open ${p.title}`);
+      card.style.setProperty('--window-accent', p.accent);
+      const thumbSrc = p.thumb || p.icon || '';
+      const liveLink = (p.links || []).find(l => l.type === 'demo' || l.type === 'repo');
+      card.innerHTML = `
+        <div class="folder-card-thumb"><img src="${escapeHtml(thumbSrc)}" alt="" loading="lazy" decoding="async"></div>
+        <div class="folder-card-meta">
+          <div class="folder-card-title">${escapeHtml(p.label)}</div>
+          <div class="folder-card-sub">${escapeHtml((p.title || '').split(' / ')[0])}</div>
+        </div>
+        ${liveLink ? `<div class="folder-card-badge">${escapeHtml(liveLink.type === 'demo' ? 'LIVE' : 'REPO')}</div>` : ''}`;
+      card.addEventListener('click', () => focusOrOpen(p.id));
+      grid.appendChild(card);
+    });
+    wrap.appendChild(grid);
+    return wrap;
+  }
+
+// buildResumeBody — inline render of assets/docs/resume.json
+  const RESUME_CACHE = { data: null, inflight: null };
+  async function loadResumeDoc(url) {
+    if (RESUME_CACHE.data) return RESUME_CACHE.data;
+    if (RESUME_CACHE.inflight) return RESUME_CACHE.inflight;
+    RESUME_CACHE.inflight = fetch(url).then(r => r.json()).then(d => { RESUME_CACHE.data = d; return d; }).catch(e => { RESUME_CACHE.inflight = null; throw e; });
+    return RESUME_CACHE.inflight;
+  }
+
+  function renderResumeDoc(data) {
+    const root = document.createElement('div');
+    root.className = 'resume-doc';
+
+    // Header
+    const head = document.createElement('header');
+    head.className = 'resume-doc-head';
+    const name = document.createElement('h1');
+    name.className = 'resume-doc-name';
+    name.textContent = data.name || '';
+    head.appendChild(name);
+    if (data.role) {
+      const role = document.createElement('p');
+      role.className = 'resume-doc-role';
+      role.textContent = data.role;
+      head.appendChild(role);
+    }
+    if (Array.isArray(data.contact) && data.contact.length) {
+      const contact = document.createElement('p');
+      contact.className = 'resume-doc-contact';
+      data.contact.forEach((item, i) => {
+        if (i) contact.appendChild(document.createTextNode(' · '));
+        const isLink = /(https?:\/\/|@|github\.com|x\.com)/.test(item);
+        if (isLink) {
+          let href = item;
+          if (item.startsWith('@')) href = 'mailto:' + item.slice(1);
+          else if (item.includes('@') && !item.includes('://')) href = 'mailto:' + item;
+          else if (/^github\.com\//i.test(item)) href = 'https://' + item;
+          else if (/^x\.com\//i.test(item)) href = 'https://' + item;
+          const a = document.createElement('a');
+          a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer';
+          a.textContent = item;
+          contact.appendChild(a);
+        } else {
+          contact.appendChild(document.createTextNode(item));
+        }
+      });
+      head.appendChild(contact);
+    }
+    root.appendChild(head);
+
+    if (data.summary) {
+      const s = document.createElement('p');
+      s.className = 'resume-doc-summary';
+      s.textContent = data.summary;
+      root.appendChild(s);
+    }
+
+    // Sections
+    (data.sections || []).forEach((section) => {
+      const sec = document.createElement('section');
+      sec.className = 'resume-doc-section';
+      const h = document.createElement('h2');
+      h.className = 'resume-doc-section-title';
+      h.textContent = section.title;
+      sec.appendChild(h);
+
+      if (section.type === 'skills') {
+        const rows = document.createElement('div');
+        rows.className = 'resume-doc-skill-rows';
+        section.rows.forEach((row) => {
+          const r = document.createElement('div');
+          r.className = 'resume-doc-skill-row';
+          const lab = document.createElement('span');
+          lab.className = 'resume-doc-skill-label';
+          lab.textContent = row.label;
+          r.appendChild(lab);
+          const val = document.createElement('span');
+          val.className = 'resume-doc-skill-value';
+          row.items.forEach((item, i) => {
+            if (i) val.appendChild(document.createTextNode(' · '));
+            val.appendChild(document.createTextNode(item));
+          });
+          r.appendChild(val);
+          rows.appendChild(r);
+        });
+        sec.appendChild(rows);
+      } else if (section.type === 'experience') {
+        section.entries.forEach((entry) => {
+          const e = document.createElement('article');
+          e.className = 'resume-doc-job';
+          const t = document.createElement('h3');
+          t.className = 'resume-doc-job-title';
+          t.textContent = entry.title;
+          e.appendChild(t);
+          if (entry.meta) {
+            const m = document.createElement('p');
+            m.className = 'resume-doc-job-meta';
+            m.textContent = entry.meta;
+            e.appendChild(m);
+          }
+          if (entry.bullets && entry.bullets.length) {
+            const ul = document.createElement('ul');
+            ul.className = 'resume-doc-bullets';
+            entry.bullets.forEach((b) => {
+              const li = document.createElement('li');
+              li.textContent = b;
+              ul.appendChild(li);
+            });
+            e.appendChild(ul);
+          }
+          sec.appendChild(e);
+        });
+      } else if (section.type === 'projects') {
+        const list = document.createElement('ul');
+        list.className = 'resume-doc-project-list';
+        (section.items || []).forEach((p) => {
+          const li = document.createElement('li');
+          li.className = 'resume-doc-project';
+          const name = document.createElement('strong');
+          name.textContent = p.name;
+          li.appendChild(name);
+          if (p.description) {
+            li.appendChild(document.createTextNode(' — ' + p.description));
+          }
+          list.appendChild(li);
+        });
+        sec.appendChild(list);
+      } else {
+        const ul = document.createElement('ul');
+        ul.className = 'resume-doc-list';
+        (section.items || []).forEach((t) => {
+          const li = document.createElement('li');
+          li.textContent = t;
+          ul.appendChild(li);
+        });
+        sec.appendChild(ul);
+      }
+      root.appendChild(sec);
+    });
+
+    // Footer with download link
+    if (data.generatedAt) {
+      const f = document.createElement('footer');
+      f.className = 'resume-doc-footer';
+      f.innerHTML = `<span>Last updated ${escapeHtml(data.generatedAt)}</span><a href="assets/docs/Tolu_Shekoni_Resume.docx" target="_blank" rel="noopener noreferrer">Download .docx ↗</a>`;
+      root.appendChild(f);
+    }
+    return root;
+  }
+
+  function buildResumeBody(project) {
+    const wrap = document.createElement('div');
+    wrap.className = 'resume-body';
+    const placeholder = document.createElement('p');
+    placeholder.className = 'resume-loading';
+    placeholder.textContent = 'Loading résumé…';
+    wrap.appendChild(placeholder);
+    loadResumeDoc(project.resumeDocUrl || 'assets/docs/resume.json').then((data) => {
+      wrap.innerHTML = '';
+      wrap.appendChild(renderResumeDoc(data));
+    }).catch((e) => {
+      wrap.innerHTML = '';
+      const err = document.createElement('p');
+      err.className = 'resume-loading';
+      err.textContent = 'Failed to load résumé (' + (e.message || e) + '). Download the .docx in the fallback section below.';
+      wrap.appendChild(err);
+    });
+    return wrap;
+  }
+
+// ============================================================
+// MusicApp — Audius public REST, no auth. Module-scoped singleton.
+// ============================================================
+  const GENRES = [
+    { key: 'all',         label: 'All' },
+    { key: 'Electronic',  label: 'Electronic' },
+    { key: 'Lo-Fi',       label: 'Lo-Fi' },
+    { key: 'Ambient',     label: 'Ambient' },
+    { key: 'Hip-Hop/Rap', label: 'Hip-Hop/Rap' },
+    { key: 'House',       label: 'House' },
+    { key: 'Techno',      label: 'Techno' },
+    { key: 'Jazz',        label: 'Jazz' },
+    { key: 'Classical',   label: 'Classical' }
+  ];
+
+  const MusicApp = (function () {
+    const API = 'https://discoveryprovider.audius.co/v1';
+    const APP_NAME = 'toluOS';
+    // To lift the rate limit: register at audius.co/api-plans, then add the
+    // bearer token below and include it in HEADERS ('Authorization': 'Bearer ...').
+    const HEADERS = { 'X-App-Name': APP_NAME };
+
+    const state = {
+      queue: [],     // [{ id, title, user, duration, artwork, streamUrl, genre }]
+      index: -1,
+      playing: false,
+      volume: 0.5,
+      genre: 'all',
+      query: '',
+      pending: false,
+      track: null    // currently loaded track object (mirrors state.queue[index])
+    };
+
+    let audio = null;
+    let ctx = null;        // AudioContext (lazy, user-gesture gated)
+    let analyser = null;
+    let rafId = null;
+    const cache = new Map();
+    const CACHE_TTL = 5 * 60 * 1000;
+
+    const subscribers = new Set();
+
+    function emit() {
+      subscribers.forEach((fn) => {
+        try { fn(state); } catch (_) {}
+      });
+    }
+    function subscribe(fn) { subscribers.add(fn); return () => subscribers.delete(fn); }
+
+    async function fetchJSON(path, params) {
+      const url = new URL(API + path);
+      url.searchParams.set('appName', APP_NAME);
+      Object.keys(params || {}).forEach((k) => {
+        if (params[k] !== undefined && params[k] !== null) url.searchParams.set(k, params[k]);
+      });
+      const cached = cache.get(url.toString());
+      if (cached && Date.now() - cached.ts < CACHE_TTL) return cached.data;
+      const res = await fetch(url.toString(), { headers: HEADERS });
+      if (!res.ok) throw new Error('Audius ' + res.status);
+      const json = await res.json();
+      cache.set(url.toString(), { ts: Date.now(), data: json });
+      return json;
+    }
+
+    function shapeTrack(t) {
+      return {
+        id: t.id,
+        title: t.title,
+        user: (t.user && (t.user.name || t.user.handle)) || 'Unknown',
+        handle: (t.user && t.user.handle) || '',
+        duration: t.duration || 0,
+        genre: t.genre || '',
+        mood: t.mood || '',
+        artwork: (t.artwork && (t.artwork['480x480'] || t.artwork['150x150'] || t.artwork['1000x1000'])) || '',
+        streamUrl: (t.stream && t.stream.url) || '',
+        permalink: t.permalink || ''
+      };
+    }
+
+    async function trending(genre) {
+      const params = { limit: 20 };
+      if (genre && genre !== 'all') params.genre = genre;
+      const json = await fetchJSON('/tracks/trending', params);
+      return (json.data || []).map(shapeTrack);
+    }
+    async function search(q) {
+      const json = await fetchJSON('/tracks/search', { query: q, limit: 20 });
+      return (json.data || []).map(shapeTrack);
+    }
+
+    function ensureAudio() {
+      if (audio) return audio;
+      audio = new Audio();
+      audio.preload = 'auto';
+      audio.volume = state.volume;
+      audio.addEventListener('ended', () => next());
+      audio.addEventListener('error', () => {
+        // Honest fallback: keep UI in sync but show a "stream unavailable" hint
+        state.playing = false;
+        emit();
+      });
+      return audio;
+    }
+
+    function ensureCtx() {
+      if (ctx) return ctx;
+      try {
+        ctx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = ctx.createAnalyser();
+        analyser.fftSize = 128;
+        const src = ctx.createMediaElementSource(ensureAudio());
+        src.connect(analyser);
+        analyser.connect(ctx.destination);
+      } catch (_) {
+        ctx = null; analyser = null;
+      }
+      return ctx;
+    }
+
+    function load(i) {
+      if (i < 0 || i >= state.queue.length) return;
+      state.index = i;
+      state.track = state.queue[i];
+      const a = ensureAudio();
+      a.src = state.track.streamUrl || '';
+      a.load();
+      emit();
+    }
+
+    function play() {
+      if (state.index < 0 && state.queue.length) load(0);
+      const a = ensureAudio();
+      ensureCtx(); // user-gesture gate: ctx created here
+      if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
+      a.play().then(() => {
+        state.playing = true;
+        emit();
+        startBeat();
+      }).catch(() => {
+        state.playing = false;
+        emit();
+      });
+    }
+    function pause() {
+      if (audio) audio.pause();
+      state.playing = false;
+      stopBeat();
+      emit();
+    }
+    function toggle() { state.playing ? pause() : play(); }
+    function next() {
+      if (!state.queue.length) return;
+      const ni = (state.index + 1) % state.queue.length;
+      load(ni);
+      if (state.playing) play();
+    }
+    function prev() {
+      if (!state.queue.length) return;
+      const ni = (state.index - 1 + state.queue.length) % state.queue.length;
+      load(ni);
+      if (state.playing) play();
+    }
+    function setVolume(v) {
+      state.volume = Math.max(0, Math.min(1, v));
+      if (audio) audio.volume = state.volume;
+      emit();
+    }
+    function setQueue(q) { state.queue = q; state.index = -1; state.track = null; emit(); }
+    function setGenre(g) { state.genre = g; emit(); }
+    function setQuery(q) { state.query = q; }
+
+    async function loadTrending(genre) {
+      state.pending = true; emit();
+      try {
+        const tracks = await trending(genre || state.genre);
+        setQueue(tracks);
+      } catch (e) {
+        setQueue([]);
+      } finally {
+        state.pending = false; emit();
+      }
+    }
+    async function runSearch(q) {
+      if (!q) { loadTrending(state.genre); return; }
+      state.pending = true; emit();
+      try {
+        const tracks = await search(q);
+        setQueue(tracks);
+      } catch (e) {
+        setQueue([]);
+      } finally {
+        state.pending = false; emit();
+      }
+    }
+
+    // AudioContext beat pulse — writes state.beatEnergy (0..1) on emit().
+    let energy = 0;
+    function tickBeat() {
+      if (!analyser || !state.playing) { energy *= 0.85; state.beatEnergy = energy; emit(); rafId = requestAnimationFrame(tickBeat); return; }
+      const arr = new Uint8Array(analyser.frequencyBinCount);
+      analyser.getByteFrequencyData(arr);
+      // bass band only (first 12 bins ~ 0–1.7 kHz)
+      let sum = 0;
+      for (let i = 0; i < 12; i++) sum += arr[i];
+      const level = sum / (12 * 255);
+      energy = energy * 0.7 + level * 0.3;
+      state.beatEnergy = energy;
+      emit();
+      rafId = requestAnimationFrame(tickBeat);
+    }
+    function startBeat() {
+      if (rafId) return;
+      tickBeat();
+    }
+    function stopBeat() {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+      energy = 0;
+      state.beatEnergy = 0;
+      emit();
+    }
+
+    return { state, subscribe, play, pause, toggle, next, prev, setVolume, loadTrending, runSearch, setGenre, setQuery, getGenres: () => GENRES };
+  })();
+
+  // Allow other windows (folder, etc.) to refresh Music state via a single emitter
+  window.MusicApp = MusicApp;
+
+  function buildMusicBody(project) {
+    const wrap = document.createElement('div');
+    wrap.className = 'audio-body';
+
+    // Search row
+    const searchRow = document.createElement('div');
+    searchRow.className = 'audio-search-row';
+    const search = document.createElement('input');
+    search.type = 'search';
+    search.className = 'audio-search';
+    search.placeholder = 'Search Audius…';
+    search.setAttribute('aria-label', 'Search Audius tracks');
+    searchRow.appendChild(search);
+    const searchBtn = document.createElement('button');
+    searchBtn.className = 'audio-search-btn';
+    searchBtn.textContent = 'Search';
+    searchRow.appendChild(searchBtn);
+    wrap.appendChild(searchRow);
+
+    // Genre chips
+    const chips = document.createElement('div');
+    chips.className = 'audio-chips';
+    MusicApp.getGenres().forEach((g) => {
+      const c = document.createElement('button');
+      c.className = 'audio-chip' + (g.key === MusicApp.state.genre ? ' active' : '');
+      c.dataset.genre = g.key;
+      c.textContent = g.label;
+      chips.appendChild(c);
+    });
+    wrap.appendChild(chips);
+
+    // Track list
+    const list = document.createElement('div');
+    list.className = 'audio-list';
+    list.id = 'audio-list';
+    const placeholder = document.createElement('p');
+    placeholder.className = 'audio-list-empty';
+    placeholder.textContent = 'Loading trending tracks…';
+    list.appendChild(placeholder);
+    wrap.appendChild(list);
+
+    // Now-playing strip
+    const np = document.createElement('div');
+    np.className = 'audio-now-playing';
+    np.id = 'audio-now-playing';
+    np.innerHTML = `
+      <div class="audio-np-art"><span class="audio-np-art-glyph">♪</span></div>
+      <div class="audio-np-meta">
+        <div class="audio-np-title">Nothing playing</div>
+        <div class="audio-np-artist">Search or pick a track to start</div>
+      </div>
+      <div class="audio-transport">
+        <button class="audio-btn" data-act="prev" aria-label="Previous">⏮</button>
+        <button class="audio-btn primary" data-act="play" aria-label="Play / pause">▶</button>
+        <button class="audio-btn" data-act="next" aria-label="Next">⏭</button>
+      </div>
+      <div class="audio-progress"><div class="audio-progress-fill"></div></div>
+      <div class="audio-volume">
+        <span class="audio-volume-label">VOL</span>
+        <input type="range" class="audio-volume-slider" min="0" max="100" value="50" aria-label="Volume">
+      </div>`;
+    wrap.appendChild(np);
+
+    // Render queue into list
+    function renderList() {
+      const q = MusicApp.state.queue;
+      list.innerHTML = '';
+      if (MusicApp.state.pending && q.length === 0) {
+        const p = document.createElement('p');
+        p.className = 'audio-list-empty';
+        p.textContent = 'Loading…';
+        list.appendChild(p);
+        return;
+      }
+      if (!q.length) {
+        const p = document.createElement('p');
+        p.className = 'audio-list-empty';
+        p.textContent = 'No tracks — try another genre or search term.';
+        list.appendChild(p);
+        return;
+      }
+      q.forEach((t, i) => {
+        const row = document.createElement('button');
+        row.className = 'audio-row' + (i === MusicApp.state.index ? ' playing' : '');
+        row.dataset.idx = i;
+        const dur = t.duration ? formatDuration(t.duration) : '';
+        row.innerHTML = `
+          <div class="audio-row-art">${t.artwork ? `<img src="${escapeHtml(t.artwork)}" alt="" loading="lazy" decoding="async">` : '<span class="audio-row-art-glyph">♪</span>'}</div>
+          <div class="audio-row-meta">
+            <div class="audio-row-title">${escapeHtml(t.title)}</div>
+            <div class="audio-row-artist">${escapeHtml(t.user)} · ${escapeHtml(t.genre || '')}</div>
+          </div>
+          <div class="audio-row-time">${dur}</div>`;
+        row.addEventListener('click', () => {
+          MusicApp.state.index = i;
+          MusicApp.state.track = t;
+          MusicApp.play();
+        });
+        list.appendChild(row);
+      });
+    }
+
+    function renderNP() {
+      const t = MusicApp.state.track;
+      np.classList.toggle('active', !!t);
+      np.classList.toggle('playing', MusicApp.state.playing);
+      const artEl = np.querySelector('.audio-np-art');
+      if (t && t.artwork) {
+        artEl.innerHTML = `<img src="${escapeHtml(t.artwork)}" alt="" loading="lazy" decoding="async">`;
+      } else if (t) {
+        artEl.innerHTML = `<span class="audio-np-art-glyph">♪</span>`;
+      } else {
+        artEl.innerHTML = `<span class="audio-np-art-glyph">♪</span>`;
+      }
+      np.querySelector('.audio-np-title').textContent = t ? t.title : 'Nothing playing';
+      np.querySelector('.audio-np-artist').textContent = t ? `${t.user} · ${t.genre || ''}` : 'Search or pick a track to start';
+      np.querySelector('[data-act="play"]').textContent = MusicApp.state.playing ? '⏸' : '▶';
+
+      // Progress
+      const fill = np.querySelector('.audio-progress-fill');
+      if (t && audio && audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        fill.style.width = pct + '%';
+      } else {
+        fill.style.width = '0%';
+      }
+      fill.style.setProperty('--beat', MusicApp.state.beatEnergy || 0);
+      // Beat energy drives a subtle gold glow under the progress fill
+      fill.style.boxShadow = MusicApp.state.playing
+        ? `0 0 ${6 + (MusicApp.state.beatEnergy || 0) * 18}px oklch(0.78 0.16 85 / ${0.25 + (MusicApp.state.beatEnergy || 0) * 0.5})`
+        : 'none';
+    }
+
+    // Event wiring
+    chips.addEventListener('click', (e) => {
+      const c = e.target.closest('.audio-chip');
+      if (!c) return;
+      chips.querySelectorAll('.audio-chip').forEach((cc) => cc.classList.toggle('active', cc === c));
+      MusicApp.setGenre(c.dataset.genre);
+      MusicApp.loadTrending(c.dataset.genre);
+    });
+    function doSearch() {
+      const q = search.value.trim();
+      MusicApp.setQuery(q);
+      MusicApp.runSearch(q);
+    }
+    searchBtn.addEventListener('click', doSearch);
+    search.addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+    np.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-act]');
+      if (!b) return;
+      if (b.dataset.act === 'prev') MusicApp.prev();
+      else if (b.dataset.act === 'play') MusicApp.toggle();
+      else if (b.dataset.act === 'next') MusicApp.next();
+    });
+    np.querySelector('.audio-volume-slider').addEventListener('input', (e) => {
+      MusicApp.setVolume(parseInt(e.target.value, 10) / 100);
+    });
+
+    // Subscribe to state changes
+    const unsub = MusicApp.subscribe(() => { renderList(); renderNP(); });
+
+    // Lazy-load trending on first render (after the window is built)
+    setTimeout(() => MusicApp.loadTrending('all'), 50);
+
+    // Cleanup when the window is closed
+    setTimeout(() => {
+      const win = wrap.closest('.window');
+      if (win) win.addEventListener('window-closed', unsub, { once: true });
+    }, 0);
+
+    // Trigger initial paint
+    renderList();
+    renderNP();
+    return wrap;
+  }
+
+  function formatDuration(s) {
+    s = Math.max(0, Math.floor(s));
+    const m = Math.floor(s / 60);
+    const sec = String(s % 60).padStart(2, '0');
+    return `${m}:${sec}`;
+  }
+
+// ============================================================
+// Now-Playing desktop widget + Quick Links + Launchpad overlay
+// ============================================================
+  function setupNowPlayingWidget() {
+    const w = document.getElementById('now-playing-widget');
+    if (!w) return;
+    function paint() {
+      const t = MusicApp.state.track;
+      w.classList.toggle('active', !!t);
+      const art = w.querySelector('.npw-art');
+      const title = w.querySelector('.npw-title');
+      const artist = w.querySelector('.npw-artist');
+      const play = w.querySelector('[data-act="play"]');
+      const fill = w.querySelector('.npw-fill');
+      if (t && t.artwork) {
+        art.innerHTML = `<img src="${escapeHtml(t.artwork)}" alt="" loading="lazy" decoding="async">`;
+      } else {
+        art.innerHTML = `<span class="npw-glyph">♪</span>`;
+      }
+      title.textContent = t ? t.title : 'Pick a track';
+      artist.textContent = t ? `${t.user} · ${t.genre || ''}` : 'Music — open the player';
+      play.textContent = MusicApp.state.playing ? '⏸' : '▶';
+      const beat = MusicApp.state.beatEnergy || 0;
+      fill.style.transform = `scaleX(${MusicApp.state.playing ? (1 + beat * 0.05) : 1})`;
+      fill.style.boxShadow = MusicApp.state.playing
+        ? `0 0 ${6 + beat * 18}px oklch(0.78 0.16 85 / ${0.25 + beat * 0.5})`
+        : 'none';
+    }
+    MusicApp.subscribe(paint);
+    w.querySelector('[data-act="play"]').addEventListener('click', () => MusicApp.toggle());
+    w.querySelector('[data-act="open"]').addEventListener('click', () => focusOrOpen('music'));
+    w.querySelector('[data-act="next"]').addEventListener('click', () => MusicApp.next());
+    paint();
+  }
+
+  function setupQuickLinks() {
+    const q = document.getElementById('quick-links');
+    if (!q) return;
+    const links = [
+      { label: 'Résumé', href: 'assets/docs/Tolu_Shekoni_Resume.docx', glyph: '§' },
+      { label: 'Stripe Clone', href: 'https://stripe-clone-bn0.pages.dev/', glyph: '✦' },
+      { label: 'Vouch', href: 'https://vouch.tolu-a-shekoni.workers.dev', glyph: '◆' },
+      { label: 'GitHub', href: 'https://github.com/ToXMon', glyph: '◐' }
+    ];
+    q.innerHTML = '';
+    const list = document.createElement('div');
+    list.className = 'ql-pills';
+    links.forEach((l) => {
+      const a = document.createElement('a');
+      a.className = 'ql-pill';
+      a.href = l.href;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.innerHTML = `<span class="ql-glyph">${escapeHtml(l.glyph)}</span><span class="ql-label">${escapeHtml(l.label)}</span><span class="ql-arrow">↗</span>`;
+      list.appendChild(a);
+    });
+    q.appendChild(list);
+    const meta = document.createElement('p');
+    meta.className = 'ql-meta';
+    meta.textContent = 'Receipt freshness: 2026-09-18 — see Welcome › Receipts for live probes.';
+    q.appendChild(meta);
+  }
+
+  function setupLaunchpad() {
+    const pad = document.getElementById('launchpad');
+    if (!pad) return;
+    let lastFocus = null;
+    function paint() {
+      pad.innerHTML = '';
+      const grid = document.createElement('div');
+      grid.className = 'lp-grid';
+      const items = [
+        ...TOP_LEVEL_APPS.map((a) => ({ id: a.id, label: a.label, sub: a.title, glyph: a.glyph, icon: a.icon })),
+        ...PROJECTS.map((p) => ({ id: p.id, label: p.label, sub: p.title, glyph: '◫', icon: p.icon || p.thumb }))
+      ];
+      items.forEach((it) => {
+        const btn = document.createElement('button');
+        btn.className = 'lp-cell';
+        btn.dataset.id = it.id;
+        const inner = it.icon
+          ? `<div class="lp-cell-icon"><img src="${escapeHtml(it.icon)}" alt="" loading="lazy" decoding="async"></div>`
+          : `<div class="lp-cell-icon lp-cell-glyph"><span>${escapeHtml(it.glyph)}</span></div>`;
+        btn.innerHTML = `${inner}<div class="lp-cell-label">${escapeHtml(it.label)}</div>`;
+        btn.addEventListener('click', () => {
+          hide();
+          focusOrOpen(it.id);
+        });
+        grid.appendChild(btn);
+      });
+      pad.appendChild(grid);
+    }
+    function show() {
+      lastFocus = focusedId;
+      paint();
+      pad.classList.add('open');
+      pad.setAttribute('aria-hidden', 'false');
+    }
+    function hide() {
+      pad.classList.remove('open');
+      pad.setAttribute('aria-hidden', 'true');
+    }
+    function toggle() { pad.classList.contains('open') ? hide() : show(); }
+    pad.addEventListener('click', (e) => { if (e.target === pad) hide(); });
+    // Expose for keyboard handler
+    window.toluOS = window.toluOS || {};
+    window.toluOS.launchpad = { show, hide, toggle };
+  }
+
   function init() {
     renderDesktopIcons();
     buildDock();
@@ -1882,9 +2743,12 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
     setupMenubarActions();
     setupWallpaperParallax();
     initConstellation();
+    setupNowPlayingWidget();
+    setupQuickLinks();
+    setupLaunchpad();
     syncMenubar();
 
- // Auto-open Welcome window on first load (desktop metaphor "home")
+// Auto-open Welcome window on first load (desktop metaphor "home")
     setTimeout(() => openProjectWindow('welcome'), 200);
   }
 

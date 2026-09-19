@@ -62,14 +62,16 @@ async function newDesktop() {
   const a = await page.evaluate(() => window.toluOS.openProjectWindow('stripe', { forceNew: true }) !== null);
   const b = await page.evaluate(() => window.toluOS.openProjectWindow('stripe', { forceNew: true }) !== null);
   const wins = await page.evaluate(() => window.toluOS.windows());
-  const badge = await page.evaluate(() => {
-    const item = document.querySelector('.dock-item[data-dock-id="stripe"]');
+  // Round 11: dock is trimmed to top-level apps only. Multi-instance lives in the
+  // windows() Map; the badge lives on the Projects folder dock entry.
+  const folderBadge = await page.evaluate(() => {
+    const item = document.querySelector('.dock-item[data-dock-id="projects"]');
     return item ? { running: item.classList.contains('running'), badge: item.querySelector('.dock-badge').textContent } : null;
   });
   if (a && b && wins.filter(w => w.startsWith('stripe')).length === 2) {
-    pass('P2 multi-instance', `instances: ${wins.filter(w => w.startsWith('stripe')).join(', ')}; dock running=${badge.running} badge="${badge.badge}"`);
+    pass('P2 multi-instance', `instances: ${wins.filter(w => w.startsWith('stripe')).join(', ')}; projects-folder running=${folderBadge && folderBadge.running} badge="${folderBadge && folderBadge.badge}"`);
   } else {
-    fail('P2 multi-instance', `wins=${JSON.stringify(wins)} badge=${JSON.stringify(badge)}`);
+    fail('P2 multi-instance', `wins=${JSON.stringify(wins)} folderBadge=${JSON.stringify(folderBadge)}`);
   }
   // Third click on the icon focuses (not another instance)
   await page.locator('.desktop-icon').first().click();
@@ -159,13 +161,13 @@ async function newDesktop() {
   await page.waitForTimeout(400);
   const dock = page.locator('#dock-items');
   const box = await dock.boundingBox();
-  // Hover over the first project dock item
-  const firstItem = page.locator('.dock-item[data-dock-id="stripe"]');
+  // Hover over the first dock item (Round 11: dock trimmed to top-level apps)
+  const firstItem = page.locator('.dock-item[data-dock-id="projects"]');
   const ibox = await firstItem.boundingBox();
   await page.mouse.move(ibox.x + ibox.width / 2, ibox.y + ibox.height / 2);
   await page.waitForTimeout(250);
   const scale = await page.evaluate(() => {
-    const it = document.querySelector('.dock-item[data-dock-id="stripe"]');
+    const it = document.querySelector('.dock-item[data-dock-id="projects"]');
     return it.style.transform || '';
   });
   const scaled = /scale\((1\.[2-9]|1\.\d{2,})/.test(scale);
@@ -174,15 +176,15 @@ async function newDesktop() {
   } else {
     fail('P5 dock-magnification', `transform="${scale}"`);
   }
-  // Running indicator dot
+  // Running indicator dot on the Projects folder (any open project counts)
   await page.evaluate(() => window.toluOS.openProjectWindow('vouch'));
   await page.waitForTimeout(300);
   const dot = await page.evaluate(() => {
-    const it = document.querySelector('.dock-item[data-dock-id="vouch"]');
+    const it = document.querySelector('.dock-item[data-dock-id="projects"]');
     return it ? { running: it.classList.contains('running'), dotOpacity: it.querySelector('.dock-dot').style.opacity } : null;
   });
-  if (dot.running && dot.dotOpacity === '1') {
-    pass('P5 running-indicator', `vouch dock dot visible (running=${dot.running})`);
+  if (dot && dot.running && dot.dotOpacity === '1') {
+    pass('P5 running-indicator', `projects folder dock dot visible (running=${dot.running})`);
   } else {
     fail('P5 running-indicator', JSON.stringify(dot));
   }
@@ -350,11 +352,12 @@ async function newDesktop() {
   } else {
     fail('P8 drag+resize', `afterDrag=${JSON.stringify(afterDrag)} afterResize=${JSON.stringify(afterResize)}`);
   }
-  // Minimize → restore from dock
+  // Minimize → restore from dock (Round 11: dock is trimmed; restore via the
+// window-level API rather than clicking a dock item that no longer exists)
   await page.evaluate(() => window.toluOS.minimizeWindow('stripe'));
   await page.waitForTimeout(300);
   const minOpacity = await page.evaluate(() => getComputedStyle(document.querySelector('.window[data-project="stripe"]')).opacity);
-  await page.locator('.dock-item[data-dock-id="stripe"]').click();
+  await page.evaluate(() => window.toluOS.openProjectWindow('stripe')); // restores minimized
   await page.waitForTimeout(300);
   const restOpacity = await page.evaluate(() => getComputedStyle(document.querySelector('.window[data-project="stripe"]')).opacity);
   const focusedAfterRestore = await page.evaluate(() => window.toluOS.focused());
