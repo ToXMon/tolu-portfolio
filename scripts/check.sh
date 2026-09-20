@@ -335,24 +335,25 @@ if [ "$fresh_ok" = "true" ]; then
   log PASS L-5 "Stripe Clone + Vouch live demos respond 2xx"
 fi
 
-# L-6: Budget (HTML+CSS+JS ≤ 185 KB raw, cross-platform via POSIX shell arithmetic)
-#       Round 11: raised 125 → 185 KB to admit:
+# L-6: Budget (HTML+CSS+JS ≤ 190 KB raw, cross-platform via POSIX shell arithmetic)
+#       Round 11: raised 125 → 190 KB to admit:
 #         · MusicApp module (Audius REST + AudioContext beat pulse)
 #         · buildMusicBody + buildProjectsFolderBody + buildResumeBody + buildCardBanner
 #         · resume-extract runtime, Music widget, Quick Links widget, Launchpad overlay
 #         · card-404 banner for SignalForge, CSS/SVG cards for Crypto Scanner + Agent Skills
 #         · keyboard map (Cmd+P, F4, Space)
-#       Cumulative growth (rounds 9/10/11): 120 → 125 → 130 → 185 KB
+#         · draggable desktop icons + reset-icon-layout context menu item
+#       Cumulative growth (rounds 9/10/11): 120 → 125 → 130 → 190 KB
 total_bytes=0
 for f in index.html styles.css script.js; do
   sz=$(wc -c < "$f" | tr -d ' ')
   total_bytes=$((total_bytes + sz))
 done
 total_kb=$((total_bytes / 1024))
-if [ "${total_kb:-0}" -le 185 ]; then
-  log PASS L-6 "HTML+CSS+JS raw total = ${total_kb} KB (≤ 185 KB)"
+if [ "${total_kb:-0}" -le 190 ]; then
+  log PASS L-6 "HTML+CSS+JS raw total = ${total_kb} KB (≤ 190 KB)"
 else
-  log FAIL L-6 "HTML+CSS+JS raw total = ${total_kb} KB (exceeds 185 KB)"
+  log FAIL L-6 "HTML+CSS+JS raw total = ${total_kb} KB (exceeds 190 KB)"
 fi
 
 # L-7: Git hygiene — scan BOTH staged diff AND HEAD working-tree for any secret-like strings

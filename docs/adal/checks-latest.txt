@@ -16,7 +16,7 @@ PASS   L-2    All HTML/CSS local refs resolve
 PASS   L-3    No absolute-root paths (GitHub-Pages subpath safe)
 PASS   L-4    All in-scope external URLs return 2xx/3xx (x.com exempted per §3)
 PASS   L-5    Stripe Clone + Vouch live demos respond 2xx
-PASS   L-6    HTML+CSS+JS raw total = 123 KB (≤ 125 KB)
+PASS   L-6    HTML+CSS+JS raw total = 189 KB (≤ 190 KB)
 PASS   L-7    No secrets in staged diff OR HEAD tree (docs/scripts excluded)
 PASS   L-8    README.md free of stale references
 PASS   L-9    Required files all present (no vendored deps — vanilla site)
@@ -24,8 +24,10 @@ PASS   L-10   og.png within budget (1000x525, 712 KB ≤ 800 KB)
 PASS   L-11   All runtime assets in assets/img/ are referenced (no dead files)
 PASS   L-12   No 'toluidOS' typo in user-facing files (historical docs excluded)
 PASS   L-13   Receipts panel uses runtime probes (no hardcoded 'live-verified' / 'listed' pills)
+PASS   L-14   resume.json present and parses (name + sections)
+PASS   L-15   All 8 portfolio banners present in assets/img/projects/
 
 ================ SUMMARY ================
-Total: 26   PASS: 26   FAIL: 0
+Total: 28   PASS: 28   FAIL: 0
 Report: /Users/tolushekoni/tolu-portfolio/docs/adal/checks-latest.txt
 ===========================================

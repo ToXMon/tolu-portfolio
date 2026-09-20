@@ -1029,15 +1029,51 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
     });
   }
 
+  // Round 11: draggable desktop icons. Positions persist to localStorage.
+// Stored shape: { 'iconLayout.v1': { [id]: { x, y } } }
+  const ICON_LAYOUT_KEY = 'toluOS.iconLayout.v1';
+
+  function loadIconLayout() {
+    try {
+      const raw = localStorage.getItem(ICON_LAYOUT_KEY);
+      if (raw) return JSON.parse(raw) || {};
+    } catch (_) {}
+    return {};
+  }
+  function saveIconLayout(map) {
+    try { localStorage.setItem(ICON_LAYOUT_KEY, JSON.stringify(map)); } catch (_) {}
+  }
+  function resetIconLayout() {
+    try { localStorage.removeItem(ICON_LAYOUT_KEY); } catch (_) {}
+    if (iconsEl) {
+      iconsEl.classList.remove('desktop-icons-free');
+      iconsEl.querySelectorAll('.desktop-icon').forEach((el) => {
+        el.style.left = '';
+        el.style.top = '';
+        el.style.position = '';
+      });
+    }
+  }
+
   function renderDesktopIcons() {
     iconsEl.innerHTML = '';
-    TOP_LEVEL_APPS.forEach((p) => {
+    // Separate the standard tiles (in the grid) from the featured Music tile
+    // (positioned outside the grid so its larger size doesn't get clipped).
+    const standardApps = TOP_LEVEL_APPS.filter((p) => p.tileSize !== 'large');
+    const featuredApps = TOP_LEVEL_APPS.filter((p) => p.tileSize === 'large');
+
+    const saved = loadIconLayout();
+    const hasSaved = Object.keys(saved).length > 0;
+    if (hasSaved) iconsEl.classList.add('desktop-icons-free');
+
+    function makeBtn(p) {
       const btn = document.createElement('button');
       btn.className = 'desktop-icon' + (p.tileSize === 'large' ? ' desktop-icon-large' : '');
       btn.dataset.openProject = p.id;
+      btn.dataset.iconId = p.id;
       btn.setAttribute('role', 'listitem');
-      btn.setAttribute('aria-label', `Open ${p.title}`);
- // Use the icon (or thumb) as the desktop icon; SVG / PNG both fine.
+      btn.setAttribute('aria-label', `Open ${p.title}. Drag to rearrange.`);
+      btn.draggable = false; // we use pointer-based drag, not HTML5 DnD
       const iconSrc = p.icon || null;
       const thumbInner = iconSrc
         ? `<img src="${escapeHtml(iconSrc)}" alt="" loading="lazy" decoding="async">`
@@ -1046,21 +1082,115 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
         <div class="desktop-icon-thumb${iconSrc ? '' : ' desktop-icon-thumb-glyph'}">${thumbInner}</div>
         <span class="desktop-icon-label">${escapeHtml(p.label)}${p.count ? ` <span class="desktop-icon-count">${p.count}</span>` : ''}</span>
       `;
+      if (hasSaved && saved[p.id]) {
+        const pos = saved[p.id];
+        btn.style.position = 'absolute';
+        btn.style.left = pos.x + 'px';
+        btn.style.top = pos.y + 'px';
+      }
       btn.addEventListener('click', (e) => {
- // Launch-origin: open from this icon's rect (or focus existing instance)
+        if (btn._dragged) { btn._dragged = false; return; }
         const existing = topInstanceOf(p.id);
         if (existing) { focusWindow(existing); return; }
         const r = btn.getBoundingClientRect();
         openProjectWindow(p.id, { origin: { x: r.x, y: r.y, w: r.width, h: r.height } });
       });
       btn.addEventListener('dblclick', (e) => {
+        if (btn._dragged) return;
         e.preventDefault();
- // Double-click: second instance (multi-instance grammar)
         const r = btn.getBoundingClientRect();
         openProjectWindow(p.id, { forceNew: true, origin: { x: r.x, y: r.y, w: r.width, h: r.height } });
       });
-      iconsEl.appendChild(btn);
+      if (finePointer && !reducedMotion && !isMobile) {
+        btn.addEventListener('pointerdown', (e) => startIconDrag(btn, p.id, e));
+      }
+      return btn;
+    }
+
+    // Standard tiles go into the grid container
+    standardApps.forEach((p) => iconsEl.appendChild(makeBtn(p)));
+
+    // Featured tiles (Music) live in their own container, positioned outside
+    // the grid so they can be larger without getting clipped.
+    featuredApps.forEach((p) => {
+      const btn = makeBtn(p);
+      const featuredHost = document.getElementById('featured-icon-' + p.id);
+      if (featuredHost) {
+        featuredHost.innerHTML = '';
+        featuredHost.appendChild(btn);
+      } else {
+        iconsEl.appendChild(btn); // fallback
+      }
     });
+  }
+
+  // Drag state — module-scoped so the move/up handlers don't need closure access
+  let iconDrag = null;
+  function startIconDrag(btn, id, e) {
+    if (e.button !== 0) return; // left button only
+    const rect = btn.getBoundingClientRect();
+    iconDrag = {
+      btn,
+      id,
+      offsetX: e.clientX - rect.left,
+      offsetY: e.clientY - rect.top,
+      startX: e.clientX,
+      startY: e.clientY,
+      moved: 0,
+      pointerId: e.pointerId,
+      baseX: rect.left,
+      baseY: rect.top
+    };
+ // Promote to absolute positioning (CSS grid → free) on first drag
+    iconsEl.classList.add('desktop-icons-free');
+    btn.style.position = 'absolute';
+    btn.style.left = rect.left + 'px';
+    btn.style.top = rect.top + 'px';
+    btn.classList.add('dragging');
+    // Listen on document so we catch all moves regardless of pointer capture
+    // quirks across browsers / headless Playwright.
+    document.addEventListener('pointermove', onIconDragMove);
+    document.addEventListener('pointerup', onIconDragEnd);
+    document.addEventListener('pointercancel', onIconDragEnd);
+    e.preventDefault();
+  }
+
+  function onIconDragMove(e) {
+    if (!iconDrag || e.pointerId !== iconDrag.pointerId) return;
+    const dx = e.clientX - iconDrag.startX;
+    const dy = e.clientY - iconDrag.startY;
+    iconDrag.moved = Math.max(iconDrag.moved, Math.abs(dx) + Math.abs(dy));
+ // Clamp position to viewport (above menubar, below taskbar, inside screen)
+    const x = Math.max(8, Math.min(window.innerWidth - 96, iconDrag.baseX + dx));
+    const y = Math.max(MENUBAR_H + 8, Math.min(window.innerHeight - 100, iconDrag.baseY + dy));
+    iconDrag.btn.style.left = x + 'px';
+    iconDrag.btn.style.top = y + 'px';
+  }
+
+  function onIconDragEnd(e) {
+    if (!iconDrag || e.pointerId !== iconDrag.pointerId) return;
+    const d = iconDrag;
+    iconDrag = null;
+    d.btn.classList.remove('dragging');
+    document.removeEventListener('pointermove', onIconDragMove);
+    document.removeEventListener('pointerup', onIconDragEnd);
+    document.removeEventListener('pointercancel', onIconDragEnd);
+ // If user actually moved the icon (>5 px), suppress the click and persist
+    if (d.moved > 5) {
+      d.btn._dragged = true;
+      const map = loadIconLayout();
+      map[d.id] = {
+        x: parseFloat(d.btn.style.left),
+        y: parseFloat(d.btn.style.top)
+      };
+      saveIconLayout(map);
+    } else {
+ // Released without moving — clear inline position so CSS grid takes over
+      d.btn.style.position = '';
+      d.btn.style.left = '';
+      d.btn.style.top = '';
+      iconsEl.classList.remove('desktop-icons-free');
+    }
   }
 
   function focusOrOpen(id) { openProjectWindow(id); }
@@ -1772,6 +1902,7 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
       ctxMenuEl.innerHTML = `
         <button class="ctx-menu-item" data-act="welcome">Open Welcome</button>
         <button class="ctx-menu-item" data-act="reset">Reset window layout</button>
+        <button class="ctx-menu-item" data-act="reset-icons">Reset desktop icons</button>
         <div class="ctx-menu-divider"></div>
         <button class="ctx-menu-item" data-act="shortcuts">Keyboard shortcuts…</button>
         <button class="ctx-menu-item" data-act="source">View source on GitHub ↗</button>
@@ -1781,6 +1912,7 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
           const a = b.dataset.act;
           if (a === 'welcome') openProjectWindow('welcome');
           else if (a === 'reset') resetLayout();
+          else if (a === 'reset-icons') { resetIconLayout(); renderDesktopIcons(); }
           else if (a === 'shortcuts') showShortcuts();
           else if (a === 'source') window.open('https://github.com/ToXMon/tolu-portfolio', '_blank');
 
@@ -2304,6 +2436,9 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
     function ensureAudio() {
       if (audio) return audio;
       audio = new Audio();
+      // Required for AudioContext analyser to read the audio data when the
+      // stream is cross-origin. Audius mirrors serve ACAO: *, so anonymous is fine.
+      audio.crossOrigin = 'anonymous';
       audio.preload = 'auto';
       audio.volume = state.volume;
       audio.addEventListener('ended', () => next());
@@ -2341,22 +2476,35 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
     }
 
     function play() {
-      if (state.index < 0 && state.queue.length) load(0);
+ // If the queue hasn't loaded yet, remember the intent and retry when it does.
+      if (!state.queue.length) {
+        state.pendingPlay = true;
+        loadTrending(state.genre); // idempotent — won't re-fetch if in flight
+        emit();
+        return;
+      }
+      if (state.index < 0) load(0);
       const a = ensureAudio();
       ensureCtx(); // user-gesture gate: ctx created here
       if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
       a.play().then(() => {
         state.playing = true;
+        state.pendingPlay = false;
         emit();
         startBeat();
       }).catch(() => {
+        // AudioContext not yet allowed to play (no active user gesture after
+        // the async queue load). Keep the track loaded and flag pendingPlay
+        // so the next user gesture can resume playback automatically.
         state.playing = false;
+        state.pendingPlay = true;
         emit();
       });
     }
     function pause() {
       if (audio) audio.pause();
       state.playing = false;
+      state.pendingPlay = false;
       stopBeat();
       emit();
     }
@@ -2383,15 +2531,33 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
     function setQuery(q) { state.query = q; }
 
     async function loadTrending(genre) {
-      state.pending = true; emit();
-      try {
-        const tracks = await trending(genre || state.genre);
-        setQueue(tracks);
-      } catch (e) {
-        setQueue([]);
-      } finally {
-        state.pending = false; emit();
+      // Idempotent: if a fetch is already in flight for the same genre, just
+      // piggyback on it (multiple callers — initial setTimeout, play(), chip
+      // click — would otherwise race and clobber state).
+      if (state.pending && state.genre === (genre || state.genre)) {
+        return state._pendingLoad;
       }
+      state._pendingLoad = (async () => {
+        state.pending = true; emit();
+        try {
+          const tracks = await trending(genre || state.genre);
+          setQueue(tracks);
+ // Pending play? The user hit ▶ before the queue loaded — start playback now.
+          if (state.pendingPlay && tracks.length) {
+            state.pendingPlay = false;
+            load(0);
+            play();
+          }
+        } catch (e) {
+          setQueue([]);
+          state.pendingPlay = false;
+        } finally {
+          state.pending = false;
+          state._pendingLoad = null;
+          emit();
+        }
+      })();
+      return state._pendingLoad;
     }
     async function runSearch(q) {
       if (!q) { loadTrending(state.genre); return; }
@@ -2399,8 +2565,14 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
       try {
         const tracks = await search(q);
         setQueue(tracks);
+        if (state.pendingPlay && tracks.length) {
+          state.pendingPlay = false;
+          load(0);
+          play();
+        }
       } catch (e) {
         setQueue([]);
+        state.pendingPlay = false;
       } finally {
         state.pending = false; emit();
       }
@@ -2433,7 +2605,7 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
       emit();
     }
 
-    return { state, subscribe, play, pause, toggle, next, prev, setVolume, loadTrending, runSearch, setGenre, setQuery, getGenres: () => GENRES };
+    return { state, subscribe, play, pause, toggle, next, prev, load, setVolume, loadTrending, runSearch, setGenre, setQuery, getGenres: () => GENRES, audio: () => audio };
   })();
 
   // Allow other windows (folder, etc.) to refresh Music state via a single emitter
@@ -2533,8 +2705,7 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
           </div>
           <div class="audio-row-time">${dur}</div>`;
         row.addEventListener('click', () => {
-          MusicApp.state.index = i;
-          MusicApp.state.track = t;
+          MusicApp.load(i);
           MusicApp.play();
         });
         list.appendChild(row);
@@ -2559,8 +2730,9 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
 
       // Progress
       const fill = np.querySelector('.audio-progress-fill');
-      if (t && audio && audio.duration) {
-        const pct = (audio.currentTime / audio.duration) * 100;
+      const a = MusicApp.audio ? MusicApp.audio() : null;
+      if (t && a && a.duration) {
+        const pct = (a.currentTime / a.duration) * 100;
         fill.style.width = pct + '%';
       } else {
         fill.style.width = '0%';
@@ -2746,6 +2918,21 @@ A7 Topo: "Extremely subtle dark texture: faint warm-gold topographic contour lin
     setupNowPlayingWidget();
     setupQuickLinks();
     setupLaunchpad();
+ // Music: if the user clicked ▶ before trending loaded, the AudioContext
+ // may have rejected our play() promise (no active user gesture after the
+ // async fetch). Listen for the next click/keypress to retry playback.
+    document.addEventListener('pointerdown', () => {
+      if (MusicApp.state.pendingPlay && MusicApp.state.track) {
+        MusicApp.state.pendingPlay = false;
+        MusicApp.play();
+      }
+    }, { capture: true });
+    document.addEventListener('keydown', () => {
+      if (MusicApp.state.pendingPlay && MusicApp.state.track) {
+        MusicApp.state.pendingPlay = false;
+        MusicApp.play();
+      }
+    }, { capture: true });
     syncMenubar();
 
 // Auto-open Welcome window on first load (desktop metaphor "home")

@@ -1,5 +1,5 @@
 # Round-9 interaction probes — rYOS grammar (independently implemented)
-Date: 2026-09-19T21:15:20.799Z
+Date: 2026-09-20T01:26:27.289Z
 
 PASS  P1 launch-origin  — origin {x:24,y:52} within icon rect 24,52 80×99
 PASS  P1 pageerrors  — 0
@@ -18,6 +18,6 @@ PASS  P7 window-controls-44px  — control 44×44
 PASS  P8 drag+resize  — drag ok; resize 560×460 → 660×530
 PASS  P8 minimize+restore  — opacity 0 → 1, focus restored
 PASS  P8 esc-close  — Esc closed the focused window
-PASS  P9 perf-budget  — transfer 849 KB (≤ 1.1 MB), DCL 374 ms (local, ≤ 1200 ms)
+PASS  P9 perf-budget  — transfer 859 KB (≤ 1.1 MB), DCL 278 ms (local, ≤ 1200 ms)
 
 Total: 18  PASS: 18  FAIL: 0

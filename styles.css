@@ -314,6 +314,18 @@ img, svg, canvas { display: block; max-width: 100%; }
   max-height: calc(100vh - var(--taskbar-h) - 3rem);
   align-content: start;
   overflow: hidden;
+  transition: none;
+}
+
+/* When icons are in free-position mode (saved layout) */
+.desktop-icons-free {
+  display: block;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;       /* let desktop receive clicks outside icons */
+}
+.desktop-icons-free .desktop-icon {
+  pointer-events: auto;
 }
 
 /* Second column drops slightly — breaks the rigid file-browser grid */
@@ -346,6 +358,15 @@ img, svg, canvas { display: block; max-width: 100%; }
 
 .desktop-icon:active {
   transform: scale(0.96);
+}
+
+.desktop-icon.dragging {
+  cursor: grabbing !important;
+  transform: scale(1.06);
+  opacity: 0.9;
+  z-index: 6;
+  box-shadow: 0 0 0 1px var(--color-accent), 0 1rem 2rem oklch(0 0 0 / 0.45);
+  transition: transform 80ms var(--ease-out-exp), box-shadow 80ms var(--ease-out-exp);
 }
 
 .desktop-icon-thumb {
@@ -1444,12 +1465,35 @@ button:focus-visible {
 .desktop-icon-large .desktop-icon-thumb {
   width: 96px;
   height: 96px;
-  border-radius: 12px;
-  box-shadow: 0 0 0 1px oklch(1 0 0 / 0.08), 0 0 24px oklch(0.78 0.16 85 / 0.10);
+  border-radius: 14px;
+  box-shadow: 0 0 0 1px oklch(1 0 0 / 0.08), 0 0 28px oklch(0.78 0.16 85 / 0.14);
+  background: linear-gradient(135deg, oklch(0.20 0.04 60) 0%, oklch(0.14 0.02 60) 100%);
+  transition: box-shadow 200ms var(--ease-out-exp);
+}
+.desktop-icon-large .desktop-icon-thumb:hover {
+  box-shadow: 0 0 0 1px var(--color-accent), 0 0 36px oklch(0.78 0.16 85 / 0.30);
 }
 .desktop-icon-large .desktop-icon-label {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Featured icon host — a positioned container that sits OUTSIDE the icon grid
+ and lets larger tiles render without getting clipped by overflow:hidden.
+ Anchored below the standard icon grid (left side, ~340px from top). */
+.featured-icon-host {
+  position: absolute;
+  top: 340px;
+  left: 1.5rem;
+  z-index: 5;
+  pointer-events: none;
+}
+.featured-icon-host .desktop-icon {
+  pointer-events: auto;
+}
+@media (max-width: 48rem) {
+  .featured-icon-host { display: none; }
 }
 
 .desktop-icon-thumb-glyph {
@@ -2023,14 +2067,23 @@ button:focus-visible {
 #quick-links {
   position: absolute;
   top: calc(1.5rem + 28px + 0.5rem);
-  left: 1.5rem;
-  margin-top: 320px;
+  right: 1.5rem;
+  margin-top: 200px;
   z-index: 5;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   font-family: var(--font-body);
   pointer-events: auto;
+  align-items: flex-end;
+}
+@media (max-width: 56rem) {
+  #quick-links {
+    right: auto;
+    left: 1.5rem;
+    margin-top: 320px;
+    align-items: flex-start;
+  }
 }
 .ql-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .ql-pill {
